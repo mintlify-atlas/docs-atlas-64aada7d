@@ -1,0 +1,74 @@
+---
+title: Introduction to Bases
+description: Bases is a core plugin that lets you create database-like views of your notes. View, edit, sort, and filter files and their properties in tables, cards, lists, and maps.
+---
+
+Bases is a core plugin that lets you create database-like views of your notes. Using a base you can view, edit, sort, and filter files and their properties. Bases can help you organize everything from projects to travel plans, reading lists, and more.
+
+<Note>
+  All data in Bases is stored in your local Markdown files and their properties — nothing is locked in a proprietary database. The view configuration is saved as a `.base` file or embedded in a code block.
+</Note>
+
+## What you can do with Bases
+
+<CardGroup cols={2}>
+  <Card title="Table view" icon="table">
+    Display files as rows with columns for each property. Sort, filter, and edit values inline. Add summaries to calculate totals and averages.
+  </Card>
+  <Card title="Cards view" icon="layout-grid">
+    Display files as a gallery grid with optional cover images. Great for visual collections like books, films, or places.
+  </Card>
+  <Card title="List view" icon="list">
+    Display files as a bulleted or numbered list. Control which properties appear and how they are formatted.
+  </Card>
+  <Card title="Map view" icon="map">
+    Display files as pins on an interactive map. Requires the Maps plugin. Great for travel plans and location-based notes.
+  </Card>
+</CardGroup>
+
+## Use cases
+
+Bases works well for any collection of notes that share common properties:
+
+- **Project tracking** — filter by status, sort by due date, group by owner.
+- **Reading lists** — track books with author, genre, rating, and read status.
+- **Travel plans** — pin locations on a map, attach notes for each place.
+- **Content calendar** — plan posts with publish date, topic, and status.
+- **Research library** — organize papers with tags, authors, and annotation links.
+
+## How Bases works
+
+A base reads files from your vault and displays their properties as structured data. You define which files to include using filters (by tag, folder, or a custom expression), then configure views to display and interact with those files.
+
+Each base can have multiple views. Each view can have its own layout, filters, sort order, and visible properties — so the same set of notes can be presented in different ways for different purposes.
+
+## Enable Bases
+
+<Steps>
+  <Step title="Open Settings">
+    Click the gear icon in the bottom-left corner, or press `Ctrl+,` (`Cmd+,` on macOS).
+  </Step>
+  <Step title="Go to Core plugins">
+    Select **Core plugins** in the sidebar.
+  </Step>
+  <Step title="Enable Bases">
+    Toggle on **Bases**.
+  </Step>
+</Steps>
+
+## Learn more
+
+<CardGroup cols={2}>
+  <Card title="Create a base" href="/bases/create-base" icon="file-plus">
+    Learn how to create a `.base` file and embed a base in a note.
+  </Card>
+  <Card title="Views" href="/bases/views" icon="layers">
+    Explore layouts, filtering, sorting, and grouping.
+  </Card>
+  <Card title="Formulas" href="/bases/formulas" icon="calculator">
+    Create computed properties using data from other properties.
+  </Card>
+  <Card title="Bases syntax" href="/bases/syntax" icon="code">
+    Reference for the `.base` file format.
+  </Card>
+</CardGroup>

@@ -1,0 +1,138 @@
+---
+title: 'Import notes'
+description: 'Bring your notes into Obsidian from Notion, Roam, Bear, Apple Notes, Evernote, and many other apps and file formats.'
+---
+
+Apps come and go, but your data should last. Obsidian stores notes as non-proprietary plain text Markdown files on your local device, so you have total control over your data. If you are migrating from another app, there are several ways to get your notes into Obsidian.
+
+## Use the Importer plugin
+
+The official **Importer** plugin handles the most popular note-taking apps and file formats. It converts your exported data into Markdown files and places them directly in your vault.
+
+<Steps>
+  <Step title="Install the Importer plugin">
+    Open **Settings → Community plugins**, click **Browse**, and search for **Importer**. Click **Install**, then **Enable**.
+  </Step>
+  <Step title="Open Importer">
+    Open the command palette (`Ctrl+P` / `Cmd+P`) and run **Importer: Open importer**. Alternatively, click the Importer icon in the left sidebar.
+  </Step>
+  <Step title="Choose your source app or format">
+    Select the app or file format you are migrating from.
+  </Step>
+  <Step title="Follow the import wizard">
+    Each source has its own set of instructions. The wizard will guide you through exporting from your source app and converting the files.
+  </Step>
+</Steps>
+
+## Supported apps and formats
+
+The Importer plugin supports the following sources:
+
+<CardGroup cols={2}>
+  <Card title="Notion" icon="n">
+    Import pages and databases exported from Notion.
+  </Card>
+  <Card title="Microsoft OneNote" icon="microsoft">
+    Import notebooks and pages from OneNote.
+  </Card>
+  <Card title="Evernote" icon="leaf">
+    Import notes and notebooks from an Evernote export file (`.enex`).
+  </Card>
+  <Card title="Apple Notes" icon="apple">
+    Import notes exported from the Apple Notes app.
+  </Card>
+  <Card title="Apple Journal" icon="book">
+    Import journal entries from the Apple Journal app.
+  </Card>
+  <Card title="Google Keep" icon="bookmark">
+    Import notes and lists from a Google Keep export.
+  </Card>
+  <Card title="Bear" icon="feather">
+    Import notes from a Bear export.
+  </Card>
+  <Card title="Craft" icon="pencil">
+    Import documents from Craft.
+  </Card>
+  <Card title="Roam Research" icon="circle-nodes">
+    Import a Roam Research JSON export.
+  </Card>
+  <Card title="HTML files" icon="code">
+    Convert HTML files to Markdown.
+  </Card>
+  <Card title="CSV files" icon="table">
+    Import structured data from CSV files.
+  </Card>
+  <Card title="Textbundle files" icon="file">
+    Import `.textbundle` and `.textpack` archives.
+  </Card>
+</CardGroup>
+
+## Import plain Markdown files
+
+If your notes are already in Markdown format — for example, exported from another Markdown editor — the simplest approach is to copy them directly into your vault folder.
+
+<Steps>
+  <Step title="Locate your vault folder">
+    Open **Settings → Files and links** and check the path shown under **Vault path**, or find the vault folder in your file explorer.
+  </Step>
+  <Step title="Copy your files">
+    Copy your `.md` files (and any subfolders) into the vault folder using Finder, File Explorer, or the terminal.
+  </Step>
+  <Step title="Reload Obsidian">
+    Switch back to Obsidian. Your notes will appear in the file explorer immediately. If they don't, press `Ctrl+R` (`Cmd+R` on macOS) to reload the vault.
+  </Step>
+</Steps>
+
+<Note>
+  Obsidian will recognise any `.md` file placed in the vault folder. You don't need to do anything extra to make them appear.
+</Note>
+
+## Convert legacy Markdown formats
+
+If you have notes with formatting that doesn't match Obsidian's Markdown style — for example, notes that use `[[wikilinks]]` from a different app, or notes using `==highlights==` — use the built-in **Format converter**.
+
+1. Open **Settings → Core plugins** and enable **Format converter**.
+2. Go to **Settings → Format converter** and choose which syntax patterns to convert.
+3. Click **Start conversion** to update all notes in your vault.
+
+<Warning>
+  The Format converter modifies your notes in place. Back up your vault before running a conversion.
+</Warning>
+
+## More formats and community guides
+
+If your app isn't listed above, you can request support or contribute to the open-source [obsidian-importer repository](https://github.com/obsidianmd/obsidian-importer).
+
+The Obsidian community has also shared migration guides for many other tools:
+
+<AccordionGroup>
+  <Accordion title="Day One">
+    See the [community thread on GitHub](https://github.com/obsidianmd/obsidian-importer/issues/55) for a guide to migrating from Day One.
+  </Accordion>
+  <Accordion title="Logseq">
+    See the [community thread on GitHub](https://github.com/obsidianmd/obsidian-importer/issues/47) for a guide to migrating from Logseq.
+  </Accordion>
+  <Accordion title="Roam Research (manual)">
+    In addition to the Importer plugin, community members have documented a [manual Roam migration process](https://github.com/obsidianmd/obsidian-importer) for complex graphs.
+  </Accordion>
+  <Accordion title="TiddlyWiki">
+    See the [Obsidian forum thread](https://forum.obsidian.md/t/import-from-tiddlywiki-5-to-obsidian/731) for a TiddlyWiki migration guide.
+  </Accordion>
+  <Accordion title="Ulysses">
+    See the [community thread on GitHub](https://github.com/obsidianmd/obsidian-importer/issues/18) for a guide to migrating from Ulysses.
+  </Accordion>
+  <Accordion title="Remnote, Diaro, Samsung Notes, TheBrain, zkn3, and Zim">
+    Additional guides are available in the [obsidian-importer issue tracker](https://github.com/obsidianmd/obsidian-importer) and the [Obsidian forum](https://forum.obsidian.md).
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Link notes" icon="link" href="/getting-started/link-notes">
+    Start connecting your imported notes to build a knowledge graph.
+  </Card>
+  <Card title="Manage vaults" icon="folder" href="/files/manage-vaults">
+    Learn how to organise, rename, and back up your vault.
+  </Card>
+</CardGroup>

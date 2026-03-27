@@ -1,0 +1,70 @@
+---
+title: Accepted file formats
+description: The file types Obsidian can open, display, and embed, including Markdown, images, audio, video, and PDF.
+---
+
+Obsidian works with the following file types natively. Files in unsupported formats are still visible in the File explorer but cannot be opened or previewed within Obsidian.
+
+## Supported formats
+
+<AccordionGroup>
+  <Accordion title="Markdown (.md)">
+    The primary format for notes in Obsidian. All notes are plain text files formatted with Markdown, which means you can open and edit them in any text editor.
+  </Accordion>
+  <Accordion title="Bases (.base)">
+    Obsidian Bases files for structured, database-style views of notes in your vault.
+  </Accordion>
+  <Accordion title="JSON Canvas (.canvas)">
+    Infinite canvas files using the open [JSON Canvas](https://jsoncanvas.org/) format. Canvas lets you arrange notes, images, and cards on a freeform board.
+  </Accordion>
+  <Accordion title="Images">
+    `.avif`, `.bmp`, `.gif`, `.jpeg`, `.jpg`, `.png`, `.svg`, `.webp`
+
+    Images can be embedded directly in notes and display inline.
+  </Accordion>
+  <Accordion title="Audio">
+    `.flac`, `.m4a`, `.mp3`, `.ogg`, `.wav`, `.webm`, `.3gp`
+
+    Audio files can be embedded in notes and play back with an inline audio player.
+  </Accordion>
+  <Accordion title="Video">
+    `.mkv`, `.mov`, `.mp4`, `.ogv`, `.webm`
+
+    Video files can be embedded in notes and play back with an inline video player.
+  </Accordion>
+  <Accordion title="PDF (.pdf)">
+    PDF files can be embedded in notes and viewed with an inline PDF viewer. You can open a PDF at a specific page or set the viewer height.
+  </Accordion>
+</AccordionGroup>
+
+## Embedding files in notes
+
+Many file types can be embedded directly into your notes, displaying their content inline rather than as a plain link.
+
+<Tabs>
+  <Tab title="Desktop">
+    Drag and drop a supported file into a note to embed it automatically.
+  </Tab>
+  <Tab title="Mobile">
+    Use the attachment options in the toolbar to insert or link a file.
+  </Tab>
+</Tabs>
+
+The embedding syntax is the same for all supported types — prefix the link with `!`:
+
+```md
+![[image.png]]
+![[audio.mp3]]
+![[video.mp4]]
+![[document.pdf]]
+```
+
+See [Embed files](/linking/embed-files) for the full embedding syntax, including how to resize images, open PDFs at specific pages, and embed headings or blocks from other notes.
+
+<Note>
+Playback support for audio and video depends on the codecs available on your device.
+</Note>
+
+## Extend support with plugins
+
+You can add support for additional file formats using [community plugins](https://obsidian.md/plugins). For example, some plugins add support for spreadsheets, code notebooks, or specialized data formats.

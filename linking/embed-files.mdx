@@ -1,0 +1,143 @@
+---
+title: Embed files
+description: Embed notes, images, audio, video, PDFs, and other supported files directly into your notes.
+---
+
+Embedding a file displays its content inline in your note rather than just linking to it. You can embed notes, headings, blocks, images, audio, video, and PDFs — any file in the [accepted formats](/files/accepted-formats).
+
+To embed a file, add an exclamation mark (`!`) in front of an [internal link](/linking/internal-links):
+
+```md
+![[filename]]
+```
+
+<Tip>
+On desktop, you can drag and drop supported files directly into your note to embed them automatically.
+</Tip>
+
+## Embed a note
+
+To embed an entire note:
+
+```md
+![[Internal links]]
+```
+
+The full content of the linked note appears inline.
+
+### Embed a specific heading
+
+To embed only the content under a heading, add `#` followed by the heading name:
+
+```md
+![[Internal links#Supported formats for internal links]]
+```
+
+Only the content under that heading (up to the next heading at the same level) is shown.
+
+### Embed a specific block
+
+To embed a single block — a paragraph, list, blockquote, or table — use a block identifier:
+
+```md
+![[Internal links#^b15695]]
+```
+
+See [link to a block](/linking/internal-links#link-to-a-block) for instructions on adding block identifiers to your notes.
+
+### Embed a list from another note
+
+First, add a block identifier to the list in the source note:
+
+```md
+- list item 1
+- list item 2
+
+^my-list-id
+```
+
+Then embed it by referencing that identifier:
+
+```md
+![[My note#^my-list-id]]
+```
+
+## Embed an image
+
+To embed an image:
+
+```md
+![[Engelbart.jpg]]
+```
+
+### Resize an embedded image
+
+Specify width and height by appending `|WIDTHxHEIGHT` to the link:
+
+```md
+![[Engelbart.jpg|640x480]]
+```
+
+To set only the width and preserve the aspect ratio:
+
+```md
+![[Engelbart.jpg|100]]
+```
+
+### Embed an externally hosted image
+
+Use a Markdown link for images hosted outside your vault. You can set the width the same way:
+
+```md
+![250](https://example.com/image.jpg)
+```
+
+## Embed an audio file
+
+To embed an audio file:
+
+```md
+![[Excerpt from Mother of All Demos (1968).ogg]]
+```
+
+Obsidian renders an inline audio player. You can embed any [accepted audio format](/files/accepted-formats).
+
+<Note>
+  Audio and video playback depends on the codecs available on your device.
+</Note>
+
+## Embed a PDF
+
+To embed a PDF:
+
+```md
+![[Document.pdf]]
+```
+
+Obsidian renders the PDF in an inline viewer.
+
+### Open a PDF at a specific page
+
+Append `#page=N` to the link, where `N` is the page number:
+
+```md
+![[Document.pdf#page=3]]
+```
+
+### Set the height of the PDF viewer
+
+Append `#height=N` to the link, where `N` is the height in pixels:
+
+```md
+![[Document.pdf#height=400]]
+```
+
+You can combine both parameters:
+
+```md
+![[Document.pdf#page=3&height=400]]
+```
+
+## Embed search results
+
+You can embed the results of a search query directly into a note. See the Search documentation for the `query` syntax and how to use it with embeds.

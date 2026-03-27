@@ -1,0 +1,249 @@
+---
+title: "Customize your site"
+description: "Configure your site's appearance, navigation, custom CSS and JavaScript, social media previews, SEO, and analytics."
+---
+
+This page explains how to customize the appearance and behavior of your Obsidian Publish site.
+
+## Site settings
+
+Open site settings by clicking **Publish changes** in the Ribbon, then clicking **Change site options** (the cog icon).
+
+### General settings
+
+| Setting | Description |
+|---|---|
+| **Site name** | The public title shown at the top of your site. |
+| **Homepage file** | The note that loads when a visitor opens your site's root URL. |
+| **Logo** | A published image displayed as a site banner. The image must be published to your site. |
+| **Custom domain** | Configure a custom domain for your site. See [Custom domains](/publish/custom-domains). |
+| **Disallow search engine indexing** | Adds a `robots.txt` file to prevent search engines from crawling your site. |
+
+### Appearance settings
+
+| Setting | Description |
+|---|---|
+| **Theme** | Choose **Light**, **Dark**, or **Adapt to System**. |
+| **Light/Dark toggle** | Show a toggle on your site that lets visitors switch between light and dark mode. |
+
+### Reading experience
+
+| Setting | Description |
+|---|---|
+| **Show hover preview** | Show a page preview when visitors hover over an internal link. |
+| **Hide page title** | Hide the inline title at the top of each note. |
+| **Readable line length** | Limit line width for comfortable reading. |
+| **Strict line breaks** | Render single line breaks as visible breaks. |
+| **Stack pages** | Enable stacked tab navigation (sliding panels). |
+
+### Components
+
+| Setting | Description |
+|---|---|
+| **Show navigation** | Display the file explorer sidebar. |
+| **Show search bar** | Add a search bar to your site. |
+| **Show graph view** | Show the graph view in the right sidebar. |
+| **Show table of contents** | Show a table of contents for each page. |
+| **Show backlinks** | Show backlinks at the bottom of each page. |
+
+## Customize navigation order
+
+Navigation items are listed in published order by default. You can reorder them or hide specific notes and folders.
+
+<Steps>
+  <Step title="Open navigation settings">
+    1. Click **Publish changes** in the Ribbon.
+    2. Click **Change site options**.
+    3. Under **Components settings**, next to **Customize navigation**, click **Manage**.
+  </Step>
+  <Step title="Reorder items">
+    In the **Navigation preview**, drag notes or folders to your preferred order. You can adjust note order within folders and folder order within other folders, but you cannot move notes between folders here.
+  </Step>
+  <Step title="Hide items">
+    Right-click a note or folder and select **Hide in navigation**. The item is removed from the visible navigation while remaining published.
+
+    To reveal hidden items, check **Show hidden** next to the **Navigation Preview** title.
+  </Step>
+  <Step title="Save changes">
+    Click **Done** to apply your navigation changes to the live site.
+
+    To restore defaults, click the **Restore Default** icon next to the relevant setting.
+  </Step>
+</Steps>
+
+## Custom CSS
+
+Add a `publish.css` file to the **root directory** of your vault to apply custom styles to your site.
+
+```css
+/* publish.css — placed at the root of your vault */
+body {
+  --font-text-size: 18px;
+}
+```
+
+Once the file exists, publish it from the **Publish changes** dialog — it won't appear in the normal file explorer, but you can find it there.
+
+<Note>
+  CSS that works inside the Obsidian app may not behave the same way on Publish. For best results, develop CSS specifically for Publish. In general, styles that work in Reading view have the best chance of working on Publish.
+
+  CSS variables for Publish are documented on the [Obsidian developer docs](https://docs.obsidian.md/Reference/CSS+variables/Publish/Publish).
+</Note>
+
+### Use a community theme
+
+<Steps>
+  <Step title="Locate the theme file">
+    Open your vault's settings folder (default: `.obsidian`), then open the `themes` folder.
+  </Step>
+  <Step title="Copy the theme CSS">
+    Copy the CSS file for the theme you want to use.
+  </Step>
+  <Step title="Rename and place the file">
+    Paste the file into the **root folder** of your vault and rename it to `publish.css`.
+  </Step>
+  <Step title="Publish the file">
+    Open **Publish changes** and publish `publish.css`.
+  </Step>
+</Steps>
+
+<Note>
+  Many community themes use the Style Settings plugin for configuration. Style Settings does not work on Obsidian Publish.
+</Note>
+
+### Favicon
+
+Publish accepts favicons using these naming conventions, where the number indicates pixel dimensions:
+
+- `favicon-32.png`
+- `favicon-32x32.png`
+- `favicon.ico`
+
+For best cross-device coverage, provide multiple sizes:
+
+```
+favicon-32x32.png
+favicon-128x128.png
+favicon-152x152.png
+favicon-167x167.png
+favicon-180x180.png
+favicon-192x192.png
+favicon-196x196.png
+```
+
+Favicons can be placed anywhere in your vault as long as they're published.
+
+## Custom JavaScript
+
+Add a `publish.js` file to the root of your vault to run custom scripts on your site.
+
+<Warning>
+  Custom JavaScript via `publish.js` requires a [custom domain](/publish/custom-domains). It will not run on the default `publish.obsidian.md` URL.
+</Warning>
+
+`publish.js` must be in the root directory of your vault, just like `publish.css`. Publish it from the **Publish changes** dialog.
+
+## Social media link previews
+
+When a visitor shares a link to your site on social media, platforms like Twitter/X and Slack display a rich preview card. You can control what appears in these cards using note properties.
+
+<Warning>
+  The meta tags set by these properties are only visible to web crawlers. Regular browsers see the normal page for performance reasons.
+</Warning>
+
+### Custom description
+
+Obsidian automatically generates a description from note content, but you can provide your own:
+
+```yaml
+---
+description: An introduction to our solar system.
+---
+```
+
+This overrides `<meta name="description">`, `og:description`, and `twitter:description`.
+
+### Custom image
+
+Use `image` or `cover` (they're identical — use only one) to set a custom preview image:
+
+```yaml
+---
+cover: "Attachments/Cover image.png"
+---
+```
+
+The image must be published to your site. The path is case-sensitive. You can also use an external URL:
+
+```yaml
+---
+image: "https://example.com/cover%20image.png"
+---
+```
+
+This overrides `og:image`.
+
+## SEO
+
+Obsidian Publish sites are automatically optimized for search engines. A sitemap is available at `/sitemap.xml` and an RSS feed at `/rss.xml`.
+
+### Google Search Console
+
+Register your site on [Google Search Console](https://search.google.com/search-console) to monitor search performance and indexing status.
+
+### Disable search engine indexing
+
+To prevent search engines from crawling your site, enable **Disallow search engine indexing** in site settings. This adds a `robots.txt` file to your site.
+
+### Page metadata
+
+Use note properties to customize per-page SEO metadata:
+
+| Property | Effect |
+|---|---|
+| `description` | Sets the page meta description and social preview description. |
+| `image` / `cover` | Sets the social preview image (`og:image`). |
+| `permalink` | Sets a custom, permanent URL for the page. |
+
+## Analytics
+
+<Warning>
+  Analytics require a [custom domain](/publish/custom-domains). They will not work on the default `publish.obsidian.md` URL.
+
+  Before enabling analytics, check that your local laws and regulations allow visitor tracking. You may need to add a consent banner to your site.
+</Warning>
+
+### Google Analytics
+
+1. Open **Publish changes** → **Change site options**.
+2. Under **Other site settings**, enter your tracking code in **Google Analytics tracking code**.
+
+To use Google Tag Manager instead, add your GTM snippet via `publish.js`.
+
+### Plausible, Fathom, and other services
+
+You can add any analytics service by injecting its script through `publish.js`. Replace `yourdomain.com` and the script URL with values from your analytics provider.
+
+<CodeGroup>
+
+```javascript Plausible
+var analyticsScript = document.createElement('script');
+analyticsScript.defer = true;
+analyticsScript.setAttribute('data-domain', 'yourdomain.com');
+analyticsScript.src = 'https://plausible.io/js/plausible.js';
+document.head.appendChild(analyticsScript);
+```
+
+```javascript Fathom
+var analyticsScript = document.createElement('script');
+analyticsScript.defer = true;
+analyticsScript.setAttribute('data-site', 'yourdomain.com');
+analyticsScript.src = 'https://cdn.usefathom.com/script.js';
+document.head.appendChild(analyticsScript);
+```
+
+</CodeGroup>
+
+<Tip>
+  If you're not seeing analytics data, disable ad-blocking browser extensions such as uBlock Origin — they may block the tracking script during testing.
+</Tip>

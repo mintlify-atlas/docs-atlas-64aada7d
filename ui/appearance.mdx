@@ -1,0 +1,121 @@
+---
+title: "Appearance"
+description: "Customize how Obsidian looks, including color scheme, fonts, themes, CSS snippets, zoom level, and the translucent window effect."
+---
+
+Obsidian gives you extensive control over its visual appearance. You can adjust everything from the color scheme and fonts to the window frame style and app icon. Open **Settings → Appearance** to access these options.
+
+## Color scheme
+
+Obsidian ships with light and dark color schemes. The default setting adapts to your operating system's mode automatically.
+
+To change the color scheme:
+
+1. Open **Settings → Appearance**.
+2. Under **Base color scheme**, choose one of the following:
+
+| Option | Description |
+|---|---|
+| **Adapt to system** | Follows your OS light/dark mode setting. |
+| **Light** | Always uses the light color scheme. |
+| **Dark** | Always uses the dark color scheme. |
+
+### Accent color
+
+Select a custom accent color to personalize buttons, links, and highlights across the app. Use the color picker or the reset icon next to the **Accent color** setting.
+
+## Themes
+
+Community themes change the complete visual style of Obsidian. Hundreds of themes are available directly inside the app.
+
+<Steps>
+  <Step title="Open the theme browser">
+    Go to **Settings → Appearance → Themes** and select **Manage**.
+  </Step>
+  <Step title="Choose a theme">
+    Browse the list. Select a theme to preview it, then select **Install and use** to apply it.
+  </Step>
+  <Step title="Revert to the default theme">
+    In the same browser, select **Stop using this theme** to return to Obsidian's built-in look.
+  </Step>
+</Steps>
+
+### Update themes
+
+Themes do not update automatically. To check for updates:
+
+1. Go to **Settings → Appearance → Current community themes**.
+2. Select **Check for updates**.
+3. If updates are available, select **Update all**, or update individual themes from **Settings → Appearance → Themes → Manage**.
+
+### Uninstall a theme
+
+1. Go to **Settings → Appearance → Themes → Manage**.
+2. Select the theme, then select **Uninstall**.
+
+## Font settings
+
+You can set three independent fonts in **Settings → Appearance → Font**:
+
+| Setting | Applies to |
+|---|---|
+| **Interface font** | All of Obsidian's UI chrome (menus, sidebars, buttons). |
+| **Text font** | The editing and reading views for your notes. |
+| **Monospace font** | Code blocks, inline code, and frontmatter. |
+
+Enter a font name directly in each field, or leave it blank to use the system default.
+
+### Font size
+
+Use the **Font size** slider to set the size in pixels for editing and reading views. You can also adjust font size on the fly:
+
+- **Windows/Linux:** `Ctrl+Scroll`
+- **macOS:** `Cmd+Scroll` or trackpad pinch-zoom
+
+## Zoom level
+
+The **Zoom level** slider under **Settings → Appearance → Advanced** controls the overall scale of the entire app interface, separate from the text font size.
+
+## Window frame style
+
+Under **Settings → Appearance → Advanced → Window frame style**, choose how the title bar of Obsidian windows looks:
+
+| Style | Description |
+|---|---|
+| **Obsidian frame** | Uses Obsidian's custom window frame. |
+| **Native frame** | Uses your OS's default window frame. |
+| **Hidden frame** | Hides the title bar completely. |
+
+A full restart is required for this change to take effect.
+
+## Translucent window
+
+On macOS, you can make the Obsidian window translucent by enabling **Translucent window** under **Settings → Appearance**.
+
+<Warning>
+  The Obsidian team removed translucency support on Windows in version 1.15.11 due to Electron removing the underlying feature.
+</Warning>
+
+## Custom app icon
+
+You can replace the Obsidian app icon with one of your own.
+
+<Steps>
+  <Step title="Open appearance settings">
+    Go to **Settings → Appearance → Advanced → Custom app icon** and select **Choose**.
+  </Step>
+  <Step title="Select an icon file">
+    Pick an icon from your filesystem. Accepted formats: `.icns`, `.ico`, `.png`, `.svg`.
+  </Step>
+  <Step title="Relaunch Obsidian">
+    Select **Relaunch**. Your new icon appears in the taskbar and dock after restart.
+  </Step>
+</Steps>
+
+<Tip>
+  On Windows, you may need an extra step to update the taskbar icon. Right-click the Obsidian icon in the taskbar → right-click **Obsidian** → **Properties → Change Icon**, then locate your icon file and click **OK**. Restart Explorer or reboot to apply.
+</Tip>
+
+## CSS snippets
+
+For targeted style overrides without building a full theme, use CSS snippets. Manage snippets at **Settings → Appearance → CSS snippets**. See [CSS snippets](/extending/css-snippets) for full details.

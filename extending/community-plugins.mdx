@@ -1,0 +1,115 @@
+---
+title: "Community plugins"
+description: "Browse, install, enable, and manage community plugins to extend Obsidian with new features built by the Obsidian community."
+---
+
+Community plugins extend Obsidian with functionality built by the Obsidian community. Use plugins to adapt Obsidian to your specific needs — support for additional file formats, integrations with third-party services, custom views, and much more.
+
+<Warning>
+  Community plugins run third-party code on your behalf. Plugins inherit Obsidian's access level and can read files on your computer, connect to the internet, and install additional programs. Only install plugins you trust. See [Plugin security](/extending/community-plugins#plugin-security) below for details.
+</Warning>
+
+## Enable community plugins
+
+By default, Obsidian runs in **Restricted mode**, which prevents all third-party code from executing. You must turn off Restricted mode before you can install community plugins.
+
+<Steps>
+  <Step title="Open Settings">
+    Go to **Settings → Community plugins**.
+  </Step>
+  <Step title="Turn on community plugins">
+    Select **Turn on community plugins**. Obsidian warns you that community plugins are not reviewed as thoroughly as core plugins.
+  </Step>
+  <Step title="Confirm">
+    Once Restricted mode is off, the **Browse** button becomes available.
+  </Step>
+</Steps>
+
+## Browse and install plugins
+
+<Steps>
+  <Step title="Open the plugin browser">
+    Go to **Settings → Community plugins** and select **Browse**. You can also browse plugins at [obsidian.md/plugins](https://obsidian.md/plugins) in your web browser.
+  </Step>
+  <Step title="Search for a plugin">
+    Use the search box to filter plugins by name, author, or description.
+  </Step>
+  <Step title="Install the plugin">
+    Select the plugin you want, then select **Install**.
+  </Step>
+  <Step title="Enable the plugin">
+    After installation, select **Enable** to activate it. You can also enable it later from **Settings → Community plugins → Installed plugins**.
+  </Step>
+</Steps>
+
+## Manage installed plugins
+
+Under **Settings → Community plugins → Installed plugins**, each plugin has the following controls:
+
+| Icon | Action |
+|---|---|
+| Settings (gear) | Open the plugin's settings page if it has configurable options. |
+| Hotkeys (+) | Assign keyboard shortcuts to the plugin's commands. |
+| Funding (heart) | View the plugin author's funding URL to support their work. |
+| Uninstall (trash) | Remove the plugin from your vault. |
+| Toggle | Enable or disable the plugin without uninstalling it. |
+
+You can also:
+- Select the **refresh** icon to reload all plugins.
+- Select the **folder** icon to open the plugins folder in your configuration folder.
+- Use the **search bar** to filter plugins by name.
+
+## Update plugins
+
+Community plugins do not update automatically. To update:
+
+<Tabs>
+  <Tab title="Update all plugins">
+    1. Go to **Settings → Community plugins → Current plugins**.
+    2. Select **Check for updates**.
+    3. If updates are available, select **Update all**.
+  </Tab>
+  <Tab title="Update a single plugin">
+    1. Go to **Settings → Community plugins → Current plugins**.
+    2. Select **Check for updates**.
+    3. Under **Installed plugins**, select **Update** next to the plugin you want to update.
+  </Tab>
+</Tabs>
+
+## Uninstall a plugin
+
+1. Go to **Settings → Community plugins**.
+2. Under **Installed plugins**, select the trash icon next to the plugin.
+3. Select **Uninstall** to confirm.
+
+## Restricted mode
+
+Restricted mode disables all community plugins for security. Installed plugins remain in your vault when Restricted mode is on, but Obsidian ignores them.
+
+To turn Restricted mode back on:
+
+1. Go to **Settings → Community plugins**.
+2. Next to **Restricted mode**, select **Turn on**.
+
+<Tip>
+  If you're working with sensitive data and want to try a community plugin, consider performing an independent security audit on the plugin before using it.
+</Tip>
+
+## Plugin security
+
+The Obsidian team takes security seriously, but there are limitations to what can be enforced:
+
+- Community plugins undergo an initial review when submitted to the plugin store.
+- All plugins must adhere to [Obsidian Developer Policies](https://docs.obsidian.md/Developer+policies).
+- The team is small and cannot manually review every new release — the community helps identify and report problems.
+
+**What plugins can do:**
+- Access files on your computer
+- Connect to the internet
+- Install additional programs
+
+If you discover a security vulnerability in a community plugin, check the plugin's `security.md` or `readme.md` for the author's reporting process. For critical vulnerabilities, also report the issue to Obsidian support. If you suspect a plugin is malicious, report it to Obsidian support directly.
+
+## Automation with Obsidian URI
+
+You can control plugins and trigger vault actions programmatically using the Obsidian URI protocol. See [Obsidian URI](/extending/obsidian-uri) for the full list of available actions.

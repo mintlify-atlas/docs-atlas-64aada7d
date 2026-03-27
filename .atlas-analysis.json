@@ -1,28 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Obsidian",
+  "projectType": "saas",
+  "projectName": "Obsidian",
+  "projectDescription": "A powerful knowledge management and note-taking app that stores your data locally in Markdown files, with optional sync and publishing services.",
   "theme": "maple",
-  "colors": {
-    "primary": "#9c74fc",
-    "light": "#040404",
-    "dark": "#6a3fc2"
-  },
-  "favicon": "https://media.brand.dev/46f71fb2-c04f-48f0-8176-9076bf7e1b26.jpg",
-  "logo": {
-    "light": "https://media.brand.dev/55fbfcd1-a2b2-4af8-a58d-6e9f1a59c441.svg",
-    "dark": "https://media.brand.dev/55fbfcd1-a2b2-4af8-a58d-6e9f1a59c441.svg"
-  },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/obsidianmd/obsidian-help"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/obsidianmd/obsidian-help"
-    }
-  },
+  "primaryColor": "#9c74fc",
+  "lightColor": "#040404",
+  "darkColor": "#6a3fc2",
   "navigation": {
     "tabs": [
       {
@@ -141,5 +124,29 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Local-first Markdown note-taking with no vendor lock-in",
+    "Bidirectional linking between notes with backlinks and graph view",
+    "Bases: database-like views of notes using properties",
+    "Canvas: infinite whiteboard for visual thinking",
+    "Obsidian Sync: end-to-end encrypted cross-device sync",
+    "Obsidian Publish: host notes as a public website",
+    "Rich plugin ecosystem with 1000+ community plugins",
+    "Obsidian URI protocol for automation and cross-app workflows",
+    "Obsidian CLI for terminal-based control",
+    "Fully offline capable with optional cloud services"
+  ],
+  "publicApiSurface": [
+    "obsidian://open — open a vault or note via URI",
+    "obsidian://new — create a new note via URI",
+    "obsidian://daily — open or create daily note via URI",
+    "obsidian://search — open search in a vault via URI",
+    "obsidian://choose-vault — open vault manager via URI",
+    "obsidian://hook-get-address — Hook productivity integration",
+    "Obsidian CLI (obsidian-cli) — command-line control of Obsidian",
+    "Community Plugin API — extend Obsidian with custom plugins",
+    "CSS snippets & themes — customize appearance",
+    "Bases syntax (.base files) — define database-like views in Markdown"
+  ]
 }

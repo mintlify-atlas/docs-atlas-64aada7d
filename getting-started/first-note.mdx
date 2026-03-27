@@ -1,0 +1,85 @@
+---
+title: 'Create your first note'
+description: 'Learn how to create a note, format text with Markdown, and understand how Obsidian saves your work automatically.'
+---
+
+Notes in Obsidian are stored as plain text files using Markdown. Because your data lives in a standard format, it is durable, portable, and not locked into any proprietary system — your notes will outlive any app, including Obsidian itself.
+
+## Create a new note
+
+<Steps>
+  <Step title="Open a new note">
+    Press `Ctrl+N` (or `Cmd+N` on macOS). A new, untitled note opens in the editor.
+  </Step>
+  <Step title="Give it a name">
+    Type a name for your note — for example, `Obsidian` — and press `Enter`.
+  </Step>
+  <Step title="Write something">
+    Click in the body of the note and start writing. For example:
+
+    ```md
+    Obsidian is the private and flexible writing app that adapts to the way you think.
+    ```
+  </Step>
+</Steps>
+
+<Note>
+  Obsidian saves your notes automatically as you type. There is no save button and no need to press `Ctrl+S`.
+</Note>
+
+## Format text with Markdown
+
+Obsidian uses [Markdown](https://www.markdownguide.org/) syntax for formatting. You write plain text with lightweight symbols, and Obsidian renders them as formatted output.
+
+Here are the most common formatting options:
+
+| Format | Syntax | Result |
+|--------|--------|--------|
+| Heading | `# Heading 1` | Large heading |
+| Bold | `**bold text**` | **bold text** |
+| Italic | `*italic text*` | *italic text* |
+| Inline code | `` `code` `` | `code` |
+| Link | `[label](url)` | Clickable link |
+| Bullet list | `- item` | List item |
+
+**Try it:** Paste the following at the top of your note to add a heading:
+
+```md
+# Sharpen your thinking.
+```
+
+The `#` symbol followed by a space turns a line into a heading. Use `##` and `###` for subheadings.
+
+To make any selected text **bold**, press `Ctrl+B` (`Cmd+B` on macOS).
+
+<Tip>
+  For a complete reference of Markdown syntax supported in Obsidian, see [Basic formatting syntax](/editing/basic-formatting).
+</Tip>
+
+## Editor modes
+
+Obsidian offers two editing modes, which you can switch between from the editor's context menu or via **Settings → Editor**:
+
+<CardGroup cols={2}>
+  <Card title="Live Preview" icon="eye">
+    The default mode. Markdown is rendered inline as you type — you see formatted output without leaving the editor. Click any formatted element to edit the underlying Markdown.
+  </Card>
+  <Card title="Source mode" icon="code">
+    Shows the raw Markdown source at all times. Useful if you prefer to see every character explicitly, or if you're troubleshooting formatting.
+  </Card>
+</CardGroup>
+
+## Explore the sandbox vault
+
+If you want to see examples of all the formatting Obsidian supports before writing your own notes, open the **Sandbox vault** from the vault switcher. It contains pre-built notes that demonstrate headings, lists, tables, callouts, embeds, and more.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Link notes" icon="link" href="/getting-started/link-notes">
+    Connect notes together to build a network of ideas.
+  </Card>
+  <Card title="Basic formatting syntax" icon="text" href="/editing/basic-formatting">
+    Explore the full Markdown syntax Obsidian supports.
+  </Card>
+</CardGroup>

@@ -1,0 +1,237 @@
+---
+title: "Obsidian URI"
+description: "Use the obsidian:// URI protocol to open notes, create notes, search your vault, and trigger other actions from external apps and scripts."
+---
+
+Obsidian URI is a custom URI protocol that lets you trigger Obsidian actions from external applications, scripts, and automation tools. It enables cross-app workflows and scripting without requiring Obsidian to be the frontmost window.
+
+## URI format
+
+All Obsidian URIs follow this pattern:
+
+```
+obsidian://action?param1=value&param2=value
+```
+
+<Warning>
+  All parameter values must be URI-encoded. Forward slashes (`/`) must be encoded as `%2F` and spaces as `%20`. Improperly encoded reserved characters will break the URI.
+</Warning>
+
+## Available actions
+
+<AccordionGroup>
+  <Accordion title="open — open a note">
+    Opens an Obsidian vault or a specific file within a vault.
+
+    **Parameters:**
+
+    | Parameter | Description |
+    |---|---|
+    | `vault` | Vault name or vault ID. |
+    | `file` | File name or vault-relative path. The `.md` extension can be omitted. |
+    | `path` | Absolute filesystem path to a file. Overrides `vault` and `file`. |
+    | `paneType` | Where to open the note: `tab`, `split`, or `window` (desktop only). Omit to replace the active tab. |
+    | `prepend` | Add content to the top of the file and attempt to merge properties. |
+    | `append` | Add content to the bottom of the file and attempt to merge properties. |
+
+    **Examples:**
+
+    ```
+    # Open a vault by name
+    obsidian://open?vault=my%20vault
+
+    # Open a vault by ID
+    obsidian://open?vault=ef6ca3e3b524d22f
+
+    # Open a specific note
+    obsidian://open?vault=my%20vault&file=my%20note
+
+    # Open a note by absolute path
+    obsidian://open?path=%2Fhome%2Fuser%2Fmy%20vault%2Fpath%2Fto%2Fmy%20note
+
+    # Open a note in a new tab
+    obsidian://open?vault=my%20vault&file=my%20note&paneType=tab
+    ```
+
+    <Tip>
+      Navigate to a heading or block within a note using URI encoding: `Note%23Heading` targets a heading called "Heading", and `Note%23%5EBlock` targets a block called "Block".
+    </Tip>
+  </Accordion>
+
+  <Accordion title="new — create a note">
+    Creates a new note in a vault, optionally with content.
+
+    **Parameters:**
+
+    | Parameter | Description |
+    |---|---|
+    | `vault` | Vault name or vault ID. |
+    | `name` | File name to create. Location follows your "Default location for new notes" preference. |
+    | `file` | Vault-absolute path including name. Overrides `name`. |
+    | `path` | Global absolute filesystem path. Overrides `vault` and `file`. |
+    | `paneType` | Where to open the note: `tab`, `split`, or `window`. |
+    | `content` | Initial content for the note. |
+    | `clipboard` | Use clipboard contents as the note content instead of `content`. |
+    | `silent` | Include to create the note without opening it. |
+    | `append` | Append to an existing file if one exists. |
+    | `overwrite` | Overwrite an existing file (only applies when `append` is not set). |
+    | `x-success` | Callback URL for x-callback-url support. |
+
+    **Examples:**
+
+    ```
+    # Create a new note called "my note" in "my vault"
+    obsidian://new?vault=my%20vault&name=my%20note
+
+    # Create a note at a specific path
+    obsidian://new?vault=my%20vault&file=path%2Fto%2Fmy%20note
+
+    # Create a note with content, silently (don't open it)
+    obsidian://new?vault=my%20vault&name=my%20note&content=Hello%20World&silent
+    ```
+  </Accordion>
+
+  <Accordion title="daily — create or open daily note">
+    Creates or opens today's daily note. The **Daily notes** core plugin must be enabled.
+
+    **Parameters:**
+
+    Accepts the same parameters as the `new` action.
+
+    **Example:**
+
+    ```
+    # Open today's daily note in "my vault"
+    obsidian://daily?vault=my%20vault
+    ```
+  </Accordion>
+
+  <Accordion title="unique — create a unique note">
+    Creates a new unique note. The **Unique note creator** plugin must be enabled.
+
+    **Parameters:**
+
+    | Parameter | Description |
+    |---|---|
+    | `vault` | Vault name or vault ID. |
+    | `paneType` | Where to open the note: `tab`, `split`, or `window`. |
+    | `content` | Initial content for the note. |
+    | `clipboard` | Use clipboard contents as the note content. |
+    | `x-success` | Callback URL for x-callback-url support. |
+
+    **Examples:**
+
+    ```
+    # Create a unique note
+    obsidian://unique?vault=my%20vault
+
+    # Create a unique note with content
+    obsidian://unique?vault=my%20vault&content=Hello%20World
+    ```
+  </Accordion>
+
+  <Accordion title="search — open search">
+    Opens the Search panel in the specified vault, optionally pre-filling a search query.
+
+    **Parameters:**
+
+    | Parameter | Description |
+    |---|---|
+    | `vault` | Vault name or vault ID. |
+    | `query` | (optional) The search term to pre-fill. |
+
+    **Examples:**
+
+    ```
+    # Open search in a vault
+    obsidian://search?vault=my%20vault
+
+    # Open search with a pre-filled query
+    obsidian://search?vault=my%20vault&query=Obsidian
+    ```
+  </Accordion>
+
+  <Accordion title="choose-vault — open the vault manager">
+    Opens the vault manager so the user can switch vaults.
+
+    ```
+    obsidian://choose-vault
+    ```
+  </Accordion>
+
+  <Accordion title="hook-get-address — integrate with Hook">
+    Used with the [Hook](https://hookproductivity.com/) productivity app. Returns the address of the currently focused note.
+
+    **Parameters:**
+
+    | Parameter | Description |
+    |---|---|
+    | `vault` | (optional) Vault name or vault ID. Defaults to the current or last focused vault. |
+    | `x-success` | (optional) x-callback-url callback. If provided, the API uses it; otherwise, a Markdown link is copied to the clipboard. |
+    | `x-error` | (optional) x-callback-url error callback. |
+
+    **Example:**
+
+    ```
+    obsidian://hook-get-address
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## x-callback-url parameters
+
+Certain actions support the `x-callback-url` protocol via the `x-success` and `x-error` parameters. When Obsidian receives a URI with `x-success`, it appends the following to the callback URL upon success:
+
+| Parameter | Description |
+|---|---|
+| `name` | File name without extension. |
+| `url` | The `obsidian://` URI for the file. |
+| `file` | The `file://` URL for the file (desktop only). |
+
+**Example callback:**
+
+```
+# Request
+obsidian://new?vault=my%20vault&name=note&x-success=myapp://x-callback-url
+
+# Obsidian calls back with
+myapp://x-callback-url?name=note&url=obsidian%3A%2F%2Fopen...&file=file%3A%2F%2F...
+```
+
+
+
+## Shorthand URI formats
+
+Two shorthand formats are available as alternatives to the full query-string syntax:
+
+```
+# Shorthand for obsidian://open?vault=my vault&file=my note
+obsidian://vault/my vault/my note
+
+# Shorthand for obsidian://open?path=/absolute/path/to/my note
+obsidian:///absolute/path/to/my note
+```
+
+## Vault ID
+
+The `vault` parameter accepts either the vault name or its ID. The vault ID is a random 16-character code assigned when the vault is created, for example `ef6ca3e3b524d22f`. To find a vault's ID, open the vault switcher, right-click the vault, and select **Copy vault ID**.
+
+## Register the Obsidian URI on Linux
+
+On Windows and macOS, running Obsidian once is sufficient to register the `obsidian://` protocol. On Linux, registration requires additional steps:
+
+<Steps>
+  <Step title="Create a desktop entry file">
+    Create an `obsidian.desktop` file following the [GNOME desktop file guidelines](https://developer.gnome.org/documentation/guidelines/maintainer/integrating.html#desktop-files).
+  </Step>
+  <Step title="Set the Exec field">
+    Set the `Exec` field to `Exec=executable %u`. The `%u` passes `obsidian://` URIs to the app.
+  </Step>
+  <Step title="AppImage installs">
+    If you're using the AppImage installer, unpack it first:
+    ```shell
+    Obsidian-x.y.z.AppImage --appimage-extract
+    ```
+    Then point the `Exec` directive at the unpacked executable.
+  </Step>
+</Steps>

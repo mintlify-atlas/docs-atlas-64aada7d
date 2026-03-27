@@ -1,0 +1,117 @@
+---
+title: Templates
+description: The Templates plugin lets you insert pre-defined content into your notes, with dynamic variables for the note title, current date, and current time.
+---
+
+Templates is a core plugin that lets you insert pre-defined snippets of text into the active note. Templates are plain notes stored in a folder you designate, and they can include dynamic variables that resolve when you insert the template.
+
+## Enable templates
+
+<Steps>
+  <Step title="Open Settings">
+    Click the gear icon in the bottom-left corner, or press `Ctrl+,` (`Cmd+,` on macOS).
+  </Step>
+  <Step title="Go to Core plugins">
+    Select **Core plugins** in the sidebar and toggle on **Templates**.
+  </Step>
+</Steps>
+
+## Set your templates folder
+
+<Steps>
+  <Step title="Open Templates settings">
+    Go to **Settings → Core plugins → Templates**.
+  </Step>
+  <Step title="Set the folder">
+    In the **Template folder location** field, enter the path to your templates folder (for example, `Templates` or `_meta/templates`).
+  </Step>
+</Steps>
+
+## Template variables
+
+Templates support three built-in variables that are replaced with live values when you insert the template:
+
+| Variable | Description | Default format |
+|----------|-------------|----------------|
+| `{{title}}` | The title of the active note. | — |
+| `{{date}}` | Today's date. | `YYYY-MM-DD` |
+| `{{time}}` | The current time. | `HH:mm` |
+
+### Custom date and time formats
+
+Add a colon and a [Moment.js format string](https://momentjs.com/docs/#/displaying/format/) to override the default format:
+
+```
+{{date:MMMM Do, YYYY}}   → March 15th, 2024
+{{date:DD/MM/YYYY}}      → 15/03/2024
+{{time:h:mm A}}          → 3:45 PM
+```
+
+You can use `{{date}}` and `{{time}}` interchangeably for date and time formatting. You can also change the global default formats under **Settings → Templates → Date format** and **Time format**.
+
+<Tip>
+  The `{{date}}` and `{{time}}` variables also work in the Daily notes and Unique note creator plugins.
+</Tip>
+
+## Create a template
+
+In your templates folder, create a note with the content you want to reuse. Use template variables for anything that should update dynamically.
+
+Here's an example template for study notes:
+
+```md
+---
+topic: 
+date: "{{date}}"
+course: 
+tags:
+  - studies
+---
+
+# {{title}}
+
+## Key Concepts
+
+
+## Important Details
+
+
+## Examples
+
+
+## Questions
+- 
+
+## Summary
+
+
+## Related Topics
+- [[]]
+```
+
+## Insert a template
+
+To insert a template into the active note:
+
+- Click **Insert template** in the left ribbon.
+- Or, open the Command palette and run **Templates: Insert template**.
+- Or, set a hotkey for the **Templates: Insert template** command.
+
+The template content is inserted at your current cursor position. If your cursor is not inside the note body, the content is inserted at your last cursor position.
+
+### Insert the current date or time
+
+Use the commands **Templates: Insert current date** and **Templates: Insert current time** to insert just the date or time at your cursor, using the formats configured in plugin settings.
+
+## Templates vs. Templater
+
+<CardGroup cols={2}>
+  <Card title="Templates (core)" icon="file-text">
+    Built into Obsidian. Supports `{{title}}`, `{{date}}`, and `{{time}}` variables. Simple and reliable for most use cases.
+  </Card>
+  <Card title="Templater (community)" icon="code">
+    A community plugin with a far richer scripting language. Supports JavaScript, conditional logic, user prompts, file system access, and hundreds of built-in functions. Install it from **Settings → Community plugins**.
+  </Card>
+</CardGroup>
+
+If you need logic, loops, or dynamic content beyond simple variable substitution, Templater is worth exploring. For basic templates, the core plugin is sufficient.

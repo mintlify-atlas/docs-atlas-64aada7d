@@ -1,0 +1,148 @@
+---
+title: 'Download and install Obsidian'
+description: 'Install Obsidian on Windows, macOS, Linux, iOS, or Android. Get up and running in minutes on any platform.'
+---
+
+Obsidian is available for all major desktop and mobile platforms. Choose your platform below to get started.
+
+<Tabs>
+  <Tab title="Windows">
+    <Steps>
+      <Step title="Download the installer">
+        Open your browser and go to [obsidian.md/download](https://obsidian.md/download). Under **Windows**, click **Universal** to download the installation file.
+      </Step>
+      <Step title="Run the installer">
+        Open the downloaded `.exe` file and follow the on-screen instructions.
+      </Step>
+      <Step title="Open Obsidian">
+        Launch Obsidian the same way you open any other application.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="macOS">
+    <Steps>
+      <Step title="Download the disk image">
+        Open your browser and go to [obsidian.md/download](https://obsidian.md/download). Under **macOS**, click **Universal** to download the `.dmg` file.
+      </Step>
+      <Step title="Install the app">
+        Open the downloaded `.dmg` file. In the window that appears, drag **Obsidian** into the **Applications** folder.
+      </Step>
+      <Step title="Open Obsidian">
+        Launch Obsidian from Applications the same way you open any other app.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Linux">
+    Obsidian offers three packaging formats on Linux. Use whichever fits your system.
+
+    **Snap**
+
+    <Steps>
+      <Step title="Download the Snap package">
+        Go to [obsidian.md/download](https://obsidian.md/download) and under **Linux**, click **Snap**.
+      </Step>
+      <Step title="Install the package">
+        Open a terminal, navigate to the download folder, and run:
+
+        ```bash
+        snap install obsidian_<version>_<arch>.snap --dangerous --classic
+        ```
+
+        The `--dangerous` flag is required because Canonical has not reviewed the package. The `--classic` flag allows Obsidian to access files outside the sandbox, where your notes are stored.
+      </Step>
+      <Step title="Open Obsidian">
+        Launch Obsidian the same way you open any other application.
+      </Step>
+    </Steps>
+
+    **AppImage**
+
+    <Steps>
+      <Step title="Download the AppImage">
+        Go to [obsidian.md/download](https://obsidian.md/download) and under **Linux**, click **AppImage**.
+      </Step>
+      <Step title="Make it executable and run it">
+        Open a terminal, navigate to the download folder, and run:
+
+        ```bash
+        chmod u+x Obsidian-<version>.AppImage
+        ./Obsidian-<version>.AppImage --no-sandbox
+        ```
+      </Step>
+    </Steps>
+
+    <Note>
+      On Chromebooks, the `libnss3-dev` package must be installed, otherwise you may receive the error `error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory`.
+    </Note>
+
+    **Flatpak**
+
+    <Steps>
+      <Step title="Install via Flatpak">
+        Run the following command in your terminal:
+
+        ```bash
+        flatpak install flathub md.obsidian.Obsidian
+        ```
+      </Step>
+      <Step title="Launch Obsidian">
+        ```bash
+        flatpak run md.obsidian.Obsidian
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Android">
+    <Steps>
+      <Step title="Find Obsidian on the Play Store">
+        Open the [Google Play Store](https://play.google.com/store/apps/details?id=md.obsidian) and search for **Obsidian**.
+      </Step>
+      <Step title="Install the app">
+        Tap **Install** to download and install Obsidian.
+      </Step>
+      <Step title="Open Obsidian">
+        Launch Obsidian the same way you open any other app.
+      </Step>
+    </Steps>
+
+    <Tip>
+      You can also download the APK directly from [obsidian.md/download](https://obsidian.md/download) if you prefer to install it manually.
+    </Tip>
+  </Tab>
+
+  <Tab title="iPhone & iPad">
+    <Steps>
+      <Step title="Find Obsidian on the App Store">
+        Open the [App Store](https://apps.apple.com/us/app/obsidian-connected-notes/id1557175442) and search for **Obsidian**.
+      </Step>
+      <Step title="Download the app">
+        Tap **Get** to download and install Obsidian.
+      </Step>
+      <Step title="Open Obsidian">
+        Launch Obsidian the same way you open any other app.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Try the sandbox vault
+
+The first time you open Obsidian, you'll be prompted to create or open a vault. If you want to explore the app before setting up your own vault, open the **Sandbox vault** — a pre-built vault that showcases Obsidian's core features and formatting options.
+
+<Note>
+  The sandbox vault is a great way to explore Obsidian without touching your own files. Any changes you make to it won't affect your personal notes.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create a vault" icon="folder" href="/getting-started/create-vault">
+    Set up your first vault to start storing your notes.
+  </Card>
+  <Card title="Create your first note" icon="file-pen" href="/getting-started/first-note">
+    Learn how to write and format notes in Obsidian.
+  </Card>
+</CardGroup>

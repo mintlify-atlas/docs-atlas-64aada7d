@@ -1,0 +1,211 @@
+---
+title: Internal links
+description: Link to notes, headings, blocks, and attachments within your vault using Obsidian's wikilink and Markdown link formats.
+---
+
+Internal links connect notes, attachments, and other files inside your vault. By linking notes together, you build a network of knowledge that you can navigate, visualize in Graph view, and query.
+
+Obsidian automatically updates internal links in your vault when you rename a file. To be prompted before updating, go to **Settings → Files and links → Automatically update internal links** and disable the toggle.
+
+## Supported link formats
+
+Obsidian supports two link formats:
+
+| Format | Example |
+|---|---|
+| Wikilink | `[[Three laws of motion]]` |
+| Markdown | `[Three laws of motion](Three%20laws%20of%20motion)` |
+
+Both formats link to the same note and render identically in the editor. Obsidian uses the Wikilink format by default because it is more compact.
+
+<Note>
+When using Markdown links, [URL-encode](https://en.wikipedia.org/wiki/Percent-encoding) the link destination. Spaces become `%20`.
+</Note>
+
+To switch to Markdown links:
+
+<Steps>
+  <Step title="Open Settings">
+    Press `Ctrl+,` (or `Cmd+,` on macOS).
+  </Step>
+  <Step title="Disable Wikilinks">
+    Under **Files and links**, turn off **Use [[Wikilinks]]**.
+  </Step>
+</Steps>
+
+Even with Wikilinks disabled, typing `[[` still triggers autocomplete — Obsidian generates Markdown links when you select a suggestion.
+
+<Warning>
+Avoid these characters in filenames and link destinations, as they may break links: `# | ^ : %% [[ ]]`
+</Warning>
+
+## Create a link
+
+In Editing view, use any of these methods:
+
+- Type `[[` and select the file you want to link to.
+- Select text in the editor, then type `[[` to wrap it in a link.
+- Open the Command palette and run **Add internal link**.
+
+While you can link to any [accepted file format](/files/accepted-formats), links to non-Markdown files must include a file extension:
+
+```md
+[[Figure 1.png]]
+```
+
+<Tip>
+Prefix a link with `!` to embed the linked content instead of just linking to it. See [Embed files](/linking/embed-files).
+</Tip>
+
+## Link to a heading
+
+You can link to specific headings within notes using anchor links.
+
+**Within the same note** — type `[[#` to see a list of headings in the current note:
+
+```md
+[[#Preview a linked file]]
+```
+
+**In another note** — add `#` after the note name, followed by the heading text:
+
+```md
+[[About Obsidian#Links are first-class citizens]]
+```
+
+**Nested subheadings** — chain heading levels with additional `#` symbols:
+
+```md
+[[Help and support#Questions and advice#Report bugs and request features]]
+```
+
+**Search headings across the vault** — use the `[[##` syntax:
+
+```md
+[[## team]]
+```
+
+This searches all headings in the vault that contain the word *team*.
+
+## Link to a block
+
+A block is a unit of text — a paragraph, blockquote, list item, or table. You can link directly to any block.
+
+Add `#^` after the note name, followed by a block identifier:
+
+```md
+[[2023-01-01#^37066d]]
+```
+
+When you type `^`, Obsidian shows a list of blocks in the target note so you can select the right one without knowing the identifier.
+
+### Block identifier placement
+
+For **simple paragraphs**, place the identifier at the end of the line after a space and caret:
+
+```md
+The quick purple gem dashes through the paragraph with blazing speed. ^37066d
+```
+
+For **structured blocks** (lists, blockquotes, callouts, tables), place the identifier on a separate line with blank lines before and after:
+
+```md
+> The quick purple gem dashes through the paragraph with blazing speed.
+
+^37066f
+
+This is the next paragraph.
+```
+
+For **specific list items**, place the identifier directly on the bullet:
+
+```md
+- Gemmy
+    ^37006f
+- Unhelpful assistant
+```
+
+### Human-readable block identifiers
+
+You can write descriptive identifiers instead of random strings. Block identifiers may only contain Latin letters, numbers, and dashes:
+
+```md
+"You do not rise to the level of your goals. You fall to the level of your systems." by James Clear ^quote-of-the-day
+```
+
+Link to it by name:
+
+```md
+[[2023-01-01#^quote-of-the-day]]
+```
+
+**Search blocks across the vault** — use `[[^^` to browse all blocks:
+
+```md
+[[^^interesting-block]]
+```
+
+<Warning>
+Block references are specific to Obsidian and are not part of standard Markdown. Links with block references won't work in other applications.
+</Warning>
+
+## Change the display text
+
+By default, Obsidian displays the link destination as the link text:
+
+- `[[Example]]` displays as **Example**
+- `[[Example#Details]]` displays as **Example > Details**
+
+You can override the display text in both formats.
+
+**Wikilink** — use a vertical bar (`|`) before the display text:
+
+```md
+[[Example|Custom name]]
+[[Example#Details|Section name]]
+```
+
+**Markdown** — use `[Display text](URL)` syntax:
+
+```md
+[Custom name](Example.md)
+[Section name](Example.md#Details)
+```
+
+<Tip>
+Use display text when you want to customize how a link looks in one specific place. Use [aliases](/linking/aliases) when you want to refer to the same note by a different name throughout your vault.
+</Tip>
+
+## How Obsidian resolves links
+
+Obsidian resolves links by finding the best match among files in your vault. You can control the path format Obsidian uses when creating links by going to **Settings → Files and links → New link format**:
+
+<AccordionGroup>
+  <Accordion title="Shortest path when possible (default)">
+    Obsidian uses only the filename if it is unique in the vault:
+    ```md
+    [[My note]]
+    ```
+    If two notes share a name, Obsidian adds enough path components to disambiguate.
+  </Accordion>
+  <Accordion title="Relative path from current note">
+    The link path is relative to the location of the note containing the link:
+    ```md
+    [[../folder/My note]]
+    ```
+  </Accordion>
+  <Accordion title="Absolute path in vault">
+    The link path starts from the vault root:
+    ```md
+    [[folder/subfolder/My note]]
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Preview a linked file
+
+To preview a linked file without opening it, hover over the link. In Editing view, hold `Ctrl` (or `Cmd` on macOS) while hovering.
+
+<Note>
+You must enable **Page preview** in Settings for hover previews to work.
+</Note>

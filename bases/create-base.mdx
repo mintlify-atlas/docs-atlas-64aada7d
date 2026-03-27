@@ -1,0 +1,107 @@
+---
+title: Create a base
+description: Learn how to create a base file, embed a base in a Markdown note, and configure filters to control which notes appear in your views.
+---
+
+A base lets you create database-like views of your notes. You can save a base as a standalone `.base` file, or embed one directly inside a Markdown note.
+
+## Create a new base
+
+<Tabs>
+  <Tab title="Command palette">
+    1. Open the Command palette (`Ctrl+P` / `Cmd+P`).
+    2. Select one of:
+       - **Bases: Create new base** — creates a `.base` file in the same folder as the active file.
+       - **Bases: Insert new base** — creates a base and embeds it in the current note as a code block.
+  </Tab>
+  <Tab title="File explorer">
+    1. Right-click the folder where you want the base.
+    2. Select **New base**.
+  </Tab>
+  <Tab title="Ribbon">
+    In the left ribbon, select **Create new base** to create a base in the same folder as the active file.
+  </Tab>
+</Tabs>
+
+## Embed a base
+
+### Embed a base file in another file
+
+You can embed an existing `.base` file into any Markdown note or canvas using the standard embed syntax:
+
+```md
+![[MyBase.base]]
+```
+
+To embed a base and show a specific view by default, append the view name after a `#`:
+
+```md
+![[MyBase.base#Reading list]]
+```
+
+### Embed a base as a code block
+
+You can also write a base configuration directly inside a note using a `base` code block and the [Bases syntax](/bases/syntax):
+
+````md
+```base
+filters:
+  and:
+    - file.hasTag("example")
+views:
+  - type: table
+    name: Table
+```
+````
+
+When you open the note, Obsidian renders the code block as a live base view.
+
+## Configure the source
+
+By default, a base includes every file in your vault. Use filters to narrow the source down to the files you care about.
+
+### Filter by tag
+
+```yaml
+filters:
+  and:
+    - file.hasTag("books")
+```
+
+### Filter by folder
+
+```yaml
+filters:
+  and:
+    - file.inFolder("Projects")
+```
+
+### Combine conditions
+
+```yaml
+filters:
+  and:
+    - file.hasTag("books")
+    - file.inFolder("Reading")
+```
+
+```yaml
+filters:
+  or:
+    - file.hasTag("books")
+    - file.hasTag("articles")
+```
+
+You can build complex filters using `and`, `or`, and `not` operators. Filters are also available through the visual **Filter** menu in the base toolbar — you don't need to edit the file directly.
+
+## Add and remove properties
+
+Properties (columns in table view, fields in other views) correspond to the frontmatter properties in your notes.
+
+To manage which properties are shown:
+
+1. Click **Properties** in the base toolbar.
+2. Toggle properties on or off, or drag them to reorder.
+3. Click **Add formula** to create a computed column.
+
+You can also rename a property's display name without changing the underlying frontmatter key — the display name is stored in the base configuration.

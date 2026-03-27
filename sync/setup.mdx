@@ -1,0 +1,237 @@
+---
+title: "Set up Obsidian Sync"
+description: "Create a remote vault, connect your first device, and add Obsidian Sync to additional devices."
+---
+
+This guide walks you through setting up Obsidian Sync for the first time, connecting additional devices to an existing remote vault, and managing your vaults.
+
+- **New to Obsidian Sync?** Start with [Set up Obsidian Sync for the first time](#set-up-obsidian-sync-for-the-first-time).
+- **Adding another device?** Jump to [Sync a remote vault on another device](#sync-a-remote-vault-on-another-device).
+- **Need to manage vaults?** See [Manage your remote vaults](#manage-your-remote-vaults).
+
+## Local and remote vaults
+
+Obsidian Sync uses two types of vaults:
+
+- A **local vault** is the copy of your notes stored on a specific device. Every device has its own local vault.
+- A **remote vault** is encrypted, centralized storage hosted on Obsidian's servers. Your local vaults connect to it to exchange changes.
+
+Unlike Dropbox or iCloud, Obsidian Sync doesn't monitor a folder on your file system. It syncs directly through the app, which makes it reliable across all platforms — including mobile devices where background file syncing is restricted.
+
+<Warning>
+  If your local vault is currently inside an iCloud, Dropbox, OneDrive, or Google Drive folder, move it out before setting up Obsidian Sync. Running two sync services on the same files causes conflicts. See [Switch to Obsidian Sync](#switch-from-another-sync-service) below.
+</Warning>
+
+## Set up Obsidian Sync for the first time
+
+**Prerequisites**
+
+- An Obsidian account. [Sign up here](https://obsidian.md/auth?returnto=%2Faccount%2Fsync#signup) if you don't have one.
+- An active [Obsidian Sync subscription](https://obsidian.md/account/sync).
+- A backup of your vault is strongly recommended — a sync service is not a substitute for backups.
+
+### Log in to your Obsidian account
+
+<Steps>
+  <Step title="Open Settings">
+    In Obsidian, open **Settings**.
+  </Step>
+  <Step title="Go to General">
+    In the sidebar, select **General**.
+  </Step>
+  <Step title="Log in">
+    Under **Account → Your Account**, select **Log in**. Enter your email and password, then select **Login**.
+  </Step>
+</Steps>
+
+### Enable the Sync plugin
+
+<Steps>
+  <Step title="Open Settings">
+    Open **Settings**.
+  </Step>
+  <Step title="Go to Core Plugins">
+    In the sidebar under **Options**, select **Core Plugins**.
+  </Step>
+  <Step title="Enable Sync">
+    Toggle **Sync** to enable it.
+  </Step>
+</Steps>
+
+### Create a remote vault
+
+<Steps>
+  <Step title="Open Sync settings">
+    Open **Settings**, then select **Sync** in the sidebar.
+  </Step>
+  <Step title="Choose a remote vault">
+    Next to **Remote vault**, select **Choose**.
+  </Step>
+  <Step title="Create a new vault">
+    Select **Create new vault**.
+  </Step>
+  <Step title="Name your vault">
+    In **Vault name**, enter a name for the remote vault.
+  </Step>
+  <Step title="Choose a region">
+    In **Region**, select the server location closest to you. See [Sync regions](/sync/settings#sync-regions) for available options. This cannot be changed later without re-uploading your data.
+  </Step>
+  <Step title="Set an encryption password">
+    In **Encryption password**, enter a password. This enables end-to-end encryption — your data is encrypted before it leaves your device. **Store this password somewhere safe.** If you lose it, your encrypted data cannot be recovered.
+  </Step>
+  <Step title="Create the vault">
+    Select **Create**.
+  </Step>
+</Steps>
+
+### Connect to your remote vault
+
+<Steps>
+  <Step title="Select Connect">
+    Select **Connect** next to your newly created vault.
+  </Step>
+  <Step title="Enter your encryption password">
+    If you set an encryption password, enter it in the **Encryption password** field, then select **Unlock vault**.
+  </Step>
+  <Step title="Configure sync settings before starting">
+    Do not start syncing yet. Close or dismiss the pop-up window and go to **Settings → Sync** to configure [selective sync and vault configuration sync](/sync/settings) first. This prevents you from uploading files you don't need in the remote vault.
+  </Step>
+  <Step title="Restart Obsidian">
+    After adjusting your settings, restart Obsidian completely. On mobile, force-quit the app.
+  </Step>
+  <Step title="Start syncing">
+    Return to **Settings → Sync** and select **Resume** to begin syncing. When Sync completes, a green checkmark icon appears in the status bar. The sync log will show "Fully Synced".
+  </Step>
+</Steps>
+
+<Note>
+  To connect additional devices, continue to [Sync a remote vault on another device](#sync-a-remote-vault-on-another-device).
+</Note>
+
+## Sync a remote vault on another device
+
+Once you've created a remote vault on your first device, follow these steps to connect each additional device.
+
+**Prerequisites**
+
+- An Obsidian account with an active Sync subscription.
+- The Sync core plugin enabled.
+- An existing remote vault (created on your first device).
+
+### Set up from the vault switcher (fresh install)
+
+If you've just installed Obsidian on a new device:
+
+<Steps>
+  <Step title="Open Obsidian">
+    Launch Obsidian. You'll see the vault switcher.
+  </Step>
+  <Step title="Select Setup Obsidian Sync">
+    - **Desktop**: In the **Open vault from Obsidian Sync** section, select **Setup**.
+    - **Mobile/Tablet**: Select **Setup Obsidian Sync**.
+  </Step>
+  <Step title="Log in">
+    Log in with your Obsidian account. If you have two-factor authentication enabled, enter your 2FA code.
+  </Step>
+  <Step title="Choose your remote vault">
+    Select the remote vault you want to sync to this device, then select **Connect**.
+  </Step>
+  <Step title="Name the local vault">
+    Enter a name for the local vault that will be created on this device. If you use Obsidian URIs, use the same name as the local vault on your other devices.
+  </Step>
+  <Step title="Select Create">
+    Select **Create**. Obsidian connects to the remote vault and shows a **Setup Connection** window.
+  </Step>
+  <Step title="Configure sync settings">
+    Close the Setup Connection window and configure your [sync settings](/sync/settings) before starting. Then restart or reload Obsidian.
+  </Step>
+</Steps>
+
+### Set up from Obsidian Settings (existing local vault)
+
+If the device already has a local vault:
+
+<Steps>
+  <Step title="Log in">
+    Open **Settings → General** and log in with your Obsidian account.
+  </Step>
+  <Step title="Enable Sync">
+    Open **Settings → Core Plugins** and toggle **Sync** on.
+  </Step>
+  <Step title="Open Sync settings">
+    Open **Settings → Sync**.
+  </Step>
+  <Step title="Choose a remote vault">
+    Next to **Pick remote vault**, select **Choose**, then select **Connect** next to the vault you want.
+  </Step>
+  <Step title="Enter your encryption password">
+    Enter the encryption password if your vault uses end-to-end encryption.
+  </Step>
+  <Step title="Configure settings before syncing">
+    Close the prompt and configure your [sync settings](/sync/settings). Then restart Obsidian.
+  </Step>
+  <Step title="Start syncing">
+    Return to **Settings → Sync** and select **Resume**.
+  </Step>
+</Steps>
+
+<Warning>
+  If the local vault already contains notes, Obsidian will warn you that notes will be merged before syncing. Conflicts are resolved automatically — see [troubleshooting](/sync/troubleshoot#conflict-resolution) for details.
+</Warning>
+
+## Manage your remote vaults
+
+### Disconnect from a remote vault
+
+<Steps>
+  <Step title="Open Settings">Open **Settings → Sync**.</Step>
+  <Step title="Disconnect">Select **Disconnect** next to **Remote vault**.</Step>
+</Steps>
+
+This stops syncing on the current device. Your local data is not affected.
+
+### Delete a remote vault
+
+<Tip>
+  Deleting a remote vault does not delete any local data on your devices.
+</Tip>
+
+<Steps>
+  <Step title="Open Settings">Open **Settings → Sync**.</Step>
+  <Step title="Open vault manager">Select **Manage** next to **Remote vault**.</Step>
+  <Step title="Delete the vault">Select the trash icon next to the vault you want to delete.</Step>
+  <Step title="Confirm">Select the red **Delete** button to confirm.</Step>
+</Steps>
+
+<Info>
+  If no trash icon is visible, you may need to disconnect from the vault first. After disconnecting, select **Choose** to open the vault list.
+</Info>
+
+## Switch from another sync service
+
+If your vault is currently inside a folder managed by iCloud, Dropbox, OneDrive, Google Drive, or another sync service, move it to a neutral location before connecting Obsidian Sync.
+
+**Recommended vault locations:**
+
+| Platform | Recommended location |
+|---|---|
+| Windows | `D:\` or `C:\Vaults` |
+| macOS | `/users/username/vaults` |
+| Linux | Any folder not managed by a sync service |
+| iOS/iPadOS | **On My iPhone** / **On the Device** (not iCloud Drive) |
+| Android | `Documents/` folder |
+
+### Move your vault on desktop
+
+Use **Settings → Files and links → Move vault** to relocate your vault in Obsidian. This keeps all internal links intact.
+
+### Move an iCloud vault on iOS
+
+<Steps>
+  <Step title="Back up your vault">Make a backup before proceeding.</Step>
+  <Step title="Create a new local vault">In Obsidian, create a new vault with **Save in iCloud Drive** disabled.</Step>
+  <Step title="Force-quit Obsidian">Force-quit the app on all devices to pause sync.</Step>
+  <Step title="Move in the Files app">Open the **Files** app. Long-press the vault folder under **iCloud Drive → Obsidian**, select **Move**, and move it to **On My iPhone → Obsidian**.</Step>
+  <Step title="Remove the old folder">Return to **iCloud Drive → Obsidian** and delete the original folder.</Step>
+  <Step title="Reopen Obsidian">When you reopen Obsidian, the vault should show a vault icon rather than a cloud icon, confirming it's no longer in iCloud.</Step>
+</Steps>

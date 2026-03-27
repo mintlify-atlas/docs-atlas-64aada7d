@@ -1,0 +1,154 @@
+---
+title: Search
+description: The Search plugin lets you find notes and content across your vault using keywords, search operators, boolean logic, and regular expressions.
+---
+
+Search is a core plugin that helps you find data in your Obsidian vault. You can combine keywords, operators, and regular expressions to narrow results precisely.
+
+## Open search
+
+- Press `Ctrl+Shift+F` (Windows/Linux) or `Cmd+Shift+F` (macOS).
+- Click the search icon in the left sidebar.
+
+<Tip>
+  Select text in the editor before opening Search, and Obsidian will pre-fill the search field with your selection.
+</Tip>
+
+Open Search with an empty field to see your recent search terms and reuse them.
+
+<Info>
+  Files matching your **Settings → Excluded files** patterns will not appear in search results.
+</Info>
+
+## Basic search
+
+Type a word or phrase into the search field. By default, Obsidian searches the contents of notes and canvases.
+
+- Each word is matched independently: `meeting work` returns files containing both words.
+- Wrap a phrase in quotes for an exact match: `"stand-up meeting"`.
+- Escape quotes inside a phrase with a backslash: `"they said \"hello\" to each other"`.
+
+## Boolean operators
+
+Combine words and phrases with boolean logic:
+
+```
+meeting OR work
+meeting work OR meetup personal
+meeting (work OR meetup) personal
+meeting -work
+meeting -work -meetup
+meeting -(work meetup)
+```
+
+- Use `OR` to match either term.
+- Use `-` (hyphen) before a word to exclude it.
+- Use parentheses to group expressions and control evaluation order.
+
+## Search operators
+
+Operators let you target specific parts of a note or file:
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `file:` | Search in filenames. | `file:.jpg` |
+| `path:` | Search in file paths. | `path:"Daily notes/2022-07"` |
+| `content:` | Search in file content. | `content:"happy cat"` |
+| `tag:` | Find files with a specific tag. | `tag:#work` |
+| `line:` | Match files where a single line contains all terms. | `line:(mix flour)` |
+| `block:` | Match files where a single block contains all terms. | `block:(dog cat)` |
+| `section:` | Match files where a section contains all terms. | `section:(dog cat)` |
+| `task:` | Match text in a task item. | `task:call` |
+| `task-todo:` | Match text in an uncompleted task. | `task-todo:call` |
+| `task-done:` | Match text in a completed task. | `task-done:call` |
+| `match-case:` | Case-sensitive match. | `match-case:HappyCat` |
+| `ignore-case:` | Case-insensitive match. | `ignore-case:ikea` |
+
+Some operators accept a nested search term in parentheses: `task:(call OR email)`.
+
+## Search properties
+
+Search across [note properties](/editing/properties) using bracket syntax:
+
+```
+[aliases]                    — files that have an aliases property
+[aliases:Name]               — files where aliases equals "Name"
+[aliases:null]               — files where aliases exists but has no value
+[status:Draft OR Published]  — files where status is Draft or Published
+```
+
+Both the property name and value support sub-queries including `OR`, parentheses, exact quotes, and regex.
+
+## Regular expressions
+
+Surround a regular expression with forward slashes to use it in a search:
+
+```
+/\d{4}-\d{2}-\d{2}/
+```
+
+This matches any ISO 8601 date such as `2022-01-01`. You can combine regex with operators:
+
+```
+path:/\d{4}-\d{2}-\d{2}/
+```
+
+This returns files with a date in the file path.
+
+<Info>
+  Obsidian uses JavaScript-flavored regular expressions.
+</Info>
+
+## Change case sensitivity
+
+By default, search is case-insensitive. Click the **Match case** icon inside the search bar to enable case-sensitive matching. The icon is highlighted when case-sensitive mode is active.
+
+## Sort results
+
+<Steps>
+  <Step title="Enter a search term">
+    Type your query in the search field.
+  </Step>
+  <Step title="Open the sort dropdown">
+    Select the dropdown on the right side below the search field.
+  </Step>
+  <Step title="Choose a sort order">
+    Options include file name (A–Z or Z–A), modified time, and created time.
+  </Step>
+</Steps>
+
+## Copy search results
+
+<Steps>
+  <Step title="Run a search">
+    Enter your search term.
+  </Step>
+  <Step title="Open the results menu">
+    Click the three-dots icon next to the result count below the search field.
+  </Step>
+  <Step title="Copy results">
+    Select **Copy search results**.
+  </Step>
+</Steps>
+
+## Embed search results in a note
+
+You can embed a live search query inside any note using a `query` code block:
+
+````md
+```query
+tag:#project status:active
+```
+````
+
+The results update dynamically as your vault changes.
+
+## Search settings
+
+Click the sliders icon on the right side of the search bar to access additional settings:
+
+| Setting | Description |
+|---------|-------------|
+| **Explain search term** | Breaks down your query and explains it in plain language. |
+| **Collapse results** | Toggle whether search context is shown below each result. |
+| **Show more context** | Expand results to show more surrounding text for each match. |

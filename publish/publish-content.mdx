@@ -1,0 +1,164 @@
+---
+title: "Publish content"
+description: "Select notes to publish, update existing content, manage attachments, and control which notes appear on your site."
+---
+
+This page explains how to manage what appears on your Obsidian Publish site. To customize the site's appearance, see [Customize your site](/publish/customize-site).
+
+## Prerequisites
+
+- The **Publish** core plugin is enabled.
+- A Publish site is created. See [Set up Obsidian Publish](/publish/setup).
+
+## Publish notes
+
+1. In the Ribbon, click **Publish changes**.
+2. In the **Publish changes** dialog, select **NEW** to view all unpublished notes.
+3. Select the notes you want to publish.
+4. Click **Publish**.
+
+## Update a published note
+
+1. In the Ribbon, click **Publish changes**.
+2. Select **CHANGED** to view notes modified since the last publish.
+3. Select the notes you want to update.
+4. Click **Publish**.
+
+<Note>
+  Deleting renamed or removed notes from Publish happens in this same step. Deleted items are not automatically selected — you must manually check them to remove them from the live site.
+</Note>
+
+## Unpublish notes
+
+Unpublishing removes a note from your site but leaves it in your local vault.
+
+1. In the Ribbon, click **Publish changes**.
+2. Select **UNCHANGED** to view all currently published notes.
+3. Select the notes you want to unpublish.
+4. Click **Publish**.
+
+## Publish linked notes and attachments
+
+If a published note links to other notes or embeds images, those linked items may show as broken unless they're also published. Obsidian Publish helps prevent this by automatically selecting media linked from notes you've already chosen to publish.
+
+To include all linked notes in one step, click **Add linked** in the **Publish changes** dialog. Review the updated selection before publishing to make sure it doesn't include anything you're not ready to share.
+
+<Tip>
+  **Add linked** respects any exclusions you've configured. Notes marked with `publish: false` or in excluded folders won't be added automatically.
+</Tip>
+
+## Automatically include notes
+
+You can flag individual notes or entire folders so they're automatically selected for publishing.
+
+### Flag a single note
+
+Add `publish: true` to the note's frontmatter properties:
+
+```yaml
+---
+publish: true
+---
+```
+
+The note will be pre-selected whenever it has new or changed content.
+
+### Include an entire folder
+
+1. In the Ribbon, click **Publish changes**.
+2. Click the **Manage publish filters** icon (funnel).
+3. Under **Included folders**, click **Manage**.
+4. Choose the folders you want to include.
+5. Click **Done**.
+
+## Exclude notes from publishing
+
+### Exclude a single note
+
+Add `publish: false` to the note's frontmatter properties:
+
+```yaml
+---
+publish: false
+---
+```
+
+The note no longer appears in the list of notes to publish.
+
+### Exclude an entire folder
+
+1. In the Ribbon, click **Publish changes**.
+2. Click the **Manage publish filters** icon (funnel).
+3. Under **Excluded folders**, click **Manage**.
+4. Choose the folders you want to exclude.
+5. Click **Done**.
+
+<Note>
+  If a note has `publish: true` in its frontmatter, it will still be published even if it's inside an excluded folder. Per-note settings take precedence over folder-level exclusions.
+</Note>
+
+## Set custom URLs with permalinks
+
+By default, a note's URL is derived from its file path. You can override this with a permalink property:
+
+```yaml
+---
+permalink: about
+---
+```
+
+This turns a long path like `publish.obsidian.md/your-site/Company/About+us` into `publish.obsidian.md/your-site/about`. If someone visits the original URL, they're automatically redirected to the permalink.
+
+### Redirect old notes
+
+When you rename or move a note, external links pointing to the old URL will break. To redirect visitors, add the old path as an alias in the new note's frontmatter:
+
+```yaml
+---
+aliases:
+  - Guides/Making friends
+---
+```
+
+<Warning>
+  Include the full path to the old note in the alias. Using only the note name won't work for redirects on Publish — the full path is required.
+</Warning>
+
+You can add multiple aliases to redirect several old URLs to the same note:
+
+```yaml
+---
+aliases:
+  - Guides/Making friends
+  - Developing friendships
+---
+```
+
+## Manage media files
+
+Publish supports images, PDFs, audio, and video files up to **50 MB** per file.
+
+<AccordionGroup>
+  <Accordion title="Images">
+    Use `.svg`, `.webp`, or `.png` formats where possible. Optimize images before uploading to reduce file size while preserving visual quality.
+  </Accordion>
+  <Accordion title="PDFs">
+    Compress PDFs and remove unnecessary embedded images before uploading. Note that on mobile devices, embedded PDFs may not load or may only show the first page due to mobile renderer limitations.
+  </Accordion>
+  <Accordion title="Video and audio">
+    Publish is not optimized for streaming large video or audio files. For multiple or large video files, host them on YouTube or Vimeo and embed the link instead.
+
+    Recommended formats if hosting on Publish:
+    - **Video**: `.mp4`, `.webm`
+    - **Audio**: `.aac`, `.mp3`, `.opus`
+  </Accordion>
+</AccordionGroup>
+
+## Manage multiple sites
+
+Your Publish subscription may allow multiple sites. Each site is an independent collection of published notes.
+
+- **Switch sites**: In the **Publish changes** panel, click **Switch site** and then **Choose** next to the site you want.
+- **Create a site**: Click **Switch site**, then enter a new Site ID and click **Create**.
+- **Delete a site**: Click **Switch site**, then click the delete icon next to a site. Notes remain in your local vault after deletion.
+- **Change a site ID**: Click **Switch site**, then click the edit icon next to a site to change its ID.

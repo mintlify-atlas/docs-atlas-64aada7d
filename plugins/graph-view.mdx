@@ -1,0 +1,102 @@
+---
+title: Graph view
+description: Graph view visualizes the relationships between notes in your vault as an interactive node graph, with notes as circles and links as lines.
+---
+
+Graph view is a core plugin that lets you visualize relationships between notes in your vault.
+
+- **Circles** (nodes) represent notes.
+- **Lines** (edges) represent internal links between notes.
+
+The more notes that link to a given note, the larger its circle becomes.
+
+## Open graph view
+
+Click **Open graph view** in the left ribbon, or run the **Graph view: Open graph view** command from the Command palette.
+
+## Interact with the graph
+
+- **Hover** over a circle to highlight that note's connections.
+- **Click** a note in the graph to open it.
+- **Right-click** a note to see available actions for that note.
+
+### Navigate
+
+- **Zoom**: Scroll with the mouse wheel, or press `+` and `-`.
+- **Pan**: Drag the graph with your mouse, or use the arrow keys.
+- Hold `Shift` while using the keyboard to speed up movement.
+
+## Configure graph settings
+
+Click the cog icon in the upper-right corner of the graph view to open settings. Select **Restore default settings** to reset any changes.
+
+### Filters
+
+Control which nodes appear in the graph.
+
+| Setting | Description |
+|---------|-------------|
+| **Search files** | Filter notes by a search term. Supports all [Search operators](/plugins/search). |
+| **Tags** | Toggle whether to show tags as nodes. |
+| **Attachments** | Toggle whether to show attachment files. |
+| **Existing files only** | Show only notes that actually exist in your vault, hiding unresolved links. |
+| **Orphans** | Toggle whether to show notes with no links. |
+
+<Info>
+  Files matching your **Settings → Excluded files** patterns will not appear in graph view.
+</Info>
+
+### Groups
+
+Color-code groups of notes to distinguish them visually.
+
+<Steps>
+  <Step title="Create a new group">
+    Click **New group** in the Groups section.
+  </Step>
+  <Step title="Define the group">
+    Type a search term in the search box to select which notes belong to the group.
+  </Step>
+  <Step title="Choose a color">
+    Click the colored circle to pick a color for the group.
+  </Step>
+</Steps>
+
+### Display
+
+Control how nodes and links appear.
+
+| Setting | Description |
+|---------|-------------|
+| **Arrows** | Show the direction of each link. |
+| **Text fade threshold** | Control how transparent note names appear. |
+| **Node size** | Adjust the size of each node circle. |
+| **Link thickness** | Adjust the width of connection lines. |
+| **Animate** | Start a time-lapse animation. |
+
+### Forces
+
+Control the physics simulation that positions nodes.
+
+| Setting | Description |
+|---------|-------------|
+| **Center force** | How compact the graph is. Higher values create a more circular layout. |
+| **Repel force** | How strongly nodes push each other apart. |
+| **Link force** | The tension on each link — like tightening or loosening a rubber band. |
+| **Link distance** | The length of lines between notes. |
+
+## Time-lapse animation
+
+Enable **Animate** in the Display settings to watch notes appear in chronological order based on their creation time. This can help you understand how your knowledge base grew over time.
+
+## Local graph view
+
+The local graph view shows only the notes connected to the active note, rather than your entire vault.
+
+To open a local graph: run **Open local graph** from the Command palette.
+
+The local graph uses all the same settings as the global graph. Additionally, you can set a **depth** level — each depth level reveals notes connected to the notes shown at the previous level. Use the depth slider at the top of the local graph's filter panel.
+
+<Tip>
+  Use the local graph to explore how a specific note connects to the rest of your vault. Increasing the depth reveals second- and third-degree connections you might not have noticed.
+</Tip>

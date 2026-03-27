@@ -1,0 +1,83 @@
+---
+title: 'Create a vault'
+description: 'Understand what an Obsidian vault is and learn how to create a new one, open an existing folder, or manage multiple vaults.'
+---
+
+A vault is a folder on your local file system where Obsidian stores your notes. Because a vault is just a plain folder of Markdown files, you own your data completely — you can open it in any text editor, back it up with any tool, and move it wherever you like.
+
+You can keep all your notes in a single vault, or create separate vaults for different projects or areas of your life.
+
+<Note>
+  Obsidian does not store your notes in the cloud or in a proprietary format. Everything lives in a regular folder on your device.
+</Note>
+
+## Create a new empty vault
+
+When you open Obsidian for the first time, it asks you to add a vault. To create a brand-new vault:
+
+<Steps>
+  <Step title="Click Create">
+    To the right of **Create new vault**, click **Create**.
+  </Step>
+  <Step title="Name your vault">
+    In the **Vault name** field, enter a name for your vault.
+  </Step>
+  <Step title="Choose a location">
+    Click **Browse** to select the folder where your vault will be created.
+  </Step>
+  <Step title="Confirm">
+    Click **Create**. Obsidian will open the new, empty vault.
+  </Step>
+</Steps>
+
+## Open an existing folder as a vault
+
+If you already have a folder of Markdown files you want to use — for example, notes from another app — you can open it directly as an Obsidian vault:
+
+<Steps>
+  <Step title="Click Open">
+    To the right of **Open folder as vault**, click **Open**.
+  </Step>
+  <Step title="Select the folder">
+    In the file browser, navigate to and select the folder you want to use.
+  </Step>
+  <Step title="Confirm">
+    Click **Open**. Obsidian will treat that folder as your vault and display all Markdown files inside it.
+  </Step>
+</Steps>
+
+<Tip>
+  You don't need to do anything special to prepare a folder. If it contains `.md` files, Obsidian will recognise them immediately.
+</Tip>
+
+## Manage multiple vaults
+
+You can switch between vaults or create additional ones at any time using the **vault switcher**.
+
+- To open the vault switcher on desktop, click the vault icon at the bottom-left of the sidebar, or press `Ctrl+Shift+,` (`Cmd+Shift+,` on macOS).
+- From the vault switcher you can create a new vault, open an existing folder, or switch to any vault you've previously opened.
+
+<Info>
+  Each vault has its own settings, plugins, and configuration. Changing the theme or installing a plugin in one vault does not affect other vaults.
+</Info>
+
+## How Obsidian stores data
+
+Obsidian creates a hidden `.obsidian` folder inside your vault to store settings, plugins, themes, and workspace state. Your actual notes remain as plain `.md` files at the top level and in any subfolders you create.
+
+This design means:
+
+- Your notes are readable by any Markdown editor.
+- You can use standard file-system tools (Finder, Explorer, `rsync`, Git) to back up or move your vault.
+- Deleting the `.obsidian` folder resets Obsidian's settings but leaves your notes untouched.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Create your first note" icon="file-pen" href="/getting-started/first-note">
+    Start writing in your new vault.
+  </Card>
+  <Card title="Link notes" icon="link" href="/getting-started/link-notes">
+    Connect your notes to build a network of ideas.
+  </Card>
+</CardGroup>

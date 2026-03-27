@@ -1,0 +1,109 @@
+---
+title: "Security and privacy"
+description: "Password-protect your Publish site, manage collaborator access, and understand how your data is stored and kept private."
+---
+
+Obsidian Publish gives you control over what gets shared. Only the notes you explicitly choose to publish are sent to Obsidian's servers. Notes you unpublish are removed from the servers. Everything else stays in your local vault.
+
+## Password protection
+
+You can restrict access to your entire Publish site with a password. When a visitor tries to open any page, they'll be prompted to enter the password before seeing any content.
+
+<Warning>
+  Password protection is site-wide only. Per-note passwords are not currently supported.
+</Warning>
+
+### Add a site password
+
+1. In the Ribbon, click **Publish changes**.
+2. Click **Change site options**.
+3. Under **Other site settings**, next to **Passwords**, click **Manage**.
+4. Click **New password**.
+5. In **Password**, enter a password for your site.
+6. (Optional) In **Nickname**, enter a label for the password — for example, the name of the person you're granting access to. Nicknames help you identify which password to revoke later.
+7. Click **Add this password**.
+
+You can add multiple passwords — useful when giving access to different people or groups.
+
+### Remove a site password
+
+1. In the Ribbon, click **Publish changes**.
+2. Click **Change site options**.
+3. Under **Other site settings**, next to **Passwords**, click **Manage**.
+4. Click the **×** icon next to the password you want to delete.
+
+If you remove all passwords, your site becomes publicly accessible again.
+
+## Collaborating on a Publish site
+
+You can invite other Obsidian users to publish and update content on your site. Collaborators don't need their own Publish subscription — only the site owner does.
+
+### Add a collaborator
+
+1. In the Ribbon, click **Publish changes** or open the Command palette and type **Publish: Publish changes...**
+2. Click **Change site options**.
+3. Next to **Site collaboration**, click **Manage**.
+4. In **Invite user**, enter the collaborator's Obsidian account email.
+5. Click **Add**.
+
+### Remove a collaborator
+
+1. In the Ribbon, click **Publish changes**.
+2. Click **Change site options**.
+3. Next to **Site collaboration**, click **Manage**.
+4. Click **Remove user** (×) next to the collaborator you want to remove.
+
+### Collaborator permissions
+
+| Action | Collaborator | Owner |
+|---|:---:|:---:|
+| Publish new pages | ✓ | ✓ |
+| Publish changes to published pages | ✓ | ✓ |
+| Unpublish pages | ✓ | ✓ |
+| Configure site options | | ✓ |
+| Manage permissions | | ✓ |
+
+### Sync changes between collaborators
+
+Obsidian Publish does not automatically sync published changes back to collaborators' local vaults. If a collaborator publishes a change, other collaborators won't see it locally until they sync manually.
+
+To update a local note with the live version:
+
+1. In the Ribbon, click **Publish changes**.
+2. Right-click (or long-press on mobile) the note you want to sync.
+3. Select **Use live version**.
+
+<Warning>
+  **Use live version** overwrites the note in your local vault with the version on the live site. Make sure you don't have local changes you want to keep.
+</Warning>
+
+<Tip>
+  For ongoing collaboration, use a dedicated sync tool — such as [Obsidian Sync](/sync/introduction) or [Git](https://git-scm.com/) — to keep vaults in sync between collaborators.
+</Tip>
+
+## Data collection and privacy
+
+By default, Obsidian Publish **does not** collect visitor data, store cookies, or process personal information.
+
+If you add analytics or other tracking scripts via `publish.js`, you become responsible for complying with applicable privacy regulations (including GDPR). This includes:
+
+- Displaying a cookie consent banner (can be implemented via `publish.js`)
+- Providing a privacy policy page on your site
+
+## Infrastructure and hosting
+
+Obsidian contracts with [Cloudflare](https://www.cloudflare.com) to host Publish sites. Servers are located in San Francisco, CA.
+
+### Network access
+
+To manage access to Obsidian Publish on a controlled network, allow the following domains:
+
+| Domain | Purpose |
+|---|---|
+| `publish.obsidian.md` | Frontend (site delivery) |
+| `publish-main.obsidian.md` | Backend |
+| `publish-1.obsidian.md` through `publish-100.obsidian.md` | Backend subdomains |
+
+<Tip>
+  If your firewall supports wildcard rules, use `publish-*.obsidian.md` to accommodate future subdomain expansion.
+</Tip>

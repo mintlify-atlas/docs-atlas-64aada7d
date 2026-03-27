@@ -1,0 +1,138 @@
+---
+title: Manage vaults
+description: Create, open, rename, move, and switch between Obsidian vaults using the vault switcher.
+---
+
+A **vault** is a folder on your file system that contains your notes, attachments, and a `.obsidian` configuration folder with Obsidian-specific settings. Each vault is independent — links, settings, plugins, and themes are all local to the vault.
+
+For more on how Obsidian stores data, see [How Obsidian stores data](/files/how-obsidian-stores-data).
+
+## Open the vault switcher
+
+The vault switcher lets you manage all your vaults from one place.
+
+- Select the **Vault profile** icon at the bottom of the left sidebar, then choose **Manage Vaults...**.
+- Or run **Open another vault** from the Command palette.
+
+## Create a new vault
+
+<Steps>
+  <Step title="Open the vault switcher">
+    Select **Vault profile** at the bottom left, then choose **Manage Vaults...**.
+  </Step>
+  <Step title="Create the vault">
+    Next to **Create new vault**, select **Create**.
+  </Step>
+  <Step title="Name and place the vault">
+    Enter a vault name, click **Browse** to choose where it will be created, then click **Create**.
+  </Step>
+</Steps>
+
+## Open an existing folder as a vault
+
+You can turn any existing folder into a vault — Obsidian will add a `.obsidian` folder to it and leave your files untouched.
+
+<Steps>
+  <Step title="Open the vault switcher">
+    Select **Vault profile** at the bottom left, then choose **Manage Vaults...**.
+  </Step>
+  <Step title="Open the folder">
+    Next to **Open folder as vault**, click **Open**.
+  </Step>
+  <Step title="Select the folder">
+    Navigate to the folder you want to use, then click **Open**.
+  </Step>
+</Steps>
+
+<Tip>
+To open a remote vault from Obsidian Sync, refer to the Obsidian Sync setup guide.
+</Tip>
+
+## Switch between vaults
+
+To switch from the current vault to another:
+
+- Select the **Vault profile** icon at the bottom of the left sidebar.
+- Click the vault you want to open from the list.
+
+Each vault opens in its own window. You can have multiple vaults open at the same time.
+
+## Rename a vault
+
+Renaming a vault also renames its underlying folder on disk.
+
+<Steps>
+  <Step title="Open the vault switcher">
+    Select **Vault profile**, then choose **Manage Vaults...**.
+  </Step>
+  <Step title="Open vault options">
+    In the vault list, select **More options** next to the vault you want to rename.
+  </Step>
+  <Step title="Rename">
+    Select **Rename vault**, enter the new name, and press `Enter`.
+  </Step>
+</Steps>
+
+## Move a vault to a different folder
+
+<Steps>
+  <Step title="Open the vault switcher">
+    Select **Vault profile**, then choose **Manage Vaults...**.
+  </Step>
+  <Step title="Close the vault window">
+    Close the vault window you want to move, leaving the **Manage Vaults** window open.
+  </Step>
+  <Step title="Move the vault">
+    Select **More options** next to the vault, choose **Move vault**, and select the new location.
+  </Step>
+</Steps>
+
+If your operating system does not allow moving vaults through the vault switcher, move it manually:
+
+<Steps>
+  <Step title="Close Obsidian">Quit the application completely.</Step>
+  <Step title="Move the folder">Move your vault folder to the new location using your file manager. Avoid folders already synced by other services.</Step>
+  <Step title="Reopen Obsidian">Launch Obsidian.</Step>
+  <Step title="Open the moved vault">
+    Select **Vault profile → Manage Vaults... → Open folder as vault**, then navigate to the new location.
+  </Step>
+  <Step title="Verify contents">
+    Confirm the vault contents are unchanged. If needed, re-enable community plugins under **Settings → Community Plugins → Turn restricted mode off**.
+  </Step>
+</Steps>
+
+## Remove a vault from the list
+
+Removing a vault only removes it from the vault switcher list. The folder and all its files remain on disk.
+
+<Steps>
+  <Step title="Open the vault switcher">
+    Select **Vault profile**, then choose **Manage Vaults...**.
+  </Step>
+  <Step title="Remove the vault">
+    Select **More options** next to the vault, then choose **Remove from list**.
+  </Step>
+</Steps>
+
+## Transfer settings to another vault
+
+To reuse the same settings, plugins, and themes in a different vault, copy the `.obsidian` folder from the root of the source vault to the root of the destination vault using your file manager or terminal.
+
+Restart Obsidian to apply the changes.
+
+<Note>
+By default, most operating systems hide folders that start with a period (`.`). See [How Obsidian stores data](/files/how-obsidian-stores-data) for instructions on making hidden folders visible.
+</Note>
+
+## The .obsidian configuration folder
+
+Each vault contains a `.obsidian` folder that stores all vault-specific settings:
+
+- Hotkey customizations
+- Installed themes and CSS snippets
+- Community plugin data
+- Workspace layout state
+
+You can change the name of the configuration folder under **Settings → Files and links → Override config folder**. This is useful when testing different profiles in the same vault or when using a sync service.
+
+For full details, see [How Obsidian stores data](/files/how-obsidian-stores-data).

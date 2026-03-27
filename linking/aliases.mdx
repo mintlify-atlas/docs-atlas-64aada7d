@@ -1,0 +1,72 @@
+---
+title: Aliases
+description: Give a note alternative names to make it easier to link and search for it across your vault.
+---
+
+An alias is an alternative name for a note. Aliases let you reference the same note using multiple names — useful for acronyms, abbreviations, nicknames, or alternate spellings.
+
+For example, you might add `AI` and `Machine learning` as aliases for a note titled `Artificial intelligence`.
+
+<Note>
+If you only want to change how a link looks in one specific place, use [display text](/linking/internal-links#change-the-display-text) instead. Aliases are for when you want to reuse the same alternate name throughout your vault.
+</Note>
+
+## Add an alias to a note
+
+Add an `aliases` property to the note's [frontmatter](https://help.obsidian.md/Editing+and+formatting/Properties). Aliases must be formatted as a YAML list:
+
+```md
+---
+aliases:
+  - Doggo
+  - Woofer
+  - Yapper
+---
+
+# Dog
+```
+
+You can add as many aliases as you need. Each entry becomes an alternative name you can search for and link to.
+
+## Link to a note using an alias
+
+When you type an internal link with `[[`, aliases appear in the autocomplete suggestions alongside note titles, marked with a curved arrow icon.
+
+<Steps>
+  <Step title="Start typing the alias">
+    Type `[[` and begin entering the alias name. It appears in the suggestions list.
+  </Step>
+  <Step title="Select the alias">
+    Press `Enter` to select it.
+  </Step>
+</Steps>
+
+Obsidian creates the link using the full `[[Note title|alias]]` format to maintain interoperability with other apps that support Wikilinks:
+
+```md
+[[Artificial intelligence|AI]]
+```
+
+<Note>
+Obsidian uses `[[Artificial Intelligence|AI]]` rather than just `[[AI]]` to ensure the link resolves correctly in other Wikilink-compatible applications.
+</Note>
+
+## Find unlinked mentions for an alias
+
+If other notes mention an alias as plain text without linking to it, you can find those mentions using Backlinks.
+
+For example, after setting `AI` as an alias for `Artificial intelligence`, the Backlinks panel shows unlinked mentions of `AI` across your vault.
+
+When you link an unlinked mention, Obsidian converts the plain text into an internal link with the alias as the display text:
+
+```md
+<!-- Before -->
+This note discusses AI in depth.
+
+<!-- After linking the unlinked mention -->
+This note discusses [[Artificial intelligence|AI]] in depth.
+```
+
+## Aliases in link suggestions
+
+Aliases appear alongside note titles in the `[[` autocomplete suggestions, with a curved arrow icon next to them. Select an alias to create a link using it as the display text.

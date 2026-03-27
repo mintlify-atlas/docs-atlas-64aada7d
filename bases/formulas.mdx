@@ -1,0 +1,188 @@
+---
+title: Formulas
+description: Formulas are computed columns in Bases. Use them to calculate values, combine fields, work with dates, and apply conditional logic — all from your note properties.
+---
+
+Formulas let you create calculated properties in Bases using data from other properties. A formula property doesn't exist in your notes' frontmatter — it's computed on the fly from values that do.
+
+## What formulas can do
+
+- **Calculate values** — add prices, compute totals, perform math operations.
+- **Manipulate text** — combine strings, change case, extract substrings.
+- **Work with dates** — calculate time differences, format dates, determine deadlines.
+- **Apply logic** — use conditional statements to display different values.
+- **Process lists** — filter, sort, map, or aggregate list data.
+
+## Create a formula property
+
+<Steps>
+  <Step title="Open the Properties menu">
+    In your base, click **Properties** in the toolbar.
+  </Step>
+  <Step title="Add a formula">
+    Click **Add formula** at the bottom of the menu.
+  </Step>
+  <Step title="Name and define the formula">
+    Enter a name for the formula property and type your formula expression in the **Formula** field.
+  </Step>
+  <Step title="Save">
+    Close the dialog. A green checkmark confirms the formula is valid.
+  </Step>
+</Steps>
+
+Once created, a formula property works like any other property: add it to views, filter by it, sort by it, and more.
+
+## Write a formula
+
+A formula is an expression that combines properties, operators, and functions.
+
+### Reference properties
+
+You can reference three types of properties:
+
+| Type | Syntax | Example |
+|------|--------|---------|
+| Note property (frontmatter) | `property_name` or `note.property_name` | `price`, `note.price` |
+| File property | `file.name`, `file.size`, `file.mtime` | `file.mtime` |
+| Another formula | `formula.formula_name` | `formula.price_per_unit` |
+
+**Examples:**
+
+```js
+price * quantity
+file.name + " - " + description
+formula.price_per_unit * 1.1
+```
+
+### Operators
+
+**Arithmetic:**
+
+```js
+price + tax
+price - discount
+price * quantity
+price / quantity
+(part / whole) * 100
+```
+
+**Comparison** (return `true` or `false`):
+
+```js
+price > 100
+age < 18
+status == "Done"
+status != "Done"
+file.mtime > now() - '7d'
+```
+
+**Boolean:**
+
+```js
+!completed
+price > 0 && quantity > 0
+urgent || important
+```
+
+### Functions
+
+Functions perform operations on values. The available functions depend on the value type. See the full function list in [Bases syntax](/bases/syntax).
+
+| Category | Examples |
+|----------|----------|
+| Global | `if()`, `now()`, `today()`, `date()`, `link()`, `max()`, `min()` |
+| String | `contains()`, `replace()`, `split()`, `lower()`, `title()` |
+| Number | `round()`, `ceil()`, `floor()`, `abs()`, `toFixed()` |
+| Date | `format()`, `relative()`, `date()`, `time()` |
+| List | `filter()`, `map()`, `sort()`, `join()`, `unique()` |
+
+## Formula examples
+
+<AccordionGroup>
+  <Accordion title="Calculate a deadline">
+    Set a project's due date to 2 weeks after the start date:
+
+    ```js
+    start_date + "2w"
+    ```
+  </Accordion>
+
+  <Accordion title="Display overdue status">
+    Show "Overdue" if the due date has passed and the task isn't done:
+
+    ```js
+    if(due_date < now() && status != "Done", "Overdue", "")
+    ```
+  </Accordion>
+
+  <Accordion title="Format currency">
+    Display a price with two decimal places and a currency symbol:
+
+    ```js
+    if(price, "$" + price.toFixed(2), "")
+    ```
+  </Accordion>
+
+  <Accordion title="Count list items">
+    Count the number of items in a list property:
+
+    ```js
+    tasks.length
+    ```
+  </Accordion>
+
+  <Accordion title="Calculate a priority score">
+    Combine multiple factors into a single score:
+
+    ```js
+    (impact * urgency) / effort
+    ```
+  </Accordion>
+
+  <Accordion title="Combine text fields">
+    Create a full name from first and last name properties:
+
+    ```js
+    first_name + " " + last_name
+    ```
+  </Accordion>
+
+  <Accordion title="Calculate total cost">
+    Multiply a monthly cost by the number of months, using another formula:
+
+    ```js
+    monthlyUses * formula.Owned.round()
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Data types
+
+Formulas work with these data types:
+
+| Type | Description | Examples |
+|------|-------------|----------|
+| String | Text in quotes | `"hello"`, `'world'` |
+| Number | Numeric values | `42`, `3.14` |
+| Boolean | True or false | `true`, `false` |
+| Date | Date or datetime | Created with `date()`, `today()`, or `now()` |
+| List | Ordered collection | `[1, 2, 3]` |
+| Object | Key-value pairs | `{"name": "value"}` |
+
+The output type of a formula is determined by the data and functions used.
+
+## Reference other formulas
+
+Formulas can reference other formula properties to build derived calculations:
+
+```js
+// Formula: price_per_unit
+price / quantity
+
+// Formula: total_with_markup — references price_per_unit
+formula.price_per_unit * 1.1
+```
+
+<Warning>
+  A formula cannot reference itself directly or indirectly through other formulas. Circular references will produce an error.
+</Warning>

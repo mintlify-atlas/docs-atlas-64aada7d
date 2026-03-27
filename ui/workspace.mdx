@@ -1,0 +1,155 @@
+---
+title: "Workspace"
+description: "Understand the Obsidian workspace layout, including sidebars, tabs, split panes, pop-out windows, the ribbon, and the status bar."
+---
+
+The workspace is the main container for all the components that make up the Obsidian interface. It arranges your notes and tools into a flexible layout you can customize to fit your workflow.
+
+## Main areas
+
+On desktop, the workspace is divided into three primary regions:
+
+<CardGroup cols={3}>
+  <Card title="Left sidebar" icon="panel-left">
+    Holds plugin tabs such as the File explorer, Search, and Bookmarks. Contains the ribbon and collapses to give more space to your notes.
+  </Card>
+  <Card title="Editor area" icon="file-text">
+    The central content area where your notes open. Supports multiple tab groups arranged side by side or stacked.
+  </Card>
+  <Card title="Right sidebar" icon="panel-right">
+    Holds plugin tabs such as Backlinks, Outgoing links, Outline, and Tags. Collapses independently of the left sidebar.
+  </Card>
+</CardGroup>
+
+On mobile, the sidebars are collapsed by default and open via swipe gestures or the expand icons. The navigation bar at the bottom replaces the ribbon.
+
+## Tabs
+
+Tabs in Obsidian work like browser tabs — you can open as many as you want and arrange them into custom layouts.
+
+### Open a new tab
+
+Select **New tab** (+) at the top of the window, or use a keyboard shortcut:
+
+- **Windows/Linux:** `Ctrl+T`
+- **macOS:** `Cmd+T`
+
+### Open a link in a new tab
+
+Hold a modifier key while clicking a link to control where it opens:
+
+| Action | macOS | Windows/Linux |
+|---|---|---|
+| Navigate (current tab) | _(none)_ | _(none)_ |
+| New tab | `⌘` | `Ctrl` |
+| New tab group | `⌘ ⌥` | `Ctrl Alt` |
+| New window | `⌘ ⌥ Shift` | `Ctrl Alt Shift` |
+
+<Note>
+  In Source Mode, add `Shift` to the above combinations when opening links.
+</Note>
+
+### Switch between tabs
+
+| Action | macOS | Windows/Linux |
+|---|---|---|
+| Next tab | `⌃ ⇥` | `Ctrl+Tab` |
+| Previous tab | `⌃ ⇧ ⇥` | `Ctrl+Shift+Tab` |
+| First tab | `⌘+1` | `Ctrl+1` |
+| 2nd–8th tab | `⌘+2`..`8` | `Ctrl+2`..`8` |
+| Last tab | `⌘+9` | `Ctrl+9` |
+| Recently closed tab | `⌘ ⇧ T` | `Ctrl+Shift+T` |
+
+### Pin a tab
+
+Right-click a tab in the main editor and select **Pin**. Links in a pinned tab always open in a separate tab, so the pinned note stays in place.
+
+To unpin, right-click the tab and select **Unpin**.
+
+## Tab groups and split panes
+
+Every tab belongs to a _tab group_. You can split the editor area into multiple tab groups to view notes side by side.
+
+### Split a tab group
+
+Right-click any tab and select **Split right** or **Split down** to create a new tab group containing that tab. You can also drag a tab to the bottom edge of another tab group to split it.
+
+### Resize a tab group
+
+Hover over the edge between two tab groups until the edge highlights, then drag to resize. Sidebars can be resized the same way.
+
+### Rearrange tabs
+
+Drag a tab along the tab bar to reorder it within a group. Drag it to a different tab group or to the edge of the window to move it there. Highlighted _drop zones_ show you where the tab will land.
+
+### Stack tab groups
+
+Select the down arrow at the top-right of a tab group and choose **Stack notes**. Stacked tabs slide over each other — useful for browsing many notes in a compact layout.
+
+## Pop-out windows
+
+<Info>Pop-out windows are available on desktop only.</Info>
+
+You can open any note in a separate window so it floats alongside your main Obsidian window. Pop-out windows are tied to their parent vault window — if you close the vault window, all of its pop-out windows close too.
+
+### Open a note in a new window
+
+<Steps>
+  <Step title="From the file explorer">
+    Right-click a note in the File explorer and select **Open in new window**.
+  </Step>
+  <Step title="From a tab">
+    Right-click a tab and select **Open in new window**. Or, select **More options** (⋯) in the upper-right corner of the editor, then choose **Open in new window**.
+  </Step>
+  <Step title="From the command palette">
+    Open the Command palette and select **Open current tab in new window**.
+  </Step>
+</Steps>
+
+### Move a tab between windows
+
+Drag a tab from one window's tab bar into a tab group in the other window. You can also right-click a tab and select **Move to new window**, or use the Command palette command **Move current tab in new window**.
+
+## Sidebars
+
+The left and right sidebars hold tabs created by plugins — for example, File explorer, Search, Backlinks, and Outline.
+
+### Open or collapse sidebars
+
+Select the left or right expand icon in the toolbar to toggle each sidebar. On mobile, swipe left or right, or select the expand icon for the left sidebar.
+
+### Manage sidebar tabs
+
+- **Switch tabs:** Select the icon in the sidebar tab bar. Hover over an icon to see its tooltip.
+- **Rearrange tabs:** Drag tab icons to reorder them within a group.
+- **Create a tab group:** Drag a tab icon above or below an existing group until the drop zone highlights, then release.
+- **Pin a tab:** Drag a note into the sidebar to pin it there. A pinned note tab stays in place when you navigate to other notes.
+
+## The ribbon
+
+The ribbon runs vertically on the left side of the app and provides quick access to common actions. It remains visible even when the left sidebar is collapsed.
+
+Default ribbon actions include:
+
+- **Vault switcher** — open or switch between vaults
+- **Help** — access documentation and support
+- **Settings** — open the settings panel
+
+Plugins can add their own actions to the ribbon.
+
+### Customize the ribbon
+
+- **Reorder:** Drag and drop ribbon icons to rearrange them.
+- **Hide an action:** Right-click an empty space in the ribbon and uncheck actions you want to hide.
+- **Hide the entire ribbon:** Right-click the ribbon and select **Hide ribbon**, or go to **Settings → Appearance → Advanced** and disable **Show ribbon**.
+- **Show a hidden ribbon:** Go to **Settings → Appearance → Advanced** and enable **Show ribbon**.
+
+Your ribbon layout is saved and synchronizes with other devices when you sync app settings.
+
+## The status bar
+
+The status bar sits in the bottom-right corner of the app. It shows context-sensitive information such as word count, character count, and the current editing mode. Plugins can also add their own indicators to the status bar.
+
+## Save and restore layouts
+
+Use the **Workspaces** core plugin to save your entire window layout — tab groups, open notes, and sidebar state — and restore it later. Open the Command palette and search for "Manage workspaces" to save or load a layout.

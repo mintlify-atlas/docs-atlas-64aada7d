@@ -1,0 +1,155 @@
+---
+title: Views
+description: Views control how Bases displays your notes. Each base can have multiple views with different layouts, filters, sort orders, and visible properties.
+---
+
+Views let you organize the information in a base in multiple ways. A single base can have several views, and each view can have its own layout, filters, sort order, and properties.
+
+For example, a "Books" base might have a "Reading list" view and a "Recently finished" view — both working from the same underlying notes, but showing different subsets.
+
+## The toolbar
+
+At the top of every base is a toolbar:
+
+| Button | Description |
+|--------|-------------|
+| **View menu** | Create, edit, rename, and switch views. |
+| **Results** | Limit the number of results, copy, or export. |
+| **Sort** | Sort and group files. |
+| **Filter** | Filter files by conditions. |
+| **Properties** | Choose which properties to display and create formulas. |
+| **Search** | Search within the current view using displayed properties. |
+| **New** | Create a new file in the current view. |
+
+## Add and switch views
+
+To add a new view:
+
+- Click the view name in the top left and select **Add view**.
+- Or, run **Bases: Add view** from the Command palette.
+
+The first view in your list loads by default. Drag views by their icon to reorder them.
+
+## View settings
+
+To open a view's settings:
+
+1. Click the view name in the top left.
+2. Click the right arrow next to the view you want to configure.
+
+Alternatively, right-click the view name in the toolbar to access settings directly.
+
+## Layouts
+
+Each view uses one of the following layouts:
+
+<CardGroup cols={2}>
+  <Card title="Table" icon="table">
+    Display files as rows in a table. Columns are populated from properties in your notes. Supports row height adjustment, column summaries, and keyboard navigation.
+  </Card>
+  <Card title="Cards" icon="layout-grid">
+    Display files as a gallery grid. Supports cover images sourced from a property (local attachment, URL, or hex color), with configurable card size and image fit.
+  </Card>
+  <Card title="List" icon="list">
+    Display files as a bulleted or numbered list. Configure markers, indented properties, and separators between property values.
+  </Card>
+  <Card title="Map" icon="map">
+    Display files as pins on an interactive map. Requires the Maps plugin. Supports custom marker icons, colors, and map tile styles.
+  </Card>
+</CardGroup>
+
+### Table view
+
+Table view displays each file as a row, with columns for each property.
+
+- **Row height**: Choose between short, medium, tall, and extra tall.
+- **Summaries**: Right-click a column header and select **Summarize** to add a summary (average, sum, count, min, max, and more) at the bottom of the column.
+- **Keyboard navigation**: Use `Tab`/`Shift+Tab` to move between cells, arrow keys to navigate, `Enter` to edit, and `Ctrl+C`/`Cmd+C` to copy.
+
+### Cards view
+
+Cards view displays files as a visual grid.
+
+- **Card size**: Control the width of each card.
+- **Image property**: Choose a property to use as a cover image. The property can be a link to a local attachment, a URL, or a hex color code.
+- **Image fit**: Choose **Cover** (fills and crops) or **Contain** (scales to fit without cropping).
+- **Image aspect ratio**: Control the height of the cover image relative to its width.
+
+### List view
+
+List view displays files as a formatted list.
+
+- **Markers**: Choose bullets, numbers, or none.
+- **Indent properties**: Show additional properties as indented sub-items under each list item.
+- **Separators**: When indent is off, define a character to separate property values (defaults to a comma).
+
+### Map view
+
+Map view displays files as pins on an interactive map.
+
+<Note>
+  Map view requires Obsidian 1.10 and the Maps plugin, which is an official community plugin. Install it from **Settings → Community plugins**.
+</Note>
+
+To display pins, configure a **marker coordinates** property in view settings. Coordinates can be stored as:
+
+```yaml
+# As a text property
+coordinates: "48.858, 2.294"
+
+# As a list property
+coordinates:
+  - "48.858"
+  - "2.294"
+```
+
+You can also add **marker icons** (Lucide icon names) and **marker colors** (hex, RGB, or CSS values) via properties.
+
+## Filters
+
+Open the **Filter** menu in the toolbar to add filters to a view.
+
+Filters narrow down which files appear in a view. You can apply filters to all views in a base, or only to the current view.
+
+- **All views** — applies to every view in the base.
+- **This view** — applies only to the active view.
+
+### Filter components
+
+Each filter condition has three parts:
+
+1. **Property** — a note property or file property (like `file.mtime`).
+2. **Operator** — how to compare (equals, contains, greater than, etc.). Available operators depend on the property type.
+3. **Value** — the value to compare against. Can include math and [functions](/bases/formulas).
+
+### Conjunctions
+
+- **All the following are true** (`and`) — show files only if every condition is met.
+- **Any of the following are true** (`or`) — show files if at least one condition is met.
+- **None of the following are true** (`not`) — exclude files where any condition is met.
+
+Combine conjunctions in **filter groups** to build complex logic.
+
+### Advanced filter editor
+
+Click the code icon in the Filter menu to open the advanced filter editor. This shows the raw [Bases syntax](/bases/syntax) for the filter and supports functions that aren't available in the visual interface.
+
+## Sort and group results
+
+Open the **Sort** menu in the toolbar to sort and group results.
+
+You can sort by one or more properties in ascending or descending order. Drag sort items up or down to change priority.
+
+| Property type | Sort options |
+|---------------|--------------|
+| Text | Alphabetically (A→Z) or reverse (Z→A) |
+| Number | Smallest to largest (0→1) or reverse |
+| Date and time | Old to new or new to old |
+
+You can also **group** results by a property. Grouping organizes rows into visually distinct sections. Currently, Obsidian supports grouping by one property at a time.
+
+## Export and copy results
+
+- **Limit results**: Click the results count in the toolbar to set a maximum number of results.
+- **Copy to clipboard**: Copies the current view as formatted text, which you can paste into Markdown or spreadsheet apps (Google Sheets, Excel, Numbers).
+- **Export CSV**: Saves the current view as a CSV file.

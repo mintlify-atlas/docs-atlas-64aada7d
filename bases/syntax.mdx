@@ -1,0 +1,300 @@
+---
+title: Bases syntax
+description: Reference for the .base file format. Learn the structure of filters, formulas, properties, summaries, and views in a base configuration file.
+---
+
+When you create a base in Obsidian, it is saved as a `.base` file. Bases are typically edited through the app interface, but you can also edit the underlying syntax directly or write it in a `base` code block embedded in a Markdown note.
+
+Bases syntax is YAML-based. Filters and formulas share the same expression language.
+
+## Complete example
+
+Here is a fully configured `.base` file:
+
+```yaml
+filters:
+  or:
+    - file.hasTag("tag")
+    - and:
+        - file.hasTag("book")
+        - file.hasLink("Textbook")
+    - not:
+        - file.hasTag("book")
+        - file.inFolder("Required Reading")
+formulas:
+  formatted_price: 'if(price, price.toFixed(2) + " dollars")'
+  ppu: "(price / age).toFixed(2)"
+properties:
+  status:
+    displayName: Status
+  formula.formatted_price:
+    displayName: "Price"
+  file.ext:
+    displayName: Extension
+summaries:
+  customAverage: 'values.mean().round(3)'
+views:
+  - type: table
+    name: "My table"
+    limit: 10
+    groupBy:
+      property: note.age
+      direction: DESC
+    filters:
+      and:
+        - 'status != "done"'
+        - or:
+            - "formula.ppu > 5"
+            - "price > 2.1"
+    order:
+      - file.name
+      - file.ext
+      - note.age
+      - formula.ppu
+      - formula.formatted_price
+    summaries:
+      formula.ppu: Average
+```
+
+## Sections
+
+### `filters`
+
+The `filters` section narrows which files the base includes. Without filters, a base shows every file in your vault.
+
+Filters can be applied at two levels:
+
+1. **Global** — under the top-level `filters` key. Applies to all views.
+2. **Per-view** — inside an individual view's `filters` key. Applies only to that view.
+
+Both levels are combined with `AND` when evaluating a view.
+
+```yaml
+# Simple filter
+filters:
+  and:
+    - file.hasTag("tag")
+
+# Complex filter with nested logic
+filters:
+  or:
+    - file.hasTag("tag")
+    - and:
+        - file.hasTag("book")
+        - file.hasLink("Textbook")
+    - not:
+        - file.hasTag("book")
+        - file.inFolder("Required Reading")
+```
+
+A filter statement is any expression that evaluates to truthy or falsey for a given file. This includes comparisons and function calls.
+
+### `formulas`
+
+The `formulas` section defines computed properties available across all views:
+
+```yaml
+formulas:
+  formatted_price: 'if(price, price.toFixed(2) + " dollars")'
+  ppu: "(price / age).toFixed(2)"
+```
+
+Formulas are stored as strings in YAML. Use nested quotes for text literals. A formula's output type is determined by the data and functions used — formulas are not constrained to strings at runtime.
+
+Reference property types in formulas:
+
+| Type | Syntax | Example |
+|------|--------|---------|
+| Note property | `property` or `note.property` | `price` |
+| File property | `file.name`, `file.size` | `file.mtime` |
+| Another formula | `formula.name` | `formula.ppu` |
+
+### `properties`
+
+The `properties` section stores display configuration for properties:
+
+```yaml
+properties:
+  status:
+    displayName: Status
+  formula.formatted_price:
+    displayName: "Price"
+  file.ext:
+    displayName: Extension
+```
+
+Display names are used in column headers and UI labels. They are not used in filters or formulas.
+
+### `summaries`
+
+The `summaries` section defines custom summary formulas. In the `values` expression, `values` is a list of all values for that property across every row in the result set:
+
+```yaml
+summaries:
+  customAverage: 'values.mean().round(3)'
+```
+
+Default summary formulas are also available without defining them here:
+
+| Name | Input type | Description |
+|------|------------|-------------|
+| Average | Number | Mean of all values |
+| Min | Number | Smallest value |
+| Max | Number | Largest value |
+| Sum | Number | Total of all values |
+| Range | Number | Difference between max and min |
+| Median | Number | Median value |
+| Stddev | Number | Standard deviation |
+| Earliest | Date | Oldest date |
+| Latest | Date | Most recent date |
+| Range | Date | Difference between earliest and latest |
+| Checked | Boolean | Count of `true` values |
+| Unchecked | Boolean | Count of `false` values |
+| Empty | Any | Count of empty values |
+| Filled | Any | Count of non-empty values |
+| Unique | Any | Count of distinct values |
+
+### `views`
+
+The `views` section is a list of view configurations:
+
+```yaml
+views:
+  - type: table
+    name: "My table"
+    limit: 10
+    groupBy:
+      property: note.age
+      direction: DESC
+    filters:
+      and:
+        - 'status != "done"'
+    order:
+      - file.name
+      - note.age
+    summaries:
+      formula.ppu: Average
+```
+
+| Key | Description |
+|-----|-------------|
+| `type` | Layout type: `table`, `list`, `cards`, `map` |
+| `name` | Display name for the view. Used to select a default view when embedding. |
+| `limit` | Maximum number of rows to display. |
+| `filters` | View-specific filters (same syntax as global `filters`). |
+| `groupBy` | Property and direction to group results. |
+| `order` | List of property names defining column order. |
+| `summaries` | Map of property names to summary formula names. |
+
+## Properties in bases
+
+Bases work with three types of properties:
+
+### Note properties
+
+Stored in the YAML frontmatter of Markdown files. Access with `property_name` or `note.property_name`:
+
+```yaml
+author == "Ursula Le Guin"
+note.status == "Done"
+```
+
+### File properties
+
+Built-in properties available for all file types:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `file.name` | String | File name including extension |
+| `file.basename` | String | File name without extension |
+| `file.path` | String | Full path relative to vault root |
+| `file.folder` | String | Path to the parent folder |
+| `file.ext` | String | File extension |
+| `file.size` | Number | File size in bytes |
+| `file.tags` | List | Tags including inline tags |
+| `file.links` | List | Internal links within the file |
+| `file.ctime` | Date | Creation timestamp |
+| `file.mtime` | Date | Last-modified timestamp |
+| `file.properties` | Object | All frontmatter properties |
+
+### `this` — context-aware file reference
+
+Use `this` to reference the file where the base is displayed:
+
+- **Opened as a file**: `this` refers to the `.base` file itself.
+- **Embedded in a note**: `this` refers to the embedding note.
+- **In a sidebar**: `this` refers to the active file in the main content area.
+
+Example — replicate the backlinks panel:
+
+```yaml
+filters:
+  and:
+    - file.hasLink(this.file)
+```
+
+## Operators
+
+### Arithmetic
+
+| Operator | Description |
+|----------|-------------|
+| `+` | Add |
+| `-` | Subtract |
+| `*` | Multiply |
+| `/` | Divide |
+| `%` | Modulo |
+| `( )` | Parentheses (grouping) |
+
+### Comparison
+
+| Operator | Description |
+|----------|-------------|
+| `==` | Equals |
+| `!=` | Not equal |
+| `>` | Greater than |
+| `<` | Less than |
+| `>=` | Greater than or equal to |
+| `<=` | Less than or equal to |
+
+### Boolean
+
+| Operator | Description |
+|----------|-------------|
+| `!` | Logical not |
+| `&&` | Logical and |
+| `\|\|` | Logical or |
+
+### Date arithmetic
+
+Add or subtract durations from dates using string suffixes:
+
+```js
+now() + "1 day"
+file.mtime > now() - "1 week"
+date("2024-12-01") + "1M" + "4h" + "3m"
+```
+
+| Unit | Accepted formats |
+|------|------------------|
+| Year | `y`, `year`, `years` |
+| Month | `M`, `month`, `months` |
+| Day | `d`, `day`, `days` |
+| Week | `w`, `week`, `weeks` |
+| Hour | `h`, `hour`, `hours` |
+| Minute | `m`, `minute`, `minutes` |
+| Second | `s`, `second`, `seconds` |
+
+Subtracting two dates returns the difference in milliseconds.
+
+## Types
+
+| Type | Notes |
+|------|-------|
+| String | Enclosed in single or double quotes: `"hello"`, `'world'` |
+| Number | Written as digits, optionally in parentheses: `1`, `(2.5)` |
+| Boolean | `true` or `false` (no quotes) |
+| Date | Created with `date()`, `today()`, or `now()` |
+| List | Access elements with `property[0]` (0-based index) |
+| Object | Access values with `property.key` or `property["key"]` |
+| Link | Wikilinks in frontmatter are automatically recognized; construct with `link("path")` |

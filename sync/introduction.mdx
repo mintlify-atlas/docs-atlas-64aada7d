@@ -1,0 +1,100 @@
+---
+title: "Obsidian Sync"
+description: "Privately sync your notes across all your devices with end-to-end encryption, version history, and selective sync."
+---
+
+Obsidian Sync is an add-on service that keeps your notes synchronized across every device you use. Your data is encrypted before it leaves your device, so only you can read it — not even the Obsidian team.
+
+<Warning>
+  Obsidian Sync is unavailable on Apple devices with [Lockdown Mode](https://support.apple.com/en-us/105120) enabled unless Obsidian is added as an exclusion.
+</Warning>
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="End-to-end encryption" icon="lock">
+    Your vault is encrypted with a password you choose before any data leaves your device. No one — not even Obsidian — can read your notes.
+  </Card>
+  <Card title="Cross-device sync" icon="arrows-rotate">
+    Connect unlimited devices to your remote vault. Works on Windows, macOS, Linux, iOS, and Android.
+  </Card>
+  <Card title="Version history" icon="clock-rotate-left">
+    Every change to your notes is recorded. Restore a previous version or recover a deleted file at any time.
+  </Card>
+  <Card title="Selective sync" icon="filter">
+    Choose exactly which file types and folders sync to each device. Keep large media files off your phone if you want.
+  </Card>
+  <Card title="Shared vaults" icon="users">
+    Invite up to 20 collaborators to a shared remote vault. All changes merge automatically.
+  </Card>
+  <Card title="Settings sync" icon="sliders">
+    Sync your themes, snippets, hotkeys, and plugin settings alongside your notes.
+  </Card>
+</CardGroup>
+
+## Supported platforms
+
+Obsidian Sync works on every platform that Obsidian runs on:
+
+- **Windows**
+- **macOS**
+- **Linux**
+- **iOS and iPadOS**
+- **Android**
+
+Files are only synced while Obsidian is running. Changes made offline are queued and uploaded automatically when you reconnect.
+
+## Plans and storage
+
+| | Sync Standard | Sync Plus |
+|---|---|---|
+| Remote vaults | 1 | 10 |
+| Maximum file size | 5 MB | 200 MB |
+| Total storage | 1 GB | 10 GB – 100 GB |
+| Version history | 1 month | 12 months |
+| Devices | Unlimited | Unlimited |
+| Shared vaults | Yes | Yes |
+
+You can purchase a Sync plan from [your account dashboard](https://obsidian.md/account/sync). See the [Sync pricing page](https://obsidian.md/sync) for current pricing.
+
+## The sync status icon
+
+The sync status icon sits in the status bar on desktop and in the right sidebar on mobile. It tells you what Sync is doing at a glance:
+
+- **Synced** (green circle with checkmark) — your vault is fully up to date
+- **Syncing** (purple) — Obsidian is uploading or downloading changes
+- **Paused** (purple) — sync is paused but still connected
+- **Disconnected** (red) — the Sync plugin is active but not connected to a remote vault
+
+Tap or click the icon to open a quick menu with access to the sync log, version history, deleted files, and settings.
+
+<Note>
+  If you're experiencing unexpected interruptions, check the [Obsidian server status page](https://status.obsidian.md).
+</Note>
+
+## How local and remote vaults work
+
+Obsidian Sync uses a **remote vault** — a centralized, encrypted copy of your data hosted on Obsidian's servers — as the hub that all your devices connect to. Each device keeps its own **local vault** and syncs changes to and from the remote vault directly through the Obsidian app.
+
+This is different from file-based services like Dropbox or iCloud, which monitor folders on your file system. Because Obsidian Sync works at the application level, it behaves consistently across all operating systems and device types.
+
+<Warning>
+  Do not store your local vault inside a folder managed by iCloud, Dropbox, OneDrive, or Google Drive while using Obsidian Sync. Running two sync services on the same files causes conflicts and data loss. If your vault is currently in one of these locations, see [Set up Obsidian Sync](/sync/setup) for migration steps.
+</Warning>
+
+## Get started
+
+<CardGroup cols={2}>
+  <Card title="Set up Obsidian Sync" icon="rocket" href="/sync/setup">
+    Create your remote vault and connect your first device in a few steps.
+  </Card>
+  <Card title="Configure sync settings" icon="sliders" href="/sync/settings">
+    Choose which files, folders, and settings to sync — and set your server region.
+  </Card>
+  <Card title="Version history" icon="clock-rotate-left" href="/sync/version-history">
+    Learn how to view and restore previous versions of your notes.
+  </Card>
+  <Card title="Security and privacy" icon="shield" href="/sync/security">
+    Understand how end-to-end encryption protects your data.
+  </Card>
+</CardGroup>

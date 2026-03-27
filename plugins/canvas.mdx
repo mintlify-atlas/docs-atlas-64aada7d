@@ -1,0 +1,176 @@
+---
+title: Canvas
+description: Canvas is a core plugin for visual note-taking. It gives you infinite space to lay out notes, connect them with arrows, and group related ideas.
+---
+
+Canvas is a core plugin for visual note-taking. It gives you infinite space to lay out notes and connect them to other notes, attachments, and web pages.
+
+Visual note-taking helps you make sense of your notes by organizing them in 2D space. Connect notes with lines and group related notes together to better understand the relationships between them.
+
+Canvas data is saved as `.canvas` files using the open [JSON Canvas](https://jsoncanvas.org/) format.
+
+## Create a canvas
+
+You can create a new canvas in several ways:
+
+<Tabs>
+  <Tab title="Command palette">
+    1. Open the Command palette (`Ctrl+P` / `Cmd+P`).
+    2. Select **Canvas: Create new canvas**.
+
+    This creates a canvas in the same folder as the active file.
+  </Tab>
+  <Tab title="File explorer">
+    1. Right-click the folder where you want the canvas.
+    2. Select **New canvas**.
+  </Tab>
+  <Tab title="Ribbon">
+    In the left ribbon, select **Create new canvas** to create a canvas in the same folder as the active file.
+  </Tab>
+</Tabs>
+
+<Note>
+  Obsidian stores canvas data in `.canvas` files using the open JSON Canvas format.
+</Note>
+
+## Add cards
+
+Cards are the building blocks of a canvas. You can add text, notes from your vault, media files, web pages, and entire folders.
+
+### Add a text card
+
+Text cards don't reference a file — they exist only on the canvas. You can use Markdown, links, and code blocks just like in a note.
+
+- Select or drag the blank file icon at the bottom of the canvas.
+- Or, double-click anywhere on the canvas.
+
+To convert a text card to a permanent note file:
+
+<Steps>
+  <Step title="Right-click the card">
+    Right-click the text card and select **Convert to file...**
+  </Step>
+  <Step title="Name and save">
+    Enter a note name and select **Save**.
+  </Step>
+</Steps>
+
+<Note>
+  Text-only cards don't appear in Backlinks. Convert them to files to make them linkable.
+</Note>
+
+### Add a note card
+
+To add a note from your vault:
+
+- Select or drag the document icon at the bottom of the canvas, then choose a note.
+- Or, right-click the canvas, select **Add note from vault**, and choose a note.
+- Or, drag a file directly from the File explorer.
+
+### Add a media card
+
+To add an image, audio file, PDF, or other media:
+
+- Select or drag the image file icon at the bottom of the canvas, then choose a file.
+- Or, right-click the canvas, select **Add media from vault**, and choose a file.
+- Or, drag a file directly from the File explorer.
+
+You can also drag files into the canvas from outside Obsidian.
+
+### Add a web page card
+
+To embed a web page:
+
+<Steps>
+  <Step title="Open the context menu">
+    Right-click the canvas and select **Add web page**.
+  </Step>
+  <Step title="Enter the URL">
+    Type the URL and select **Save**.
+  </Step>
+</Steps>
+
+You can also drag a URL from your browser directly onto the canvas.
+
+To open the embedded page in your browser, press `Ctrl` (`Cmd` on macOS) and click the card label, or right-click the card and select **Open in browser**.
+
+### Add cards from a folder
+
+Drag a folder from the File explorer onto the canvas to add all files in that folder at once.
+
+## Edit and manage cards
+
+- **Edit**: Double-click a text or note card to edit it. Click outside or press `Escape` to stop editing.
+- **Delete**: Select a card and press `Backspace` (`Delete` on macOS), or right-click and select **Delete**.
+- **Move**: Drag a selected card to reposition it. Hold `Shift` while dragging to constrain movement to one axis.
+- **Duplicate**: Hold `Alt` (`Option` on macOS) and drag to duplicate the selection.
+- **Resize**: Drag any edge of a card. Hold `Shift` to maintain aspect ratio.
+- **Swap**: Right-click a note or media card and select **Swap file** to replace it with a different file of the same type.
+
+Press `Ctrl+A` (`Cmd+A`) to select all cards. Hold `Shift` and click to add or remove cards from a selection.
+
+## Connect cards
+
+Draw lines between cards to show relationships. You can color and label connections.
+
+### Draw a connection
+
+<Steps>
+  <Step title="Hover over a card edge">
+    Move your cursor to the edge of a card until a filled circle appears.
+  </Step>
+  <Step title="Drag to another card">
+    Drag the circle to the edge of the card you want to connect.
+  </Step>
+</Steps>
+
+<Tip>
+  If you drag a line without connecting it to a card, you can choose which card to add at the end of the line.
+</Tip>
+
+### Disconnect cards
+
+- Hover over a connection line until two small circles appear, then drag one circle away without connecting it.
+- Or, right-click the line and select **Remove**.
+- Or, select the line and press `Backspace` (`Delete` on macOS).
+
+### Label a connection
+
+<Steps>
+  <Step title="Double-click the line">
+    Double-click the connection line to open the label editor.
+  </Step>
+  <Step title="Enter the label">
+    Type your label, then press `Escape` or click elsewhere on the canvas.
+  </Step>
+</Steps>
+
+### Change colors
+
+1. Select the cards or connections you want to color.
+2. In the selection controls, select **Set color**.
+3. Choose a color.
+
+## Group cards
+
+Groups visually organize related cards on the canvas.
+
+- To create an empty group: right-click the canvas and select **Create group**.
+- To group selected cards: select the cards, right-click any of them, and select **Create group**.
+- To rename a group: double-click the group name, edit it, then press `Enter`.
+
+## Navigate the canvas
+
+### Pan
+
+- Hold `Space` and drag the canvas.
+- Drag with the middle mouse button.
+- Scroll to pan vertically; hold `Shift` while scrolling to pan horizontally.
+
+### Zoom
+
+- Hold `Space` or `Ctrl` (`Cmd`) and scroll with the mouse wheel.
+- Use the **+** and **−** zoom controls in the upper-right corner.
+- Press `Shift+1` to zoom so every item is visible (zoom to fit).
+- Press `Shift+2` to zoom to your current selection.
+- Select **Reset zoom** in the upper-right corner to return to the default zoom level.

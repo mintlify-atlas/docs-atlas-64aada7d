@@ -1,0 +1,96 @@
+---
+title: "Set up Obsidian Publish"
+description: "Enable Obsidian Publish, create a site, and publish your first notes — step by step."
+---
+
+This guide walks you through enabling Obsidian Publish, creating a site, and publishing your first notes.
+
+## Prerequisites
+
+- An Obsidian account. If you don't have one, [sign up at obsidian.md](https://obsidian.md/auth?returnto=%2Faccount%2Fpublish#signup).
+- An active Obsidian Publish subscription. Subscribe from your [account dashboard](https://obsidian.md/account/publish).
+
+## Set up your site
+
+<Steps>
+  <Step title="Log in to your Obsidian account">
+    1. Open **Settings**.
+    2. In the sidebar, select **General**.
+    3. Under **Account → Your account**, select **Log in**.
+    4. Enter your email and password, then click **Login**.
+  </Step>
+
+  <Step title="Enable the Publish core plugin">
+    1. Open **Settings**.
+    2. In the sidebar, select **Core plugins**.
+    3. Enable **Publish**.
+  </Step>
+
+  <Step title="Open the Publish changes panel">
+    You can open Publish in three ways:
+
+    <Tabs>
+      <Tab title="Command palette">
+        1. Open the **Command palette** (`Ctrl+P` / `Cmd+P`).
+        2. Type `Publish`.
+        3. Select **Publish: Publish changes...**
+
+        On mobile, open the Ribbon first, then the Command palette.
+      </Tab>
+      <Tab title="Ribbon">
+        On desktop or tablet, open the left sidebar and click the **Publish changes** icon.
+
+        On mobile, open the Ribbon and tap the **Publish changes** icon.
+      </Tab>
+      <Tab title="Hotkey">
+        1. Open **Settings → Hotkeys**.
+        2. Search for `Publish`.
+        3. Assign a hotkey to **Publish: Publish changes...**
+        4. Use that hotkey to open the panel at any time.
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Create a new site">
+    1. In the **Publish changes** panel, click **Switch site** if you already have an existing site, or proceed directly if this is your first.
+    2. In **Site ID**, enter a unique identifier for your site. For example, entering `my-notes` makes your site available at `publish.obsidian.md/my-notes`.
+    3. Click **Create**.
+
+    <Note>
+      The number of sites you can have at the same time depends on your Obsidian Publish subscription tier.
+    </Note>
+  </Step>
+
+  <Step title="Set a site name">
+    1. In the **Publish changes** panel, click **Change site options** (the cog icon).
+    2. Under **General**, enter a name in the **Site name** field.
+    3. Click **Save site settings**.
+
+    The site name appears as the title of your published site.
+  </Step>
+
+  <Step title="Publish your first notes">
+    1. In the **Publish changes** panel, select **NEW** to see all notes that haven't been published yet.
+    2. Select the notes you want to publish.
+    3. Click **Publish**.
+
+    Your notes are now live at your site address.
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Publish content" icon="upload" href="/publish/publish-content">
+    Learn how to update, unpublish, and manage linked notes and attachments.
+  </Card>
+  <Card title="Customize your site" icon="palette" href="/publish/customize-site">
+    Set a home page, configure navigation, and apply custom CSS.
+  </Card>
+  <Card title="Custom domains" icon="globe" href="/publish/custom-domains">
+    Serve your site from a domain you own instead of the default Obsidian URL.
+  </Card>
+  <Card title="Social media link previews" icon="share-nodes" href="/publish/customize-site#social-media-link-previews">
+    Customize how your pages appear when shared on social networks.
+  </Card>
+</CardGroup>

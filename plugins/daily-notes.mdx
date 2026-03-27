@@ -1,0 +1,97 @@
+---
+title: Daily notes
+description: The Daily notes plugin creates and opens a note for today's date. Use it for journaling, to-do lists, and day-by-day logs.
+---
+
+Daily notes is a core plugin that opens a note based on today's date, or creates one if it doesn't exist yet. Use daily notes for journals, to-do lists, or daily logs of things you discovered or worked on.
+
+## Enable daily notes
+
+<Steps>
+  <Step title="Open Settings">
+    Click the gear icon in the bottom-left corner, or press `Ctrl+,` (`Cmd+,` on macOS).
+  </Step>
+  <Step title="Go to Core plugins">
+    Select **Core plugins** in the sidebar.
+  </Step>
+  <Step title="Enable the plugin">
+    Toggle on **Daily notes**.
+  </Step>
+</Steps>
+
+## Open today's note
+
+Once enabled, you can open today's daily note in several ways:
+
+- Click **Open today's daily note** (calendar icon) in the left ribbon.
+- Run **Open today's daily note** from the Command palette.
+- Set a hotkey for the **Open today's daily note** command under **Settings → Hotkeys**.
+
+By default, Obsidian creates a note named after today's date using the `YYYY-MM-DD` format (for example, `2024-03-15`).
+
+## Configure daily notes
+
+Go to **Settings → Core plugins → Daily notes** to configure the plugin.
+
+### Date format
+
+Change the filename format using [Moment.js format tokens](https://momentjs.com/docs/#/displaying/format/). For example:
+
+| Format | Example filename |
+|--------|------------------|
+| `YYYY-MM-DD` (default) | `2024-03-15` |
+| `DD-MM-YYYY` | `15-03-2024` |
+| `MMMM Do, YYYY` | `March 15th, 2024` |
+
+<Tip>
+  You can automatically organize daily notes into subfolders by including folder separators in the date format. For example, `YYYY/MMMM/YYYY-MMM-DD` creates notes at paths like `2023/January/2023-Jan-01`.
+</Tip>
+
+### New file location
+
+Set a folder where Obsidian creates new daily notes. Useful if you want to keep them separate from other notes in your vault.
+
+### Template file
+
+Specify a template note to pre-populate each new daily note. See the [Templates plugin](/plugins/templates) for how to create templates with dynamic variables.
+
+## Create daily notes from a template
+
+<Steps>
+  <Step title="Create a template note">
+    Create a new note in your templates folder — for example, named "Daily template" — with content like:
+
+    ```md
+    # {{date:YYYY-MM-DD}}
+
+    ## Tasks
+
+    - [ ]
+
+    ## Notes
+
+    ```
+  </Step>
+  <Step title="Open Daily notes settings">
+    Go to **Settings → Core plugins → Daily notes**.
+  </Step>
+  <Step title="Set the template">
+    In the **Template file location** field, select your template note.
+  </Step>
+</Steps>
+
+Obsidian applies the template the next time you create a new daily note.
+
+## Daily notes and date properties
+
+When the Daily notes plugin is active and a note contains a date property in its frontmatter, Obsidian automatically converts that date value into a clickable link to the corresponding daily note. This appears in live preview mode, making it easy to navigate from any note's metadata to the relevant day.
+
+## Open daily notes via URI
+
+You can open or create today's daily note from outside Obsidian using the [Obsidian URI](/extending/obsidian-uri) `daily` action (the Daily notes plugin must be enabled):
+
+```
+obsidian://daily?vault=my%20vault
+```
+
+This accepts the same parameters as the `new` URI action, including `content`, `clipboard`, and `x-success`.

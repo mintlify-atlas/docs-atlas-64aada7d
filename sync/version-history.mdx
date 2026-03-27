@@ -1,0 +1,140 @@
+---
+title: "Version history"
+description: "View, restore, and recover previous versions of your notes and deleted files using Obsidian Sync's version history."
+---
+
+Obsidian Sync records every change to your synced files. You can browse past versions of a note, restore the version you want, or recover a file you've deleted.
+
+Version history covers notes, attachments, and vault settings files.
+
+## How long versions are kept
+
+The retention period depends on your Sync plan:
+
+| Plan | Notes and settings | Attachments |
+|---|---|---|
+| Sync Standard | 1 month | 2 weeks |
+| Sync Plus | 12 months | 2 weeks |
+
+After the retention period, older versions are permanently deleted.
+
+<Note>
+  Version history is separate from the **File recovery** plugin, which keeps local snapshots on each device. Both can be useful, but only Sync version history tracks changes across all your devices.
+</Note>
+
+## Sync history sidebar
+
+The **Sync history** sidebar (added in Obsidian 1.7) shows recently created or modified files that have been synced. Think of it as an editing activity feed.
+
+Select any item in the sidebar to open it. You can also right-click an item to move the file, view its full version history, or take other actions.
+
+<Info>
+  On desktop, hovering over a synced file in the sidebar shows who last edited it — useful when collaborating on a shared vault.
+</Info>
+
+<Info>
+  Settings files and deleted items don't appear in the Sync history sidebar. Use **Version history** (described below) to find those.
+</Info>
+
+### Show the Sync history sidebar
+
+<Tabs>
+  <Tab title="Desktop / Tablet">
+    <Steps>
+      <Step title="Open the Command palette">Open the Command palette (`Ctrl+P` / `Cmd+P`).</Step>
+      <Step title="Search for Sync">Type `Sync`.</Step>
+      <Step title="Show Sync history">Select **Sync: Show Sync history**. The panel appears in the right sidebar.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Mobile">
+    <Steps>
+      <Step title="Open the Ribbon">Open the Ribbon menu.</Step>
+      <Step title="Open the Command palette">Tap the Command palette icon.</Step>
+      <Step title="Search and select">Type `Sync` and select **Sync: Show Sync history**. It appears as a dropdown option in the right sidebar.</Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+You can also assign a hotkey: go to **Settings → Hotkeys**, search for `Sync: Show Sync history`, and assign your preferred shortcut.
+
+## View version history for a file
+
+<Tabs>
+  <Tab title="Desktop / Tablet">
+    <Steps>
+      <Step title="Locate the file">In the **File explorer**, select the note you want to inspect.</Step>
+      <Step title="Open version history">Select **Open version history** from the context menu (right-click the file).</Step>
+      <Step title="Browse versions">Select a version on the left. The contents are displayed on the right.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Mobile">
+    <Steps>
+      <Step title="Locate the file">In the **File explorer**, long-press the note to open the context menu.</Step>
+      <Step title="Open version history">Select **Open version history**.</Step>
+      <Step title="Browse versions">In the pop-up, select the version you want to review.</Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Restore a previous version of a file
+
+<Tabs>
+  <Tab title="Desktop / Tablet">
+    <Steps>
+      <Step title="Open version history">Right-click the file in **File explorer** and select **Open version history**.</Step>
+      <Step title="Choose a version">Select the version you want to restore on the left. The contents are shown on the right.</Step>
+      <Step title="Restore">Select **Restore**. The note's content is replaced with the selected version.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Mobile">
+    <Steps>
+      <Step title="Open version history">Long-press the file and select **Open version history**.</Step>
+      <Step title="Choose a version">Select the version you want to restore from the list.</Step>
+      <Step title="Restore">Select **Restore**. The note's content is replaced with the selected version.</Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Recover a deleted file
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="View deleted files">Next to **Deleted files**, select **View**.</Step>
+  <Step title="Select the file">Choose the file you want to recover from the list.</Step>
+  <Step title="Choose a version">In the version list on the left, select the version you want to restore.</Step>
+  <Step title="Restore">Select **Restore** on the right. The file is restored to its original location in your vault.</Step>
+</Steps>
+
+<Tip>
+  You can select multiple deleted files at once using the checkboxes or `Shift+click`, then restore them all with **bulk restore**.
+</Tip>
+
+## View version history for a renamed or deleted file
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="View deleted files">Next to **Deleted files**, select **View**.</Step>
+  <Step title="Select the file">Choose the file you want to inspect.</Step>
+  <Step title="Browse versions">In the version history pop-up, select the version you want to view on the left.</Step>
+</Steps>
+
+## View and restore settings history
+
+Obsidian Sync also records changes to your vault configuration files, such as plugin settings and appearance.
+
+### View settings version history
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Go to Vault configuration sync">Scroll down to **Vault configuration sync**.</Step>
+  <Step title="Open Settings version history">Select **View** next to **Settings version history**.</Step>
+  <Step title="Choose a settings file">In the **Settings File** pop-up, choose the configuration file you want to inspect.</Step>
+</Steps>
+
+### Restore a previous settings version
+
+<Steps>
+  <Step title="Open Settings version history">Follow the steps above to open the settings file's history.</Step>
+  <Step title="Restore">In the changes view, select **Restore**.</Step>
+  <Step title="Restart Obsidian">Reload or restart Obsidian to apply the restored settings.</Step>
+</Steps>

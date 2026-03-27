@@ -1,0 +1,436 @@
+---
+title: "Obsidian CLI & Headless"
+description: "Control Obsidian from your terminal with the Obsidian CLI, and sync vaults without the desktop app using Obsidian Headless."
+---
+
+Obsidian provides two command-line tools for automation and scripting:
+
+<CardGroup cols={2}>
+  <Card title="Obsidian CLI" icon="terminal">
+    Controls the running Obsidian desktop app from your terminal. Everything you can do in the app, you can do from the command line.
+  </Card>
+  <Card title="Obsidian Headless" icon="cloud">
+    A standalone client that runs independently of the desktop app. Sync vaults and publish sites from any server or CI environment.
+  </Card>
+</CardGroup>
+
+---
+
+## Obsidian CLI
+
+Obsidian CLI lets you control Obsidian from your terminal for scripting, automation, and integration with external tools — including developer commands to inspect elements, take screenshots, reload plugins, and run JavaScript in the app console.
+
+<Warning>
+  Obsidian CLI requires the Obsidian **1.12.4 installer** or later. See the installer version update guide in Obsidian's update settings.
+</Warning>
+
+### Install Obsidian CLI
+
+<Steps>
+  <Step title="Update Obsidian">
+    Upgrade to the latest Obsidian installer version (1.12.4 or above).
+  </Step>
+  <Step title="Enable the CLI in settings">
+    Go to **Settings → General** and enable **Command line interface**.
+  </Step>
+  <Step title="Register the CLI">
+    Follow the prompt to register Obsidian CLI. This adds `obsidian` to your system PATH.
+  </Step>
+</Steps>
+
+<Note>
+  The Obsidian app must be running for CLI commands to work. If it's not running, the first command you execute will launch Obsidian automatically.
+</Note>
+
+### Run commands
+
+Run a single command directly from your terminal:
+
+```shell
+# Get help
+obsidian help
+
+# Show Obsidian version
+obsidian version
+```
+
+Or open the interactive **terminal user interface (TUI)** by entering `obsidian` with no arguments. The TUI supports autocomplete, command history, and reverse search (`Ctrl+R`):
+
+```shell
+# Open the TUI, then run a command without the "obsidian" prefix
+obsidian
+help
+```
+
+### Parameters and flags
+
+Commands accept **parameters** (key-value pairs) and **flags** (boolean switches):
+
+```shell
+# Parameter: name=value (quote values with spaces)
+obsidian create name=Note content="Hello world"
+
+# Flags: include the flag name to enable it
+obsidian create name=Note content="Hello" open overwrite
+
+# Multiline content: use \n for newlines
+obsidian create name=Note content="# Title\n\nBody text"
+```
+
+### Target a vault
+
+If your terminal's current working directory is inside a vault, that vault is used automatically. Otherwise, the currently active vault is used. To target a specific vault explicitly:
+
+```shell
+obsidian vault=Notes daily
+obsidian vault="My Vault" search query="meeting notes"
+```
+
+### Everyday examples
+
+```shell
+# Open today's daily note
+obsidian daily
+
+# Add a task to your daily note
+obsidian daily:append content="- [ ] Buy groceries"
+
+# Search your vault
+obsidian search query="meeting notes"
+
+# Read the active file
+obsidian read
+
+# Create a new note from a template
+obsidian create name="Trip to Paris" template=Travel
+
+# List all tags with counts
+obsidian tags counts
+
+# Copy the output of any command to clipboard
+obsidian read --copy
+```
+
+### Developer examples
+
+```shell
+# Open developer tools
+obsidian devtools
+
+# Reload a plugin you're developing
+obsidian plugin:reload id=my-plugin
+
+# Take a screenshot
+obsidian dev:screenshot path=screenshot.png
+
+# Execute JavaScript in the app
+obsidian eval code="app.vault.getFiles().length"
+```
+
+### Key command categories
+
+<AccordionGroup>
+  <Accordion title="Files and folders">
+    | Command | Description |
+    |---|---|
+    | `open file=<name>` | Open a file. |
+    | `read` | Read the active (or specified) file's contents. |
+    | `create name=<name>` | Create a new file. |
+    | `append content=<text>` | Append content to a file. |
+    | `prepend content=<text>` | Prepend content after frontmatter. |
+    | `move to=<path>` | Move or rename a file. |
+    | `rename name=<name>` | Rename a file. |
+    | `delete` | Delete the active file. |
+    | `files` | List files in the vault. |
+  </Accordion>
+
+  <Accordion title="Daily notes">
+    | Command | Description |
+    |---|---|
+    | `daily` | Open today's daily note. |
+    | `daily:append content=<text>` | Append content to the daily note. |
+    | `daily:prepend content=<text>` | Prepend content to the daily note. |
+    | `daily:read` | Read the daily note. |
+    | `daily:path` | Get the expected path of today's daily note. |
+  </Accordion>
+
+  <Accordion title="Search">
+    | Command | Description |
+    |---|---|
+    | `search query=<text>` | Search the vault. Returns matching file paths. |
+    | `search:context query=<text>` | Search with surrounding line context (grep-style output). |
+  </Accordion>
+
+  <Accordion title="Plugins and themes">
+    | Command | Description |
+    |---|---|
+    | `plugins` | List installed plugins. |
+    | `plugin:enable id=<id>` | Enable a plugin. |
+    | `plugin:disable id=<id>` | Disable a plugin. |
+    | `plugin:install id=<id>` | Install a community plugin. |
+    | `plugin:reload id=<id>` | Reload a plugin (for development). |
+    | `themes` | List installed themes. |
+    | `theme:set name=<name>` | Activate a theme. |
+    | `snippet:enable name=<name>` | Enable a CSS snippet. |
+    | `snippet:disable name=<name>` | Disable a CSS snippet. |
+  </Accordion>
+
+  <Accordion title="Workspace and tabs">
+    | Command | Description |
+    |---|---|
+    | `workspace` | Show the workspace tree. |
+    | `workspaces` | List saved workspaces. |
+    | `workspace:save name=<name>` | Save the current layout. |
+    | `workspace:load name=<name>` | Load a saved layout. |
+    | `tabs` | List open tabs. |
+    | `recents` | List recently opened files. |
+  </Accordion>
+
+  <Accordion title="Tasks">
+    | Command | Description |
+    |---|---|
+    | `tasks` | List tasks in the vault. |
+    | `tasks todo` | List incomplete tasks. |
+    | `tasks daily` | List tasks from today's daily note. |
+    | `task ref=<path:line> toggle` | Toggle a task's completion status. |
+  </Accordion>
+
+  <Accordion title="Bases">
+    | Command | Description |
+    |---|---|
+    | `bases` | List all `.base` files in the vault. |
+    | `base:views` | List views in the current base file. |
+    | `base:create` | Create a new item in a base. |
+    | `base:query` | Query a base and return results. |
+  </Accordion>
+
+  <Accordion title="Bookmarks">
+    | Command | Description |
+    |---|---|
+    | `bookmarks` | List bookmarks. |
+    | `bookmark` | Add a bookmark (file, folder, search, or URL). |
+  </Accordion>
+
+  <Accordion title="Links">
+    | Command | Description |
+    |---|---|
+    | `backlinks` | List backlinks to a file. |
+    | `links` | List outgoing links from a file. |
+    | `unresolved` | List unresolved links in the vault. |
+    | `orphans` | List files with no incoming links. |
+    | `deadends` | List files with no outgoing links. |
+  </Accordion>
+
+  <Accordion title="Properties">
+    | Command | Description |
+    |---|---|
+    | `properties` | List properties in the vault or a specific file. |
+    | `property:set name=<name> value=<value>` | Set a property on a file. |
+    | `property:remove name=<name>` | Remove a property from a file. |
+    | `property:read name=<name>` | Read a property value from a file. |
+    | `aliases` | List aliases in the vault. |
+  </Accordion>
+
+  <Accordion title="Sync commands (in-app)">
+    These commands control Sync within the running Obsidian app. To sync without the desktop app, see [Obsidian Headless](#obsidian-headless).
+
+    | Command | Description |
+    |---|---|
+    | `sync on` / `sync off` | Resume or pause sync. |
+    | `sync:status` | Show sync status and storage usage. |
+    | `sync:history` | List sync version history for a file. |
+    | `sync:read version=<n>` | Read a specific sync version. |
+    | `sync:restore version=<n>` | Restore a sync version. |
+    | `sync:deleted` | List deleted files in sync. |
+  </Accordion>
+
+  <Accordion title="Publish commands (in-app)">
+    | Command | Description |
+    |---|---|
+    | `publish:site` | Show publish site info (slug, URL). |
+    | `publish:list` | List published files. |
+    | `publish:status` | List publish changes (new, changed, deleted). |
+    | `publish:add` | Publish the active file or all changed files. |
+    | `publish:remove` | Unpublish a file. |
+    | `publish:open` | Open the active file on the published site. |
+  </Accordion>
+
+  <Accordion title="Tags and tasks">
+    | Command | Description |
+    |---|---|
+    | `tags` | List tags in the vault. |
+    | `tag name=<tag>` | Get tag info. |
+    | `tasks` | List tasks in the vault. |
+    | `task ref=<path:line> toggle` | Toggle a task's completion status. |
+  </Accordion>
+
+  <Accordion title="Vault">
+    | Command | Description |
+    |---|---|
+    | `vault` | Show vault info. |
+    | `vaults` | List known vaults. |
+    | `vault:open name=<name>` | Switch to a different vault (TUI only). |
+    | `wordcount` | Count words and characters. |
+    | `outline` | Show headings for the current file. |
+    | `random` | Open a random note. |
+    | `unique` | Create a unique note. |
+  </Accordion>
+
+  <Accordion title="Developer commands">
+    | Command | Description |
+    |---|---|
+    | `devtools` | Toggle Electron developer tools. |
+    | `dev:screenshot path=<file>` | Take a screenshot (returns base64 PNG). |
+    | `dev:errors` | Show captured JavaScript errors. |
+    | `dev:console` | Show captured console messages. |
+    | `dev:css selector=<css>` | Inspect CSS with source locations. |
+    | `dev:dom selector=<css>` | Query DOM elements. |
+    | `eval code=<javascript>` | Execute JavaScript and return the result. |
+  </Accordion>
+</AccordionGroup>
+
+### TUI keyboard shortcuts
+
+**Navigation**
+
+| Action | Shortcut |
+|---|---|
+| Move cursor left | `←` / `Ctrl+B` |
+| Move cursor right | `→` / `Ctrl+F` |
+| Jump to start of line | `Ctrl+A` |
+| Jump to end of line | `Ctrl+E` |
+| Move back one word | `Alt+B` |
+| Move forward one word | `Alt+F` |
+
+**Editing**
+
+| Action | Shortcut |
+|---|---|
+| Delete to start of line | `Ctrl+U` |
+| Delete to end of line | `Ctrl+K` |
+| Delete previous word | `Ctrl+W` / `Alt+Backspace` |
+
+**Autocomplete**
+
+| Action | Shortcut |
+|---|---|
+| Enter suggestion mode / accept suggestion | `Tab` |
+| Exit suggestion mode | `Shift+Tab` |
+| Enter suggestion mode (from fresh input) | `↓` |
+
+**History**
+
+| Action | Shortcut |
+|---|---|
+| Previous history entry | `↑` / `Ctrl+P` |
+| Next history entry | `↓` / `Ctrl+N` |
+| Reverse history search | `Ctrl+R` |
+
+**Other**
+
+| Action | Shortcut |
+|---|---|
+| Clear screen | `Ctrl+L` |
+| Exit | `Ctrl+C` / `Ctrl+D` |
+
+### Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Windows">
+    Obsidian CLI on Windows requires the 1.12.4+ installer. When you install Obsidian 1.12.4+, the `Obsidian.com` terminal redirector is added in the folder where you installed the `Obsidian.exe` file. This redirector connects Obsidian's GUI process to stdin/stdout, which is necessary because Obsidian normally runs as a GUI app incompatible with terminal output on Windows.
+  </Accordion>
+
+  <Accordion title="macOS">
+    CLI registration adds the Obsidian binary to your PATH via `~/.zprofile`. If the `obsidian` command isn't found, check that this line exists in `~/.zprofile`:
+
+    ```shell
+    export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+    ```
+
+    For other shells (bash, fish), add the same path to `~/.bash_profile` or run `fish_add_path /Applications/Obsidian.app/Contents/MacOS`.
+  </Accordion>
+
+  <Accordion title="Linux (AppImage)">
+    Registration creates a symlink at `/usr/local/bin/obsidian`. Verify it exists:
+
+    ```shell
+    ls -l /usr/local/bin/obsidian
+    ```
+
+    If missing, create it manually:
+
+    ```shell
+    sudo ln -s /path/to/obsidian /usr/local/bin/obsidian
+    ```
+
+    If the symlink was placed in `~/.local/bin/` instead, ensure that directory is in your PATH.
+  </Accordion>
+
+  <Accordion title="Linux (Snap)">
+    If the CLI doesn't detect the insider `.asar`, set `XDG_CONFIG_HOME` to point to the Snap config path:
+
+    ```shell
+    export XDG_CONFIG_HOME="$HOME/snap/obsidian/current/.config"
+    ```
+
+    Add this to `~/.bashrc` or `~/.zshrc` to make it persistent.
+  </Accordion>
+
+  <Accordion title="Linux (Flatpak)">
+    Create a symlink to the Flatpak binary:
+
+    ```shell
+    # System install
+    ln -s /var/lib/flatpak/exports/bin/md.obsidian.Obsidian ~/.local/bin/obsidian
+
+    # User install
+    ln -s ~/.local/share/flatpak/exports/bin/md.obsidian.Obsidian ~/.local/bin/obsidian
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Obsidian Headless
+
+Obsidian Headless **(open beta)** is a standalone command-line client for Obsidian services. It runs without the desktop app, making it ideal for servers, CI pipelines, and automation workflows.
+
+**Common use cases:**
+- Automate remote backups
+- Publish a website on a schedule
+- Sync a shared vault to a server for other tools to consume
+- Give agentic tools vault access without exposing your full desktop
+
+<Note>
+  Obsidian Headless syncs and publishes vaults. It does not control the Obsidian desktop app. For controlling the running desktop app, use [Obsidian CLI](#obsidian-cli) above.
+</Note>
+
+### Install Obsidian Headless
+
+Obsidian Headless requires **Node.js 22** or later.
+
+```shell
+npm install -g obsidian-headless
+```
+
+### Authenticate
+
+```shell
+# Log in to your Obsidian account
+ob login
+
+# Log in with explicit credentials
+ob login --email you@example.com --password yourpassword
+
+# Log out and clear stored credentials
+ob logout
+```
+
+All options are interactive when omitted — email and password are prompted, and two-factor authentication is requested automatically if enabled on your account.
+
+### Available services
+
+| Service | Description |
+|---|---|
+| **Headless Sync** | Sync vaults using Obsidian Sync, without the desktop app. |
+| **Headless Publish** | Publish sites using Obsidian Publish, without the desktop app. |

@@ -1,0 +1,145 @@
+---
+title: "Security and privacy"
+description: "How Obsidian Sync uses end-to-end encryption to keep your notes private — and what that means for you."
+---
+
+Obsidian Sync is built around a simple principle: your notes are private and should stay that way. This page explains how encryption works, where your data is stored, and what trade-offs exist.
+
+## Encryption options
+
+When you create a remote vault, you choose how it's encrypted:
+
+<CardGroup cols={2}>
+  <Card title="End-to-end encryption (default)" icon="lock">
+    Your data is encrypted with a password you choose before it leaves your device. Nobody — including Obsidian staff — can decrypt your notes. This is the recommended option for all users.
+  </Card>
+  <Card title="Standard encryption" icon="shield">
+    Obsidian holds the encryption key. Your data is protected in transit and at rest, but could be decrypted by Obsidian (for example, in response to a legal request). Suitable if your vault is already public, such as an Obsidian Publish site.
+  </Card>
+</CardGroup>
+
+<Warning>
+  If you lose or forget your end-to-end encryption password, your encrypted data cannot be recovered. Obsidian cannot reset or retrieve your password. Store it somewhere safe.
+</Warning>
+
+Your encryption choice applies only to the remote vault. Obsidian does not encrypt your local vault on your device.
+
+## What end-to-end encryption means
+
+End-to-end encryption (E2EE) means your notes are encrypted on your device and can only be decrypted on your device — never on the server.
+
+- **Obsidian cannot read your notes.** The encryption key is derived from your password and never transmitted.
+- **Eavesdroppers cannot read your notes.** Even if someone intercepts the data in transit, it's useless without your password.
+- **A server breach doesn't expose your data.** In the unlikely event of a complete server compromise, your files remain encrypted and unreadable.
+
+### Encryption algorithm
+
+Obsidian Sync uses industry-standard encryption:
+
+- **Encryption**: AES-256 in Galois/Counter Mode (GCM)
+- **Key derivation**: scrypt with salt
+
+AES-256 is the same encryption standard used in online banking and government systems.
+
+### Verify end-to-end encryption
+
+You can independently verify that your data is end-to-end encrypted. Obsidian publishes a step-by-step guide at [obsidian.md/blog/verify-obsidian-sync-encryption](https://obsidian.md/blog/verify-obsidian-sync-encryption/).
+
+### Third-party security audit
+
+Obsidian has been independently audited by a third-party security firm. Audit reports are available on the [Obsidian security page](https://obsidian.md/security).
+
+## What happens if you forget your encryption password
+
+If you forget your end-to-end encryption password, you can no longer connect new devices to the remote vault. Your local data on each device remains intact.
+
+To recover from a forgotten password:
+
+<Steps>
+  <Step title="Back up your primary device">Make a full copy of your vault folder as a backup.</Step>
+  <Step title="Disconnect all devices">On each device, go to **Settings → Sync → Pick remote vault** and select **Disconnect**.</Step>
+  <Step title="Create a new remote vault">On your primary device, create a new remote vault with a new password. You can delete the old vault if you're at your vault limit.</Step>
+  <Step title="Wait for sync to complete">Watch the sync indicator until it shows a green checkmark.</Step>
+  <Step title="Reconnect other devices">Connect each of your other devices to the new remote vault. Allow each device to fully sync before connecting the next one.</Step>
+</Steps>
+
+## Hosting and data storage
+
+### Server locations
+
+Obsidian Sync's servers are powered by [DigitalOcean](https://www.digitalocean.com) and are available in the following regions:
+
+| Region | Location |
+|---|---|
+| Automatic | Chosen based on your IP address at setup time |
+| Asia | Singapore |
+| Europe | Frankfurt, Germany |
+| North America | San Francisco, USA |
+| Oceania | Sydney, Australia |
+
+You choose your region when you create a remote vault. Changing regions later requires re-creating the vault (which resets version history).
+
+### Find your current server
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Copy debug info">Select **Copy Debug Info**.</Step>
+  <Step title="Find the host">Paste the info into a note and look for a line like `Host server: wss://sync-xx.obsidian.md`.</Step>
+</Steps>
+
+For server uptime information, visit the [Obsidian status page](https://status.obsidian.md).
+
+### Network access
+
+If you manage network access on your organization's firewall, you need to allow connections to:
+
+```
+sync-*.obsidian.md
+```
+
+The `*` represents a number from 1 to 100. Obsidian recommends using a wildcard rule (`sync-*.obsidian.md`) to account for new subdomains as they're added.
+
+## Upgrade vault encryption
+
+Obsidian periodically upgrades the Sync encryption version to maintain the highest security standards. If an upgrade is available, you'll see an **Upgrade vault encryption** option in **Settings → Sync**.
+
+<Warning>
+  Upgrading encryption is destructive. All data on the remote vault is replaced, and version history is permanently deleted. Always back up your vault before proceeding.
+</Warning>
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Start the upgrade">Select **Upgrade vault**. This option only appears if an upgrade is available.</Step>
+  <Step title="Verify your backup">Confirm your backup is in place and select **Continue**.</Step>
+  <Step title="Enter vault details">Set the vault name, choose a region, and enter a new encryption password.</Step>
+  <Step title="Reconnect other devices">After the upgrade completes, reconnect each of your other devices to the updated vault.</Step>
+</Steps>
+
+## Known limitations
+
+Obsidian Sync makes deliberate trade-offs to deliver fast, reliable sync. These are worth understanding:
+
+<AccordionGroup>
+  <Accordion title="Deterministic file-hash encryption">
+    Obsidian encrypts file hashes deterministically: the same file content with the same key always produces the same encrypted hash. This lets Sync detect duplicate files and avoid re-uploading identical data, saving bandwidth and storage.
+
+    The trade-off: if an attacker compromises a Sync server and can force you to upload specific files, they could determine whether a file matches one you've previously uploaded. This is a theoretical concern and does not expose your plaintext content.
+  </Accordion>
+  <Accordion title="Metadata is not fully end-to-end encrypted">
+    Some metadata is readable by the server: which device uploaded or deleted a file, when it happened, and the mapping between encrypted file paths and encrypted content. The server needs this information to route changes and maintain version history.
+
+    If a server were compromised, an attacker could tamper with path-to-content mappings — meaning a file's encrypted content could be delivered under the wrong path. Your plaintext data would remain encrypted and unreadable.
+  </Accordion>
+</AccordionGroup>
+
+## Data retention
+
+| Event | Retention |
+|---|---|
+| Version history (Standard plan) | 1 month |
+| Version history (Plus plan) | 12 months |
+| Attachment version history | 2 weeks |
+| Data after subscription expires | 1 month |
+| Data after refund | Deleted immediately |
+
+Local vaults on your devices are never affected when a remote vault is deleted or a subscription expires.

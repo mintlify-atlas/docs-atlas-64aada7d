@@ -1,0 +1,80 @@
+---
+title: "Themes"
+description: "Browse, install, switch, and update community themes to change the visual style of Obsidian. Learn how to combine themes with CSS snippets for further customization."
+---
+
+Themes change the complete visual appearance of Obsidian — colors, fonts, spacing, and more. Hundreds of community-made themes are available directly inside the app, supporting both light and dark variants.
+
+## Browse and install a theme
+
+<Steps>
+  <Step title="Open the theme browser">
+    Go to **Settings → Appearance → Themes** and select **Manage**.
+  </Step>
+  <Step title="Choose a theme">
+    Browse the list and select a theme to preview it. Themes respect your current color scheme (light or dark) and many ship with dedicated variants for both.
+  </Step>
+  <Step title="Install and apply the theme">
+    Select **Install and use**. Obsidian installs the theme and immediately applies it.
+  </Step>
+</Steps>
+
+## Switch or remove a theme
+
+- **Switch themes:** Go to **Settings → Appearance → Themes → Manage**, select a different theme, and choose **Install and use**.
+- **Revert to the default theme:** In the theme browser, select the currently active theme and choose **Stop using this theme**.
+- **Uninstall a theme:** In the theme browser, select the theme and choose **Uninstall**.
+
+## Update themes
+
+Themes do not update automatically.
+
+<Tabs>
+  <Tab title="Update all themes">
+    1. Go to **Settings → Appearance → Current community themes**.
+    2. Select **Check for updates**.
+    3. If updates are available, select **Update all**.
+  </Tab>
+  <Tab title="Update a single theme">
+    1. Go to **Settings → Appearance → Themes → Manage**.
+    2. Select the theme you want to update.
+    3. Select **Check for updates**.
+    4. If an update is available, select **Update**.
+  </Tab>
+</Tabs>
+
+## Light and dark variants
+
+Most community themes provide styling for both light and dark color schemes. The theme activates the correct variant based on your current color scheme setting in **Settings → Appearance → Base color scheme**.
+
+To switch between light and dark mode independently of the theme, change the **Base color scheme** option.
+
+## Customize a theme with Style Settings
+
+Many community themes expose customization options through the **Style Settings** community plugin. After installing both the theme and the Style Settings plugin:
+
+1. Go to **Settings → Style Settings** (added by the plugin).
+2. Adjust the options exposed by your theme — for example, font choices, border radius, or heading colors.
+
+<Tip>
+  Not all themes support Style Settings. Check the theme's documentation or README to see what customization options it provides.
+</Tip>
+
+## Override theme styles with a CSS snippet
+
+If you want to tweak just one or two aspects of a theme without modifying it directly, add a [CSS snippet](/extending/css-snippets). Snippets load after themes, so their rules take precedence.
+
+For example, to change the heading color applied by the active theme:
+
+```css
+/* my-tweaks.css */
+body {
+  --h1-color: #e06c75;
+}
+```
+
+Place this file in `<vault>/.obsidian/snippets/` and enable it under **Settings → Appearance → CSS snippets**.
+
+## Build your own theme
+
+Ready to create a theme from scratch? Follow the [Build a theme](https://docs.obsidian.md/Themes/App+themes/Build+a+theme) guide in the Obsidian developer documentation.

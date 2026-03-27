@@ -1,0 +1,235 @@
+---
+title: Properties
+description: Use properties (YAML frontmatter) to attach structured metadata — dates, tags, numbers, links — to your Obsidian notes.
+---
+
+Properties let you attach structured data to a note — dates, numbers, checkboxes, links, and more. You can use properties to organize notes, power templates, and query your vault with search.
+
+## Adding properties to a note
+
+There are several ways to add a property:
+
+<Steps>
+  <Step title="Use the command palette">
+    Run the **Add file property** command from the Command Palette.
+  </Step>
+  <Step title="Use the keyboard shortcut">
+    Press `Cmd/Ctrl+;`.
+  </Step>
+  <Step title="Use the More actions menu">
+    Click the three-dots icon (or right-click the tab) and choose **Add file property**.
+  </Step>
+  <Step title="Type YAML frontmatter directly">
+    Type `---` at the very beginning of a file to open the properties section.
+  </Step>
+</Steps>
+
+Once you add a property, a row appears at the top of the note with two fields: the property **name** and the property **value**.
+
+## Property types
+
+Each property has a name, a value, and a **type** that determines what kind of values it stores. To change a property's type, click the type icon next to the property name.
+
+Once a type is assigned to a property name, every property with that name across your vault uses the same type.
+
+<AccordionGroup>
+  <Accordion title="Text">
+    Stores a single line of text. Markdown formatting is not rendered. Hashtags do not create tags.
+
+    Internal links use the `[[Link]]` syntax and must be surrounded with quotes.
+
+    ```yaml
+    ---
+    title: A New Hope
+    link: "[[Episode IV]]"
+    url: https://www.example.com
+    ---
+    ```
+  </Accordion>
+
+  <Accordion title="List">
+    Stores multiple values. Each value appears on its own line, preceded by a hyphen and space.
+
+    ```yaml
+    ---
+    cast:
+      - Mark Hamill
+      - Harrison Ford
+      - Carrie Fisher
+    links:
+      - "[[Link]]"
+      - "[[Link2]]"
+    ---
+    ```
+  </Accordion>
+
+  <Accordion title="Number">
+    Must be a literal number (no operators). Both integers and decimals are supported.
+
+    ```yaml
+    ---
+    year: 1977
+    pie: 3.14
+    ---
+    ```
+  </Accordion>
+
+  <Accordion title="Checkbox">
+    Stores `true` or `false`. Displays as a checkbox in Live Preview.
+
+    ```yaml
+    ---
+    favorite: true
+    reply: false
+    ---
+    ```
+  </Accordion>
+
+  <Accordion title="Date">
+    Stored in `YYYY-MM-DD` format.
+
+    ```yaml
+    ---
+    date: 2020-08-21
+    ---
+    ```
+
+    The date picker uses your operating system's default date format. With the Daily notes plugin enabled, a date property also acts as an internal link to the corresponding daily note.
+  </Accordion>
+
+  <Accordion title="Date & time">
+    Includes both a date and a time, stored in ISO 8601 format.
+
+    ```yaml
+    ---
+    time: 2020-08-21T10:30:00
+    ---
+    ```
+  </Accordion>
+
+  <Accordion title="Tags">
+    A special property type used exclusively by the `tags` property. This property type cannot be assigned to other properties.
+
+    ```yaml
+    ---
+    tags:
+      - journal
+      - personal
+      - draft
+    ---
+    ```
+
+    See [Tags](/editing/tags) for more on using tags in Obsidian.
+  </Accordion>
+</AccordionGroup>
+
+## Property format (YAML)
+
+Properties are stored in [YAML](https://yaml.org/) format at the top of the file, between `---` delimiters:
+
+```yaml
+---
+name: value
+---
+```
+
+Property names are separated from values by a colon and a space. Each name must be unique within a note — you can't have two `tags` properties in the same file.
+
+<Note>
+While you can also write properties in JSON format (between `---` delimiters), Obsidian reads and saves them as YAML.
+</Note>
+
+## Default properties
+
+Obsidian includes a set of built-in properties:
+
+| Property | Type | Description |
+|---|---|---|
+| `tags` | Tags | Adds tags to a note. See [Tags](/editing/tags). |
+| `aliases` | List | Alternative names for a note. |
+| `cssclasses` | List | Apply CSS snippet classes to style individual notes. |
+
+### Properties for Obsidian Publish
+
+| Property | Description |
+|---|---|
+| `publish` | Controls whether a note is included in auto-publish selection. |
+| `permalink` | Sets a custom URL path for the published page. |
+| `description` | Sets the description for social media link previews. |
+| `image` | Sets the image for social media link previews. |
+| `cover` | Alternative to `image` for social media previews. |
+
+### Deprecated properties
+
+These properties were deprecated in Obsidian 1.4 and removed as defaults in 1.9:
+
+| Property | Replacement |
+|---|---|
+| `tag` | `tags` |
+| `alias` | `aliases` |
+| `cssclass` | `cssclasses` |
+
+## Searching and using properties
+
+Properties have their own search syntax that works alongside other search terms. Use `[property:value]` in the Search panel to filter notes by property value.
+
+You can also use properties in templates — when you insert a template, all its properties are merged into the active note.
+
+## Display modes
+
+Control how properties appear in a note under **Settings → Editor → Properties in document**:
+
+| Mode | Behavior |
+|---|---|
+| **Visible** (default) | Shows properties at the top of the note. |
+| **Hidden** | Hides properties; still accessible via the Properties view in the sidebar. |
+| **Source** | Displays properties as plain YAML text. |
+
+## Keyboard shortcuts
+
+<Tabs>
+  <Tab title="Adding and navigating">
+    | Action | Shortcut |
+    |---|---|
+    | Add new property | `Cmd/Ctrl+;` |
+    | Focus next property | `Down arrow` or `Tab` |
+    | Focus previous property | `Up arrow` or `Shift+Tab` |
+    | Jump to editor | `Alt+Down arrow` |
+  </Tab>
+  <Tab title="Editing">
+    | Action | Shortcut |
+    |---|---|
+    | Edit property name | `Left arrow` |
+    | Edit property value | `Right arrow` |
+    | Focus property | `Escape` |
+    | Delete property | `Cmd/Ctrl+Backspace` |
+    | Undo | `Cmd/Ctrl+Z` |
+    | Redo | `Cmd/Ctrl+Shift+Z` |
+  </Tab>
+  <Tab title="Selection">
+    | Action | Shortcut |
+    |---|---|
+    | Extend selection upwards | `Shift+Up arrow` |
+    | Extend selection downwards | `Shift+Down arrow` |
+    | Select all | `Cmd/Ctrl+A` |
+  </Tab>
+  <Tab title="Vim keybindings">
+    | Action | Shortcut |
+    |---|---|
+    | Move down | `j` |
+    | Move up | `k` |
+    | Focus key | `h` |
+    | Focus value | `l` |
+    | Focus value cursor at end | `A` |
+    | Focus value cursor at beginning | `i` |
+    | Create new property | `o` |
+  </Tab>
+</Tabs>
+
+## Limitations
+
+A few features are not currently supported:
+
+- **Nested properties** — use Source mode to view them.
+- **Bulk-editing properties** — use external tools such as VSCode, scripts, or community plugins.
+- **Markdown in properties** — properties are intentionally plain text so they remain both human- and machine-readable.

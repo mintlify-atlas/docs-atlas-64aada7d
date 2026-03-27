@@ -1,0 +1,87 @@
+---
+title: Manage notes
+description: Create, rename, move, and delete notes in Obsidian using the file explorer, keyboard shortcuts, and the command palette.
+---
+
+You can manage files and folders using keyboard shortcuts, the Command palette, or the File explorer panel.
+
+## Create a note
+
+<Steps>
+  <Step title="Press the keyboard shortcut">
+    Press `Ctrl+N` (or `Cmd+N` on macOS).
+  </Step>
+  <Step title="Name the note">
+    Enter a name for the note and press `Enter` to start editing.
+  </Step>
+</Steps>
+
+Alternatively, use the File explorer to create a new note, or run **Create new note** from the Command palette.
+
+<Note>
+Obsidian respects the filename limitations of your operating system. If you plan to sync your notes across devices, use filenames that are safe on all target operating systems.
+</Note>
+
+## Rename a note
+
+To rename the note currently open in the editor:
+
+<Steps>
+  <Step title="Select the note title">
+    Click the note title at the top of the editor, or press `F2`.
+  </Step>
+  <Step title="Enter the new name">
+    Type the new name and press `Enter`.
+  </Step>
+</Steps>
+
+When you rename a file, Obsidian automatically updates all internal links pointing to that file across the vault.
+
+You can also rename a note or folder without opening it by right-clicking it in the File explorer.
+
+## Move a note
+
+To move a note to a different folder:
+
+- **File explorer** — drag the note to the destination folder, or right-click and choose **Move file to...**.
+- **Command palette** — run **Move current file to another folder** and select the destination.
+
+Obsidian updates all internal links to the note after you move it.
+
+## Delete a note
+
+To delete the note currently open in the editor, select **More options → Delete file** in the upper-right corner.
+
+You can also run **Delete current file** from the Command palette, or right-click a note in the File explorer and choose **Delete**.
+
+### What happens to deleted files
+
+You can control what happens to deleted files under **Settings → Files & links**:
+
+<AccordionGroup>
+  <Accordion title="System trash (default)">
+    Deleted files are sent to your operating system's trash. You can restore them using your file manager.
+  </Accordion>
+  <Accordion title="Obsidian trash">
+    Deleted files are moved to a `.trash` folder inside your vault. You can browse and restore them from there.
+  </Accordion>
+  <Accordion title="Permanently delete">
+    Files are deleted immediately with no way to recover them.
+  </Accordion>
+</AccordionGroup>
+
+## Use the File explorer
+
+The File explorer (left sidebar) shows all notes and folders in your vault. From the File explorer you can:
+
+- Create, rename, move, and delete notes and folders.
+- Drag and drop files between folders.
+- Right-click any file or folder to see all available actions.
+
+## Use the quick switcher
+
+The quick switcher lets you navigate to any note by name without leaving the keyboard.
+
+- Press `Ctrl+O` (or `Cmd+O` on macOS) to open the quick switcher.
+- Start typing the note name or an [alias](/linking/aliases).
+- Press `Enter` to open the selected note, or `Ctrl+Enter` to open it in a new tab.

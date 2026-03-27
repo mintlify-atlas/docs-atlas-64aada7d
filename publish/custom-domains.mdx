@@ -1,0 +1,168 @@
+---
+title: "Custom domains"
+description: "Serve your Obsidian Publish site from your own domain or subdomain using Cloudflare or a reverse proxy."
+---
+
+By default, your Obsidian Publish site is accessible at `publish.obsidian.md/your-site-id`. You can configure a custom domain or subdomain — for example, `notes.mysite.com` — so visitors reach your site at a URL you control.
+
+A custom domain also unlocks features that require it:
+- [Custom JavaScript](/publish/customize-site#custom-javascript) via `publish.js`
+- [Analytics](/publish/customize-site#analytics)
+
+<Warning>
+  Obsidian does not provision SSL certificates on your behalf. Custom domains are only supported through the two methods described on this page:
+
+  - **Cloudflare** (recommended) — using Full SSL/TLS mode
+  - **A reverse proxy** — using your own web server
+
+  Other DNS configurations are not officially supported and are unlikely to work.
+</Warning>
+
+## Option 1: Set up with Cloudflare
+
+Cloudflare is the only officially supported provider for custom domains. This method handles SSL/TLS automatically.
+
+<Steps>
+  <Step title="Add a CNAME record in Cloudflare">
+    1. In Cloudflare, open the domain where you want to host your site (e.g., `mysite.com`) — even if you want a subdomain like `notes.mysite.com`.
+    2. Go to **DNS** and click **Add Record**.
+    3. Set the type to **CNAME**.
+    4. In **Name**, enter your domain or subdomain — for example, `notes` for `notes.mysite.com`, or `@` for the root domain.
+    5. In **Target**, enter `publish-main.obsidian.md`. Do not include your site ID here.
+    6. Ensure **Proxy status** is enabled (orange cloud icon). It's enabled by default.
+  </Step>
+
+  <Step title="Set SSL/TLS to Full mode">
+    In Cloudflare, go to **SSL/TLS** and set the encryption mode to **Full**.
+
+    <Warning>
+      If the encryption mode is set to **Flexible** instead of **Full**, your site will end up in a redirect loop.
+    </Warning>
+  </Step>
+
+  <Step title="Configure the custom domain in Obsidian">
+    1. Open **Publish changes** in the Ribbon.
+    2. Click **Change site options**.
+    3. Next to **Custom domain**, click **Configure**.
+    4. In **Custom URL**, enter your domain or subdomain (e.g., `notes.mysite.com`). Do not include `www.` in this field.
+  </Step>
+</Steps>
+
+### Redirect www to your root domain
+
+If you want both `mysite.com` and `www.mysite.com` to point to Publish, create a Cloudflare Page Rule:
+
+- **URL match**: `www.mysite.com/*`
+- **Setting**: Forward URL — 301 Permanent Redirect
+- **Redirect URL**: `https://mysite.com/$1`
+
+Then create a CNAME record for `www.mysite.com` pointing to `publish-main.obsidian.md`, the same as you did for the root.
+
+## Option 2: Set up with a reverse proxy
+
+If you're already running a web server or prefer not to use Cloudflare, you can proxy requests to Obsidian Publish. This also lets you host your Publish site under a subpath of an existing site (e.g., `mysite.com/my-notes/`).
+
+Proxy all requests under your chosen path to:
+
+```
+https://publish.obsidian.md/serve?url=mysite.com/my-notes/...
+```
+
+Then set your **Custom URL** in Obsidian site settings to `mysite.com/my-notes`.
+
+<CodeGroup>
+
+```nginx NGINX
+location /my-notes {
+  proxy_pass https://publish.obsidian.md/serve?url=mysite.com/my-notes/;
+  proxy_ssl_server_name on;
+  proxy_set_header Host publish.obsidian.md;
+}
+```
+
+```apache Apache (.htaccess)
+RewriteEngine  on
+RewriteRule    "^my-notes/(.*)$"  "https://publish.obsidian.md/serve?url=mysite.com/my-notes/$1"  [L,P]
+```
+
+```toml Netlify (netlify.toml)
+[[redirects]]
+  from = "https://mysite.com/my-notes/*"
+  to = "https://publish.obsidian.md/serve?url=mysite.com/my-notes/:splat"
+  status = 200
+  force = true
+```
+
+```json Vercel (vercel.json)
+{
+  "rewrites": [
+    {
+      "source": "/my-notes/",
+      "destination": "https://publish.obsidian.md/serve?url=mysite.com/my-notes"
+    },
+    {
+      "source": "/my-notes/:path*",
+      "destination": "https://publish.obsidian.md/serve?url=mysite.com/my-notes/:path*"
+    }
+  ]
+}
+```
+
+```plain Caddy
+mysite.com {
+  encode zstd gzip
+  handle /my-notes* {
+    reverse_proxy https://publish.obsidian.md {
+      header_up Host {upstream_hostport}
+    }
+    rewrite * /serve?url=mysite.com{path}
+  }
+}
+```
+
+```yaml Traefik
+http:
+  routers:
+    mysite:
+      rule: Host(`mysite.com`)
+      service: obsidian-publish
+      middlewares:
+        - "publish-headers"
+  services:
+    obsidian-publish:
+      loadBalancer:
+        servers:
+          - url: https://publish.obsidian.md
+  middlewares:
+    publish-headers:
+      headers:
+        customRequestHeaders:
+          Host: "publish.obsidian.md"
+          x-obsidian-custom-domain: "mysite.com"
+```
+
+</CodeGroup>
+
+<Note>
+  For Apache, `mod_rewrite` must be enabled and you may need to configure `SSLProxyEngine`.
+
+  If your proxy doesn't support query path forwarding, use the `x-obsidian-custom-domain` HTTP header set to your site URL (e.g., `mysite.com/my-subpath`) when proxying to `https://publish.obsidian.md/`.
+</Note>
+
+## Redirect from your old Publish URL
+
+If you previously shared your site at `publish.obsidian.md/your-site-id` and want visitors to be redirected to your custom domain, enable **Redirect to your custom domain** in your site's custom domain settings.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Redirect loop">
+    This almost always means the Cloudflare SSL/TLS mode is set to **Flexible** instead of **Full**. Go to **SSL/TLS** in Cloudflare and change the encryption mode to **Full**.
+  </Accordion>
+  <Accordion title="Fonts, graph, or password access broken after switching to custom domain">
+    After switching from your `publish.obsidian.md` URL to a custom domain, clear your browser cache. Modern browsers apply cross-domain security restrictions that can affect cached assets. Visitors who access your site exclusively through the custom domain will not encounter this issue.
+  </Accordion>
+  <Accordion title="Custom domain not working with other DNS providers">
+    Cloudflare is the only officially supported provider for custom domains. Configurations with other DNS providers are not supported and may not work.
+  </Accordion>
+</AccordionGroup>

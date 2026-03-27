@@ -1,0 +1,110 @@
+---
+title: How Obsidian stores data
+description: Obsidian stores all your notes as plain text files in a local vault folder, giving you full ownership and portability of your data.
+---
+
+Obsidian stores your notes as Markdown-formatted plain text files in a folder on your device called a _vault_. A vault is just a regular folder — including any subfolders — that you choose.
+
+Because your notes are plain text files, you can:
+
+- Open and edit them in any text editor.
+- Manage them with any file manager.
+- Back them up, version-control them, or sync them with any tool that works with files.
+
+Obsidian watches your vault folder and automatically reflects any external changes you make.
+
+## Where your vault lives
+
+You can create a vault anywhere your operating system allows: your home directory, a Documents folder, an external drive, or a folder managed by a sync service.
+
+Obsidian is compatible with Obsidian Sync, Dropbox, iCloud, OneDrive, Git, and other third-party sync services.
+
+<Warning>
+Do not create a vault inside another vault. Because internal links are local to a vault, nested vaults can cause links to resolve incorrectly.
+</Warning>
+
+<Warning>
+Do not create a vault inside the Obsidian system folder (see [Global settings](#global-settings) below). This may cause data corruption or data loss.
+</Warning>
+
+## Vault settings — the .obsidian folder
+
+When you open a folder as a vault, Obsidian creates a `.obsidian` folder in the vault root. This folder holds all settings specific to that vault:
+
+| Contents | Description |
+|---|---|
+| `app.json` | Core Obsidian settings |
+| `hotkeys.json` | Keyboard shortcut customizations |
+| `appearance.json` | Theme and appearance settings |
+| `plugins/` | Installed community plugin data |
+| `themes/` | Installed themes |
+| `snippets/` | Custom CSS snippets |
+| `workspace.json` | Current workspace layout (open tabs, panels) |
+| `workspaces.json` | Saved workspace layouts |
+
+By default, most operating systems hide folders that start with a period (`.`). To make `.obsidian` visible:
+
+<Tabs>
+  <Tab title="macOS">
+    In Finder, press `Cmd+Shift+.` (period) to toggle hidden files.
+  </Tab>
+  <Tab title="Windows">
+    In File Explorer, go to **View → Show → Hidden items**.
+  </Tab>
+  <Tab title="Linux">
+    In most file managers, press `Ctrl+H` to toggle hidden files.
+  </Tab>
+</Tabs>
+
+<Tip>
+If you use Git to manage your vault, consider adding `.obsidian/workspace.json` and `.obsidian/workspaces.json` to your `.gitignore`. These files update every time you open a file, which creates noisy commits.
+</Tip>
+
+## Global settings
+
+In addition to the vault-level `.obsidian` folder, Obsidian stores global settings (account info, global appearance) in a system folder. The location depends on your operating system:
+
+| Platform | Location |
+|---|---|
+| macOS | `/Users/yourusername/Library/Application Support/obsidian` |
+| Windows | `%APPDATA%\Obsidian\` |
+| Linux | `$XDG_CONFIG_HOME/obsidian/` or `~/.config/obsidian/` |
+
+## Metadata cache
+
+To keep the app fast, Obsidian maintains a local **metadata cache** — a record of each file's properties, headings, tags, and links. This cache powers features like Graph view, Outline view, backlinks, and search.
+
+The cache is stored in IndexedDB (a browser-level local database) and is rebuilt automatically from your files. If the cache gets out of sync, you can rebuild it manually from **Settings → Files and links → Rebuild cache**.
+
+<Warning>
+If Apple's Lockdown Mode is enabled and Obsidian is not excluded from it, the IndexedDB files will not be saved. Obsidian will need to reindex your vault every time it starts.
+</Warning>
+
+## Backups
+
+Because all your data is stored as plain files in a regular folder, backing up your vault is straightforward:
+
+- **Manual backup** — copy the vault folder to another location or an external drive.
+- **Version control** — use Git to track changes and maintain history.
+- **Cloud sync** — use Dropbox, iCloud, OneDrive, or a similar service to keep an off-site copy. Obsidian Sync also includes version history.
+
+Back up the entire vault folder, including the `.obsidian` subfolder, to preserve your settings, plugins, and themes alongside your notes.
+
+## Privacy and portability
+
+Your data never has to leave your device. Obsidian does not require an account and makes no network requests by default. All processing — search indexing, graph computation, link resolution — happens locally.
+
+Because notes are plain Markdown files, you are not locked in to Obsidian. You can migrate to any other tool that reads Markdown, or keep using the files directly in a text editor.
+
+## Configuration folder
+
+The default configuration folder is `.obsidian` in the vault root. You can override this name under **Settings → Files and links → Override config folder**. This is useful for:
+
+- Testing different plugin or theme configurations in the same vault.
+- Using a sync service that handles dotfiles differently.
+
+Enter the name of your custom config folder in the **Override config folder** field. Relaunch Obsidian for the change to take effect.
+
+<Note>
+Changing the config folder name does not migrate existing settings. Your previous `.obsidian` folder remains in place.
+</Note>

@@ -1,0 +1,184 @@
+---
+title: Callouts
+description: Use callouts to highlight information, warnings, tips, and other content without breaking the flow of your notes.
+---
+
+Callouts let you include additional content — notes, warnings, tips, examples — without breaking the flow of your writing.
+
+## Basic callout syntax
+
+To create a callout, add `[!type]` to the first line of a blockquote, where `type` is one of the [supported callout types](#supported-types):
+
+```markdown
+> [!info] Here's a callout title
+> Here's a callout block.
+> It supports **Markdown**, Wikilinks, and embeds!
+```
+
+The text after the type identifier becomes the callout title. If you omit the title, the type name is used in title case.
+
+### Title-only callouts
+
+Omit the body to create a callout that shows only a title:
+
+```markdown
+> [!tip] Title-only callout
+```
+
+### Inserting callouts
+
+You can insert a callout using the **Insert callout** command from the Command Palette. The cursor is placed in the title field so you can immediately type a new name.
+
+To wrap existing content in a callout, select the text and run the **Insert callout** command — the selected content is automatically enclosed.
+
+In Live Preview, right-click the callout title bar to change the callout type.
+
+## Foldable callouts
+
+Make a callout foldable by adding `+` or `-` directly after the type identifier:
+
+- `+` expands the callout by default
+- `-` collapses it by default
+
+```markdown
+> [!faq]- Are callouts foldable?
+> Yes! In a foldable callout, the contents are hidden when the callout is collapsed.
+```
+
+## Nested callouts
+
+Callouts can be nested by adding extra `>` levels:
+
+```markdown
+> [!question] Can callouts be nested?
+> > [!todo] Yes!, they can.
+> > > [!example] You can even use multiple layers of nesting.
+```
+
+## Supported types
+
+Each callout type has a distinct color and icon. The type identifier is case-insensitive, and any unsupported type falls back to `note`.
+
+<AccordionGroup>
+  <Accordion title="note">
+    ```md
+    > [!note]
+    > Lorem ipsum dolor sit amet
+    ```
+  </Accordion>
+
+  <Accordion title="abstract / summary / tldr">
+    ```md
+    > [!abstract]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `summary`, `tldr`
+  </Accordion>
+
+  <Accordion title="info">
+    ```md
+    > [!info]
+    > Lorem ipsum dolor sit amet
+    ```
+  </Accordion>
+
+  <Accordion title="todo">
+    ```md
+    > [!todo]
+    > Lorem ipsum dolor sit amet
+    ```
+  </Accordion>
+
+  <Accordion title="tip / hint / important">
+    ```md
+    > [!tip]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `hint`, `important`
+  </Accordion>
+
+  <Accordion title="success / check / done">
+    ```md
+    > [!success]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `check`, `done`
+  </Accordion>
+
+  <Accordion title="question / help / faq">
+    ```md
+    > [!question]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `help`, `faq`
+  </Accordion>
+
+  <Accordion title="warning / caution / attention">
+    ```md
+    > [!warning]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `caution`, `attention`
+  </Accordion>
+
+  <Accordion title="failure / fail / missing">
+    ```md
+    > [!failure]
+    > Lorem ipsum dolor sit amet
+    ```
+    Aliases: `fail`, `missing`
+  </Accordion>
+
+  <Accordion title="danger / error">
+    ```md
+    > [!danger]
+    > Lorem ipsum dolor sit amet
+    ```
+    Alias: `error`
+  </Accordion>
+
+  <Accordion title="bug">
+    ```md
+    > [!bug]
+    > Lorem ipsum dolor sit amet
+    ```
+  </Accordion>
+
+  <Accordion title="example">
+    ```md
+    > [!example]
+    > Lorem ipsum dolor sit amet
+    ```
+  </Accordion>
+
+  <Accordion title="quote / cite">
+    ```md
+    > [!quote]
+    > Lorem ipsum dolor sit amet
+    ```
+    Alias: `cite`
+  </Accordion>
+</AccordionGroup>
+
+## Custom callouts
+
+You can define custom callout types using CSS snippets or community plugins. To define a custom callout in CSS:
+
+```css
+.callout[data-callout="custom-question-type"] {
+    --callout-color: 0, 0, 0;
+    --callout-icon: lucide-alert-circle;
+}
+```
+
+- The `data-callout` value is the type identifier you use in your notes, e.g. `[!custom-question-type]`.
+- `--callout-color` sets the background color as RGB values (0–255).
+- `--callout-icon` accepts an icon ID from [lucide.dev](https://lucide.dev) or an inline SVG element:
+
+```css
+--callout-icon: '<svg>...custom svg...</svg>';
+```
+
+<Warning>
+Obsidian updates Lucide icons periodically. Only use icons from the version included in your Obsidian installation or earlier to ensure compatibility.
+</Warning>

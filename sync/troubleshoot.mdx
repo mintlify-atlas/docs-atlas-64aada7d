@@ -1,0 +1,173 @@
+---
+title: "Troubleshoot Obsidian Sync"
+description: "Understand sync status icons, diagnose common sync issues, and find solutions to conflicts, errors, and connectivity problems."
+---
+
+This page covers the sync status icon, how to read the sync log, and solutions to common sync problems. Before diving in, check the [Obsidian server status page](https://status.obsidian.md) to rule out a service outage.
+
+## Sync status icon
+
+The sync status icon appears in the **status bar** on desktop and in the **right sidebar** on mobile. It reflects the current state of sync at a glance.
+
+| Icon state | Color | Meaning |
+|---|---|---|
+| **Synced** | Green | Your vault is fully up to date with the remote vault |
+| **Syncing** | Purple | Obsidian is uploading or downloading changes |
+| **Paused** | Purple | Sync is paused but still connected to the remote vault |
+| **Disconnected** | Red | The Sync plugin is active but not connected to a remote vault |
+
+Tap or click the icon to open a quick menu with options to pause/resume sync, open the sync log, view version history, and access settings.
+
+## Sync activity log
+
+The sync log records every interaction between your local vault and the remote vault: uploads, downloads, deletions, conflicts, and errors.
+
+**Open the sync log:**
+- Click the sync status icon and select **Open Sync log**
+- Go to **Settings → Sync → Activity log**
+- Use the Command palette and search for **Sync: Open activity log**
+
+You can filter the log by **All**, **Errors**, **Skipped**, and **Merge Conflicts**, and search it with the search box.
+
+<Warning>
+  The sync log is not saved when you close Obsidian. If you need to share it with support, copy its contents before closing the app.
+</Warning>
+
+### Common log messages
+
+<AccordionGroup>
+  <Accordion title="Connecting to server">
+    Obsidian is attempting to connect to your remote vault's server. This is normal on startup.
+  </Accordion>
+  <Accordion title="Connected to server. Detecting changes...">
+    Obsidian has connected and is comparing your local and remote vaults. If this message appears repeatedly and sync doesn't progress, contact Obsidian support.
+  </Accordion>
+  <Accordion title="Fully synced">
+    Your local and remote vaults are identical. No changes are pending.
+  </Accordion>
+  <Accordion title="Merging conflicted file">
+    A conflict was detected and the file was automatically merged. If the merge result is incorrect, restore the previous version from [version history](/sync/version-history).
+  </Accordion>
+  <Accordion title="Rejected server change">
+    The incoming remote change is older than your local version, so the local version is kept.
+  </Accordion>
+  <Accordion title="Unable to download file with illegal name">
+    The file contains a character that isn't allowed on the destination operating system. Rename the file on the source device, removing any special characters except `-` and `_`.
+
+    On Android, files with multiple periods (`.`) in the name are also affected.
+  </Accordion>
+  <Accordion title="Out of memory">
+    Not enough storage space or memory is available to download the file. This typically happens on mobile with large files such as videos. Free up device storage or exclude large file types from syncing.
+  </Accordion>
+  <Accordion title="Vault limit exceeded">
+    Your account has exceeded its storage limit. Attachments and version history count toward this limit.
+
+    To reduce storage usage:
+    1. Open **Settings → Sync**.
+    2. Under **Vault size over limit**, select **View largest files** and delete files you no longer need.
+    3. Select **Prune** to remove deleted files from the remote vault.
+  </Accordion>
+  <Accordion title="Vault not found">
+    The remote vault no longer exists. This can happen if:
+    - The vault was deleted from another device
+    - Your subscription was inactive for over 30 days (remote vault is removed)
+    - Your subscription was canceled or refunded
+
+    Disconnect from the vault and create a new one. Your local data is not affected.
+  </Accordion>
+  <Accordion title="Failed to authenticate: subscription expired">
+    Your Sync subscription has expired. [Resubscribe from your account dashboard](https://obsidian.md/account/sync) to continue.
+  </Accordion>
+  <Accordion title="Failed to authenticate: Not logged in">
+    Obsidian Sync can't confirm your login. Log back in from **Settings → General → Account**.
+
+    If the issue persists, a community plugin may be interfering. Enable **Restricted Mode** and try again.
+  </Accordion>
+  <Accordion title="Disconnected from server / Unable to connect to server">
+    Sync lost its connection to the server. This is usually temporary — Sync retries automatically. If the issue persists, check your internet connection and the [server status page](https://status.obsidian.md).
+
+    On iOS, this may appear as: `Null is not an object (evaluating 'this.socket.send')`. This means the same thing and is not a sign of a deeper problem.
+  </Accordion>
+</AccordionGroup>
+
+## Common issues and fixes
+
+<AccordionGroup>
+  <Accordion title="Conflict resolution">
+    A conflict occurs when you edit the same file on two or more devices before they sync. Conflicts are more common during extended offline periods.
+
+    **How Sync resolves conflicts:**
+    - **Markdown files**: Sync merges changes using Google's diff-match-patch algorithm.
+    - **Other file types** (including Canvas): The most recently modified version wins.
+    - **Settings files**: Sync merges JSON files, applying local keys on top of remote keys.
+
+    Starting in Obsidian 1.9.7, you can choose how conflicts are handled:
+    - **Automatically merge** — combines all changes; may sometimes produce duplicate text.
+    - **Create conflict file** — saves a separate file for manual review. Named as `original-note-name (Conflicted copy device-name YYYYMMDDHHMM).md`.
+
+    To configure: go to **Settings → Sync → Conflict resolution**.
+
+    To check when conflicts occurred, filter the sync log for **Merge Conflicts**.
+  </Accordion>
+  <Accordion title="Sync deleted a note I just created on two devices">
+    If you create a note on one device and, within a couple of minutes, Sync downloads a remote version of the same note, Sync keeps the remote version without merging.
+
+    Recover the local version using the **File recovery** plugin (a separate, device-local snapshot system).
+
+    This most often affects users who auto-create notes on startup, such as Daily Notes or Templater-triggered notes.
+  </Accordion>
+  <Accordion title="Plugins and settings aren't updating on other devices">
+    Obsidian does not live-reload all settings. After updating settings or plugins on one device, restart Obsidian on other devices to apply the changes. On mobile, force-quit the app.
+
+    **Example**: You change your theme on your computer. The sync log on your phone shows the `appearance.json` file was received, but the theme hasn't changed. Reload or restart Obsidian on the phone — the theme should then update.
+  </Accordion>
+  <Accordion title="Files keep disappearing as soon as I restore them">
+    **Windows Defender quarantine**: Windows Defender may quarantine notes that contain code blocks. Add your vault folder to Windows Defender's exclusion list.
+
+    **Double-syncing**: Running Obsidian Sync alongside another sync service (Dropbox, iCloud, etc.) on the same vault causes files to appear deleted. Move your vault to a folder not managed by another service.
+
+    **Illegal filename characters**: If a restored file has illegal characters in its name, it gets skipped on secondary devices. Rename the file on the source device.
+  </Accordion>
+  <Accordion title="Sync won't start">
+    Check the following:
+    1. You're logged in — go to **Settings → General → Account**.
+    2. Your Sync subscription is active — visit [obsidian.md/account/sync](https://obsidian.md/account/sync).
+    3. The Sync core plugin is enabled — go to **Settings → Core Plugins**.
+    4. Your remote vault exists — check **Settings → Sync → Remote vault**.
+    5. The server is up — check [status.obsidian.md](https://status.obsidian.md).
+  </Accordion>
+  <Accordion title="Android: attachments received through Sync are being deleted">
+    Google Photos or Android may be managing the files Sync downloads. To prevent this, add a `.nomedia` file to your vault folder.
+
+    The community plugin [Android Nomedia](https://obsidian.md/plugins?id=android-nomedia) makes this easier. Note that `.nomedia` files themselves are not synced by Obsidian Sync.
+  </Accordion>
+  <Accordion title="Sync is running but no changes are uploading">
+    Your remote vault may have reached its storage limit. Open **Settings → Sync** and check **Storage usage**. If you're over the limit, the Sync log will show a "Vault limit exceeded" message.
+
+    To free up space, use **View largest files** under **Vault size over limit** to delete large attachments, then select **Prune**.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Is Obsidian Sync a backup service?">
+    No. Sync keeps your notes consistent across devices, but it is not a backup. Deleting a file on one device will delete it on all devices after sync. Use a dedicated backup solution (a local copy, Time Machine, Git, etc.) alongside Sync.
+  </Accordion>
+  <Accordion title="Can I use Obsidian Sync with Dropbox, iCloud, or Google Drive?">
+    Obsidian does not recommend using Obsidian Sync alongside another sync service for the same vault. Running two services on the same files causes conflicts and can lead to data loss.
+
+    Cloud services with "files on-demand" or "online-only" features are particularly problematic — Obsidian Sync will interpret locally-unavailable files as deleted and remove them from the remote vault.
+
+    If you need both, store your vault in a location not monitored by other sync services and use cloud storage only for backups.
+  </Accordion>
+  <Accordion title="Are files synced in the background?">
+    No. Files are only synced while Obsidian is running. Changes made offline are queued and uploaded the next time you open Obsidian with an internet connection.
+  </Accordion>
+  <Accordion title="How long is data kept after my subscription expires?">
+    Remote vault data is kept for 30 days after your subscription expires. If you renew within 30 days, nothing changes. If you renew after 30 days, you'll need to create a new remote vault and re-sync. Local vaults are never affected.
+  </Accordion>
+  <Accordion title="How do I contact support?">
+    Go to **Settings → Sync** and select **Email support**. Use **Copy debug info** to attach diagnostic information to your message. This helps the support team investigate faster.
+  </Accordion>
+</AccordionGroup>

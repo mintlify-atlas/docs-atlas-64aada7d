@@ -1,0 +1,70 @@
+---
+title: Backlinks
+description: The Backlinks plugin shows all notes that link to the current note, and surfaces unlinked mentions of its name across your vault.
+---
+
+The Backlinks plugin shows all _backlinks_ for the active note — that is, every other note that links to it.
+
+For example, if "Three laws of motion" contains a link to "Isaac Newton", then "Three laws of motion" appears as a backlink on the "Isaac Newton" note.
+
+Backlinks help you find context you may have forgotten — notes you wrote earlier that relate to what you're reading now.
+
+## View backlinks
+
+Click the **Backlinks** tab in the right sidebar to see backlinks for the active note.
+
+<Note>
+  If the Backlinks tab isn't visible, open the Command palette and run **Backlinks: Show backlinks** to make it appear.
+</Note>
+
+The Backlinks panel has two sections:
+
+- **Linked mentions** — notes that contain an internal link (`[[Note name]]`) to the active note.
+- **Unlinked mentions** — notes that contain the exact name of the active note as plain text, but without a link.
+
+### Panel options
+
+| Option | Description |
+|--------|-------------|
+| **Collapse results** | Toggle whether each result is expanded to show matching text. |
+| **Show more context** | Toggle between a short excerpt and the full paragraph containing the mention. |
+| **Change sort order** | Control how mentions are ordered in the list. |
+| **Show search filter** | Show a text field to filter mentions. Supports all [Search operators](/plugins/search). |
+
+<Info>
+  Files matching your **Settings → Excluded files** patterns will not appear in unlinked mentions.
+</Info>
+
+## Open backlinks for a specific note
+
+The default Backlinks tab updates whenever you switch notes. To pin the backlinks of a specific note, open a linked backlinks tab:
+
+<Steps>
+  <Step title="Open the Command palette">
+    Press `Ctrl+P` (`Cmd+P` on macOS).
+  </Step>
+  <Step title="Run the command">
+    Select **Backlinks: Open backlinks for the current note**.
+  </Step>
+</Steps>
+
+A separate tab opens next to your active note, showing a link icon to indicate it's pinned to that note.
+
+## Show backlinks inside a note
+
+Instead of using a sidebar panel, you can display backlinks directly at the bottom of a note.
+
+<Steps>
+  <Step title="Open the Command palette">
+    Press `Ctrl+P` (`Cmd+P` on macOS).
+  </Step>
+  <Step title="Toggle in-document backlinks">
+    Select **Backlinks: Toggle backlinks in document**.
+  </Step>
+</Steps>
+
+To make this the default for all notes, enable **Backlink in document** in the Backlinks plugin options under **Settings → Core plugins → Backlinks**.
+
+## Use backlinks to find connections
+
+Unlinked mentions are especially useful for discovering connections you didn't deliberately create. If you wrote a note about a topic before you had a dedicated note for that topic, the unlinked mentions section will surface it. You can then click the mention to create a proper link.

@@ -1,0 +1,146 @@
+---
+title: "CSS snippets"
+description: "Add CSS snippets to customize parts of the Obsidian interface without building a full theme. Learn where to put snippets, how to enable them, and see working examples."
+---
+
+CSS snippets let you override specific parts of the Obsidian interface — heading colors, font choices, ribbon visibility, line width — without building a full theme. Snippets are plain `.css` files stored in your vault's configuration folder.
+
+<Tip>
+  Snippets load after themes, so snippet rules take precedence over theme styles. This makes them ideal for small per-vault or per-device tweaks.
+</Tip>
+
+## Where snippets live
+
+Obsidian looks for CSS snippets in:
+
+```
+<your-vault>/.obsidian/snippets/
+```
+
+Create this folder if it doesn't exist. Each `.css` file in the folder becomes a separate snippet you can toggle on or off independently.
+
+## Add a snippet on desktop
+
+<Steps>
+  <Step title="Open the snippets folder">
+    Go to **Settings → Appearance → CSS snippets** and select the **Open snippets folder** icon.
+  </Step>
+  <Step title="Create a CSS file">
+    In the folder that opens, create a new file with a `.css` extension, for example `my-tweaks.css`.
+  </Step>
+  <Step title="Write your CSS">
+    Add your CSS rules to the file and save it.
+  </Step>
+  <Step title="Reload snippets">
+    Back in Obsidian, under **Settings → Appearance → CSS snippets**, select the **Reload snippets** icon to refresh the list.
+  </Step>
+  <Step title="Enable the snippet">
+    Toggle the snippet on using the toggle next to its name.
+  </Step>
+</Steps>
+
+## Add a snippet on mobile
+
+<Steps>
+  <Step title="Locate your vault folder">
+    Open your device's file manager. Find the vault's location — you can check the path in **Manage vaults** by tapping your vault.
+  </Step>
+  <Step title="Create the snippets folder">
+    Open the `.obsidian` configuration folder inside your vault. Create a folder called `snippets` if it doesn't exist.
+  </Step>
+  <Step title="Add your CSS file">
+    Copy or create your `.css` snippet file inside the `snippets` folder.
+  </Step>
+  <Step title="Enable the snippet in Obsidian">
+    Open **Settings → Appearance**, scroll to **CSS snippets**, tap **Reload snippets**, then tap the toggle to enable your snippet.
+  </Step>
+</Steps>
+
+<Note>
+  You can also sync snippets to mobile using Obsidian Sync or any other sync service, or use a community plugin to create snippets from within Obsidian.
+</Note>
+
+## Hot-reloading snippets
+
+Once a snippet is enabled, Obsidian automatically detects changes when you save the file and applies them immediately — no restart required. If you don't see the change, use the Command palette command **Reload Obsidian without saving** to force a full refresh.
+
+## CSS variables
+
+Obsidian exposes a large set of CSS variables that make it easy to adjust the interface consistently. Setting a variable on `body` applies it globally.
+
+```css
+/* Change all six heading levels to a rainbow */
+body {
+  --h1-color: red;
+  --h2-color: orange;
+  --h3-color: yellow;
+  --h4-color: green;
+  --h5-color: blue;
+  --h6-color: pink;
+}
+```
+
+For the full variable reference, see the [CSS variables documentation](https://docs.obsidian.md/Reference/CSS+variables/CSS+variables).
+
+## Example snippets
+
+<AccordionGroup>
+  <Accordion title="Change the body font">
+    ```css
+    /* custom-font.css */
+    body {
+      --font-text-override: 'Georgia', serif;
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Hide the ribbon">
+    ```css
+    /* hide-ribbon.css */
+    .workspace-ribbon {
+      display: none;
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Limit line width for reading">
+    ```css
+    /* readable-width.css */
+    .markdown-preview-view,
+    .cm-contentContainer {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Per-note styling with cssclasses">
+    Add a custom CSS class to individual notes using the `cssclasses` property, then target that class in a snippet.
+
+    **In the note's frontmatter:**
+    ```yaml
+    cssclasses:
+      - red-border
+    ```
+
+    **In your CSS snippet:**
+    ```css
+    .red-border img {
+      border-color: #ff0000;
+      border-style: solid;
+    }
+    ```
+
+    Every note with `red-border` in its `cssclasses` property will display images with a red border.
+  </Accordion>
+</AccordionGroup>
+
+## Validate your CSS
+
+Invalid CSS is silently ignored. If a snippet doesn't work, run the file through the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) to check for errors.
+
+## Learn more
+
+- [Learn to style HTML using CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS) — Mozilla's beginner CSS guide
+- [About styling in Obsidian](https://docs.obsidian.md/Reference/CSS+variables/About+styling)
+- [Build a theme](https://docs.obsidian.md/Themes/App+themes/Build+a+theme)

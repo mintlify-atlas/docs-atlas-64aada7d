@@ -1,0 +1,224 @@
+---
+title: "Sync settings and selective sync"
+description: "Choose which files, folders, and vault settings to sync. Configure your sync region and collaborate on shared vaults."
+---
+
+The **Sync** section in Obsidian Settings is your control panel for Obsidian Sync. From here you can manage your remote vault connection, choose what to sync, assign a device name, and invite collaborators.
+
+## Sync settings overview
+
+**Remote vault**
+Shows the currently connected remote vault. Includes a **Disconnect** button and a **Manage** button to view all remote vaults your account has access to, including shared vaults.
+
+**Sync status**
+Shows whether Sync is running, paused, or stopped. Use the **Pause** or **Resume** button to control it.
+
+**Device name**
+Assign a unique name to this device. The name appears in the sync log and in version history, making it easier to track where changes came from.
+
+**Conflict resolution**
+Choose how Sync handles edits made to the same file on multiple devices before they sync. See [Conflict resolution](#conflict-resolution) below.
+
+**Deleted files**
+Use the **View** or **Restore** button to browse and recover deleted files. See [Version history](/sync/version-history).
+
+**Storage usage**
+A progress bar showing how much of your account's sync storage is used. Updates can take up to 30 minutes due to server-side processing.
+
+## Selective sync
+
+Selective sync lets you control which file types are uploaded to your remote vault. Files you exclude don't count against your storage limit — but excluding a file type after it's already been synced does not remove it from the remote vault.
+
+<Info>
+  Excluding a file type from sync does not remove it from the remote vault if it was already uploaded. Configure selective sync before you start syncing a vault to avoid using unnecessary storage.
+</Info>
+
+### File types
+
+By default, Obsidian Sync enables selective sync for these attachment types:
+
+- Images
+- Audio files
+- Videos
+- PDFs
+
+Notes (Markdown files) are always synced. To sync additional file types not covered by the options above, toggle **Sync all other types**.
+
+**Maximum file size by plan:**
+
+| Plan | Maximum file size |
+|---|---|
+| Sync Standard | 5 MB |
+| Sync Plus | 200 MB |
+
+### Change which file types sync
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Enable file types">Under **Selective sync**, toggle the file types you want to sync.</Step>
+  <Step title="Restart Obsidian">Restart the application to apply the changes. On mobile, force-quit the app.</Step>
+</Steps>
+
+### Exclude a folder from syncing
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Manage excluded folders">Next to **Excluded folders**, select **Manage**.</Step>
+  <Step title="Select a folder">Select the folder you want to exclude, then select **Done**.</Step>
+</Steps>
+
+To remove a folder from the exclusion list, select the **×** button next to its name.
+
+### Files always excluded from sync
+
+The following are never synced regardless of your settings:
+
+- **File recovery snapshots** — stored in global settings, not in the vault
+- **Hidden files and folders** — any file or folder starting with `.` is excluded, with one exception: the vault's configuration folder (`.obsidian`) does sync
+- **Sync settings themselves** — sync settings are always device-specific and are never synced
+
+Common hidden items that are not synced: `.git`, `.vscode`, `.idea`, `.gitignore`.
+
+## Vault configuration sync
+
+In addition to notes and attachments, Obsidian Sync can keep your vault settings consistent across devices.
+
+Default settings that sync automatically:
+
+- Other file types
+- Main settings
+- Appearance
+- Themes and snippets
+- Hotkeys
+- Active core plugin list
+- Core plugin settings
+
+To also sync community plugins, manually enable **Active community plugin list** and **Installed community plugin list** under **Vault configuration sync**.
+
+### Syncing settings across multiple devices
+
+Sync settings don't apply instantly on all devices. Follow this workflow when you want to push a settings change across your devices.
+
+**On your primary device** (the source of the change):
+
+<Steps>
+  <Step title="Apply your changes">Go to **Settings → Sync** and enable the desired settings under **Vault configuration sync**.</Step>
+  <Step title="Restart Obsidian">Reload or restart Obsidian. On mobile, force-quit the app.</Step>
+  <Step title="Wait for sync">Allow time for the settings to upload to the remote vault.</Step>
+</Steps>
+
+**On each secondary device** (receiving the change):
+
+<Steps>
+  <Step title="Enable matching settings">Go to **Settings → Sync** and enable the same settings under **Vault configuration sync**.</Step>
+  <Step title="Wait for download">Wait for the changes to download from the remote vault.</Step>
+  <Step title="Restart Obsidian">Reload or restart the app to apply the synced settings.</Step>
+</Steps>
+
+### Settings that require a restart vs. hot reload
+
+Some settings apply immediately; others require a restart:
+
+- **Hot-reloadable**: Most Obsidian configurations, including hotkeys, properties, appearance settings, and configurations for already-enabled core plugins.
+- **Requires restart**: CSS changes (snippets, themes), graph view configuration, and core plugin state changes (for example, enabling or disabling Daily Notes).
+
+Community plugins generally do not support hot reloading and require a restart when new settings are applied.
+
+## Settings profiles
+
+Obsidian Sync can sync multiple configuration folders to the same remote vault. This lets you maintain separate profiles — for example, one for mobile and one for desktop.
+
+<Steps>
+  <Step title="Open Files and links settings">Open **Settings → Files and links**.</Step>
+  <Step title="Set an override config folder">Under **Override config folder**, enter a name for the profile starting with a period — for example, `.obsidian-mobile`.</Step>
+  <Step title="Relaunch Obsidian">Relaunch Obsidian to apply the change.</Step>
+</Steps>
+
+<Tip>
+  To avoid re-downloading all your plugins and themes, copy your existing `.obsidian` folder and rename it to match the new profile name before relaunching.
+</Tip>
+
+## Conflict resolution
+
+A conflict occurs when you edit the same file on two devices before they sync. Conflicts are more common when you work offline for extended periods.
+
+Obsidian Sync handles conflicts differently depending on the file type:
+
+- **Markdown files** — changes are merged using Google's diff-match-patch algorithm.
+- **All other file types** (including Canvas files) — the most recently modified version wins.
+- **Settings files** — JSON settings files are merged; keys from the local JSON are applied on top of the remote JSON.
+
+### Configure conflict resolution (Obsidian 1.9.7 and later)
+
+<Steps>
+  <Step title="Open Sync settings">
+    Open **Settings → Sync**.
+  </Step>
+  <Step title="Choose your strategy">
+    Under **Conflict resolution**, choose an option:
+
+    - **Automatically merge** (default) — combines all changes into one file. May occasionally produce duplicate text.
+    - **Create conflict file** — saves a separate conflict file for manual review. The original file keeps the remote version; the conflict file contains local changes.
+  </Step>
+</Steps>
+
+<Warning>
+  Conflict resolution is a device-specific setting. Configure it separately on each device.
+</Warning>
+
+When **Create conflict file** is enabled, conflict files are named using this pattern:
+
+```
+original-note-name (Conflicted copy device-name YYYYMMDDHHMM).md
+```
+
+For example: `Meeting notes (Conflicted copy MyMacBook2 202411281430).md`
+
+## Sync regions
+
+When you create a remote vault, you choose the server region where your data is stored. Available regions:
+
+| Region | Location |
+|---|---|
+| Automatic | Chosen based on your IP address at setup time |
+| Asia | Singapore |
+| Europe | Frankfurt, Germany |
+| North America | San Francisco, USA |
+| Oceania | Sydney, Australia |
+
+Choose the region closest to you to reduce latency. **Once set, a region cannot be changed without re-creating the vault**, which deletes all version history.
+
+To find your current region, go to **Settings → Sync → Copy Debug Info** and look for a line like `Host server: wss://sync-xx.obsidian.md`.
+
+To move to a different region, follow the [change region guide](/sync/security#hosting) and re-create your vault on the desired server.
+
+## Shared vaults
+
+Obsidian Sync lets you invite collaborators to a remote vault. All collaborators must have an active Sync subscription. Shared vaults don't count toward a collaborator's vault limit.
+
+### Invite a collaborator
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Open vault manager">Next to **Remote vault**, select **Manage**.</Step>
+  <Step title="Open sharing">Next to the vault you want to share, select **Manage sharing**.</Step>
+  <Step title="Invite the user">In **Invite user**, enter the collaborator's email address and select **Add**.</Step>
+</Steps>
+
+### Remove a collaborator
+
+<Steps>
+  <Step title="Open Sync settings">Open **Settings → Sync**.</Step>
+  <Step title="Open vault manager">Next to **Remote vault**, select **Manage**.</Step>
+  <Step title="Remove the user">Next to the user you want to remove, select **Remove user**.</Step>
+</Steps>
+
+### Collaboration limitations
+
+- Fine-grained permissions are not supported. All collaborators have the same permissions as the vault owner, except that only the owner can invite others.
+- Obsidian does not support real-time collaborative editing. Collaborators' changes appear after they sync, not in real time.
+- If multiple collaborators edit the same file simultaneously, Sync merges the changes automatically. Version history lets you review and restore any version.
+- Maximum 20 collaborators per shared vault.
+- Maximum file size depends on the vault owner's plan (5 MB for Standard, 200 MB for Plus).
+
+If the remote vault uses end-to-end encryption, collaborators must enter the encryption password when they connect.

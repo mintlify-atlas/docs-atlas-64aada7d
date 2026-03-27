@@ -1,0 +1,93 @@
+---
+title: Tags
+description: Use tags to label and organize your notes in Obsidian, and find related notes quickly using the Tags view and search.
+---
+
+Tags are keywords or topics that help you quickly find related notes. You can add tags inline in the note body or in the note's properties.
+
+## Adding tags to a note
+
+### Inline tags
+
+Type a hash symbol (`#`) followed by a keyword anywhere in your note:
+
+```md
+#meeting
+#project/active
+```
+
+### Tags in properties
+
+Add tags using the `tags` property in the YAML frontmatter. Tags in properties should always be formatted as a list:
+
+```yaml
+---
+tags:
+  - recipe
+  - cooking
+---
+```
+
+## Tag format
+
+Tags can contain the following characters:
+
+- Alphabetical letters
+- Numbers
+- Underscore (`_`)
+- Hyphen (`-`)
+- Forward slash (`/`) for nested tags
+- Unicode characters, including emojis
+
+Tags must contain at least one non-numerical character. For example, `#1984` is not valid, but `#y1984` is.
+
+Tags are **case-insensitive** — `#tag` and `#TAG` are treated as the same tag.
+
+<Note>
+Tags display with the casing they are first created with in the Tags view. For example, creating `#Tag` first means both `#tag` and `#TAG` will display as `#Tag`.
+</Note>
+
+Tags cannot contain spaces. Use one of these conventions to combine multiple words:
+
+| Convention | Example |
+|---|---|
+| camelCase | `#camelCase` |
+| PascalCase | `#PascalCase` |
+| snake_case | `#snake_case` |
+| kebab-case | `#kebab-case` |
+
+## Nested tags
+
+Use forward slashes (`/`) to create a tag hierarchy:
+
+```md
+#inbox/to-read
+#inbox/processing
+#project/active
+#project/archived
+```
+
+Nested tags behave consistently across Obsidian:
+
+- In **Search**, `tag:inbox` matches `#inbox` as well as all nested tags such as `#inbox/to-read`.
+- In the **Tags view**, nested tags are shown under their parent tag.
+- In **Bases**, the `hasTag` function treats nested tags as belonging to the parent: `file.hasTag("a")` matches both `#a` and `#a/b`.
+
+## Finding notes by tag
+
+### Using search
+
+Use the `tag:` search operator in the Search panel:
+
+```
+tag:#meeting
+tag:#inbox/to-read
+```
+
+You can also click any tag in your note body to instantly search for it.
+
+### Using the Tags view
+
+Open the Tags view by running **Tags: Show tags** from the Command Palette. Select any tag to see all notes that contain it.
+
+

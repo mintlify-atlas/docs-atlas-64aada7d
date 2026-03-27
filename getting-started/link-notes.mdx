@@ -1,0 +1,146 @@
+---
+title: 'Link notes'
+description: 'Learn how to create internal links between notes, navigate using backlinks, and visualise your knowledge graph in Obsidian.'
+---
+
+While Obsidian is great for taking individual notes, its real power comes from linking them together. By connecting pieces of information, you improve your ability to remember them and draw deeper insights over time.
+
+## Create a link
+
+Obsidian uses **wikilink** syntax: wrap the name of any note in double square brackets to create an internal link.
+
+<Steps>
+  <Step title="Create a note to link to">
+    Create a note named `Three laws of motion` and add some content:
+
+    ```md
+    The laws of motion are three laws stated by Isaac Newton, that describe
+    the relationship between the motion of an object, and the forces acting on it.
+    ```
+  </Step>
+  <Step title="Create a second note">
+    Create another note named `Law of Inertia` with the following text:
+
+    ```md
+    The Law of Inertia is one of the
+    ```
+  </Step>
+  <Step title="Type the link">
+    At the end of that sentence, press `[` twice on your keyboard. Obsidian opens an autocomplete dropdown.
+  </Step>
+  <Step title="Search and confirm">
+    Type `three` to filter the list, then press `Enter` to insert the link. Your note now reads:
+
+    ```md
+    The Law of Inertia is one of the [[Three laws of motion]]
+    ```
+  </Step>
+  <Step title="Follow the link">
+    Click the link while holding `Ctrl` (`Cmd` on macOS) to open the linked note.
+  </Step>
+</Steps>
+
+## Link to a note that doesn't exist yet
+
+You can create links to notes that you haven't written yet. This is useful for capturing topics you plan to explore later.
+
+<Steps>
+  <Step title="Select the text">
+    In your `Three laws of motion` note, select the text `Isaac Newton`.
+  </Step>
+  <Step title="Wrap it in double brackets">
+    Press `[` twice. Obsidian wraps the selection in `[[Isaac Newton]]`. The link appears in a more muted colour to indicate the note doesn't exist yet.
+  </Step>
+  <Step title="Create the note">
+    Click the link while holding `Ctrl` (`Cmd` on macOS) to create and open the new note.
+  </Step>
+</Steps>
+
+<Tip>
+  Linking to non-existent notes is a powerful habit. It lets you capture connections as you think of them, without interrupting your current writing flow.
+</Tip>
+
+## Navigate between notes
+
+### Follow links
+
+Click any `[[wikilink]]` while holding `Ctrl` (`Cmd` on macOS) to open the target note. In Live Preview mode you can also simply click the rendered link.
+
+### Use backlinks
+
+A **backlink** is a reverse reference — it shows you every note that links *to* the current note. Backlinks let you navigate in the opposite direction of a link.
+
+<Steps>
+  <Step title="Open a note">
+    Open the `Isaac Newton` note.
+  </Step>
+  <Step title="Open the Backlinks panel">
+    In the right sidebar, click the **Backlinks** tab.
+  </Step>
+  <Step title="Navigate via a mention">
+    Under **Linked mentions**, click the reference in `Three laws of motion` to jump to that note.
+  </Step>
+</Steps>
+
+### Open a local graph
+
+The local graph shows a visual map of the current note's connections — useful for understanding how a single note relates to the rest of your vault.
+
+<Tabs>
+  <Tab title="Desktop">
+    <Steps>
+      <Step title="Open More options">
+        In the upper-right corner of the note, click **More options** (the `•••` icon).
+      </Step>
+      <Step title="Open the local graph">
+        Select **Open linked view**, then select **Open local graph**.
+      </Step>
+      <Step title="Navigate">
+        Click any node in the graph to open that note.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Mobile">
+    <Steps>
+      <Step title="Open More options">
+        At the top of the note, tap **More options**.
+      </Step>
+      <Step title="Open the local graph">
+        Tap **Open local graph**.
+      </Step>
+      <Step title="Navigate">
+        Tap any node in the graph to open that note.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Understand the graph view
+
+The **Graph view** is a visual map of your entire vault — each note appears as a node, and every `[[link]]` between notes becomes an edge connecting them.
+
+As your vault grows, the graph reveals clusters of related ideas, orphaned notes with no connections, and the most heavily-linked notes in your knowledge base. You can open the full graph view from the left sidebar (the graph icon) or via the command palette.
+
+<Info>
+  The graph view is purely a navigation and exploration tool. It does not change your notes or links — it just visualises the connections that already exist.
+</Info>
+
+## Wikilink syntax reference
+
+| Syntax | Result |
+|--------|--------|
+| `[[Note name]]` | Link to a note |
+| `[[Note name\|Display text]]` | Link with custom display text |
+| `[[Note name#Heading]]` | Link to a specific heading |
+| `[[Note name#^block-id]]` | Link to a specific block |
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Graph view" icon="circle-nodes" href="/plugins/graph-view">
+    Learn how to filter, group, and explore the full vault graph.
+  </Card>
+  <Card title="Backlinks" icon="arrow-left" href="/plugins/backlinks">
+    Understand how backlinks work and how to use the backlinks panel.
+  </Card>
+</CardGroup>
